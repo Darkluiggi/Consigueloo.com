@@ -10509,6 +10509,9 @@ body {
 .pad-top{
     padding-top:10px;
 }
+.pad-top2 {
+    padding-top: 5px;
+}
 .pad-right {
     padding-right: 10px;
 }

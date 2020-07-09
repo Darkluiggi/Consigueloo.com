@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DAO;
+using Model.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,10 +10,18 @@ namespace Consigueloo.Areas.Anuncios.Controllers
 {
     public class AnuncioTrabajoController : Controller
     {
+        AnuncioTrabajoDAO anuncioTrabajoDAO;
+
+        public AnuncioTrabajoController()
+        {
+            anuncioTrabajoDAO = new AnuncioTrabajoDAO(this);
+        }
         // GET: Anuncios/AnuncioTrabajo
         public ActionResult Index()
         {
-            return View();
+            List<AnuncioTrabajoDTO> anuncios = anuncioTrabajoDAO.getList();
+
+            return View(anuncios);
         }
 
         // GET: Anuncios/AnuncioTrabajo/Details/5
@@ -28,11 +38,14 @@ namespace Consigueloo.Areas.Anuncios.Controllers
 
         // POST: Anuncios/AnuncioTrabajo/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(AnuncioTrabajoDTO anuncio)
         {
             try
             {
-                // TODO: Add insert logic here
+                if (ModelState.IsValid)
+                {
+                    anuncioTrabajoDAO.Add(anuncio);
+                }
 
                 return RedirectToAction("Index");
             }

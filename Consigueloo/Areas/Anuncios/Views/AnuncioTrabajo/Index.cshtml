@@ -1,0 +1,86 @@
+﻿@model IEnumerable<Model.ViewModel.AnuncioTrabajoDTO>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <div id="render-ads" class="container">
+        <h1 class="color-blue2">Ofertas de trabajo</h1>
+        <h3>@ViewBag.Funcion "@ViewBag.Busqueda"</h3>
+
+        <div id="render-ads" class="container-fluid ">
+
+            <div class="render-anuncios">
+                <div class="row">
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-md-4  mb-3">                            
+                                <div class="card h-100  " data-toggle="modal" data-target="#anuncioModal" onclick="showSelected(@item.id)">
+                                    <div class="card-body display-grid ">
+                                        <h4 class="card-title color-blue3">
+                                            @item.cargo
+                                        </h4>
+                                        <h3 class="card-text">@item.salario</h3>
+                                        <p class="card-text">@item.descripcion</p>
+                                        <br />
+                                        <div class="row">
+                                            <div class="icon-card "><img src="~/Content/assets/Iconos/llamadas.png" /> </div>
+                                            <p class="card-text ">@item.nombreEmpresa</p>
+                                        </div>
+                                        <br />
+                                        <div class="row">
+                                            <div class="icon-card"><img src="~/Content/assets/Iconos/whatsapp.png" /> </div>
+                                            <p class="card-text pad-top2">@item.telefonoContacto</p>
+                                        </div>
+                                        <br />
+                                        <div class="row">
+                                            <div class="icon-card "><img src="~/Content/assets/Iconos/email.png" /> </div>
+                                            <p class="card-text">@item.correoContacto</p>
+                                        </div>
+                                    </div>
+                                </div>                     
+
+
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+
+<!-- Logout Modal-->
+<div class="modal fade " id="anuncioModal" tabindex="-1" role="dialog" aria-labelledby="showSelected" aria-hidden="true">
+    <div class="modal-dialog modal-lg" >
+        <div class="modal-content">
+            <div class="container-fluid modal-card" id="showSelected">
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+        function showSelected(id) {
+           
+        $.ajax(
+            {
+                type: "POST",
+                url: '@Url.Action("ShowSelected", "AnuncioTrabajo")',
+                datatype: "json",
+                contentType: 'application/json',
+                data: JSON.stringify({ "id": id }),
+                success: function (res) {
+                    
+                    $("#showSelected").html(res);
+
+                }
+
+            });
+
+    }
+
+</script>

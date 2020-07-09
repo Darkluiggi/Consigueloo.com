@@ -14,5 +14,6 @@ namespace Model.ViewModel
         public string cargo { get; set; }
         public string salario { get; set; }
         public string correoContacto { get; set; }
+        public string telefonoContacto { get; set; }
     }
 }

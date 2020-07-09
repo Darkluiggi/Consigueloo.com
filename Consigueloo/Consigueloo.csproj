@@ -565,6 +565,8 @@
     <Content Include="Scripts\encoder.js" />
     <Content Include="Scripts\FileImageProcessor.js" />
     <Content Include="Areas\Anuncios\Views\Anuncios\Pricing - Copia.cshtml" />
+    <Content Include="Areas\Anuncios\Views\AnuncioTrabajo\Index.cshtml" />
+    <Content Include="Areas\Anuncios\Views\AnuncioTrabajo\Create.cshtml" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.2.1.js" />
     <Content Include="Scripts\jquery-3.2.1.min.js" />
@@ -648,7 +650,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Administrador\Views\Shared\" />
     <Folder Include="Areas\Anuncios\Data\" />
-    <Folder Include="Areas\Anuncios\Views\AnuncioTrabajo\" />
     <Folder Include="Areas\ConfiguracionPlataforma\Data\" />
     <Folder Include="Views\Error\" />
   </ItemGroup>

@@ -31,9 +31,7 @@ namespace Consigueloo.Areas.Anuncios.Controllers
         }
         // GET: Anuncios/Anuncios
         public ActionResult Index()
-        {
-            ApplicationUser user = new ApplicationUser();
-          
+        {          
             List<AnuncioDTO> anuncios = anunciosDAO.ListarAnuncios();
             
             return View(anuncios);
@@ -173,20 +171,7 @@ namespace Consigueloo.Areas.Anuncios.Controllers
             return PartialView("_Categorias", categorias);
         }
         
-        public ActionResult FilterCategorias(int id)
-        {
-            ViewBag.Funcion = Helpers.Constants.Anuncios.categoria;
-            List<AnuncioDTO> anuncios = anunciosDAO.filterByCategoriaId(id);
-            ViewBag.Busqueda = categoriasDAO.Find(id).nombre;
-            return View("Index", anuncios);
-        }
-        public ActionResult FilterCategoriasByName(string nombre)
-         {
-            ViewBag.Funcion = Helpers.Constants.Anuncios.categoria;
-            ViewBag.Busqueda = nombre;
-            List<AnuncioDTO> anuncios = anunciosDAO.filterByCategoriaName(nombre);
-            return View("Index", anuncios);
-        }
+        
         public ActionResult Buscar(string busqueda)
         {
             ViewBag.Funcion = Helpers.Constants.Anuncios.resultados;
