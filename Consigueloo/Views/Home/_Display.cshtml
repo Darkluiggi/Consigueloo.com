@@ -1,0 +1,81 @@
+﻿@model IEnumerable<Model.ViewModel.AnuncioDTO>
+
+    
+    <div id="render-ads " class="container-fluid div-destacados pad-top">
+        <div class="row2 ">
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-3 mb-3">
+                    <div class="card ">
+                        @if (item.actImagen == true)
+                        {
+                            <a href="#"><img class="card-img-top" src="@item.path" alt=""></a>
+                        }
+                        else
+                        {
+                            <div class="card-body">
+                                <h4 class="card-title">
+                                    <a href="#">@item.titulo</a>
+                                </h4>
+                                <p class="card-text">@item.descripcion</p>
+                                <div class="row">
+                                    <div class="icon-card2"><img src="~/Content/assets/Iconos/llamadas.png" /> </div>
+                                    <p class="card-text">@item.telefono</p>
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="icon-card2 "><img src="~/Content/assets/Iconos/whatsapp.png" /> </div>
+                                    <p class="card-text">@item.celularContacto</p>
+                                </div>  <br />
+                                <p class="card-text">@item.nombreContacto</p>
+                            </div>
+                        }
+                    </div>
+
+                </div>
+
+
+            }
+        <button class=" next btn btn-link btn-xlg absolut-from-top " onclick="moveRight()">
+            <i class="fas fa-arrow-circle-right clr-green next "></i>
+        </button>
+            <button class=" previous btn btn-link btn-xlg absolut-from-top" onclick="moveLeft()">
+                <i class="fas fa-arrow-circle-left clr-green previous " ></i>
+            </button>
+
+        </div>
+        
+    </div>
+
+    <script>
+       
+
+    const wrapper = document.querySelector(".div-destacados");
+
+    let scrollMovePoint = 0;
+    const max_scroll = wrapper.scrollWidth;
+    let operand = 320;
+        function moveRight() {
+
+
+            // Calculate the number to move.
+
+            if (scrollMovePoint < max_scroll) {
+                scrollMovePoint = scrollMovePoint + operand;
+                console.log(scrollMovePoint);
+            }
+            wrapper.scroll(scrollMovePoint, 0);
+        }
+        
+        function moveLeft() {
+            if (0 < scrollMovePoint) {
+                scrollMovePoint = scrollMovePoint - operand;
+                console.log(scrollMovePoint);
+            }
+            wrapper.scroll(scrollMovePoint, 0);
+        }
+
+        // Move the scroll bar to the value.
+       
+    
+    </script>

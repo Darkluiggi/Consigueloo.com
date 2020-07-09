@@ -1,0 +1,92 @@
+﻿@model IEnumerable<Model.ViewModel.AnuncioDTO>
+
+    <div class="card mb-4">
+        <div class="card-header"><i class="fas fa-table mr-1"></i>Anuncios activos</div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.titulo)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.nombreContacto)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.telefono)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.celularContacto)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.fechaActivacion)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.fechaCancelacion)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.categoria)
+                            </th>
+</thead>
+                    <tfoot>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.titulo)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.nombreContacto)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.telefono)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.celularContacto)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.fechaActivacion)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.fechaCancelacion)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.categoria)
+                            </th>
+                        </tr>
+                    </tfoot>
+
+
+                    @foreach (var item in Model)
+                    {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.titulo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.nombreContacto)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.telefono)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.celularContacto)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.fechaActivacion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.fechaCancelacion)
+                    </td>
+                    <th>
+                        @Html.DisplayFor(modelItem => item.categoria.nombre)
+                    </th>
+                </tr>
+                    }
+
+                </table>
+
+                
+                
+            </div>
+        </div>
+    </div>

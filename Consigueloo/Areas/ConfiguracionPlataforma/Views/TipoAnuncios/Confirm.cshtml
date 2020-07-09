@@ -1,0 +1,49 @@
+﻿@model Model.ViewModel.TipoAnunciosDTO
+
+@Html.Hidden("RedirectTo", Url.Action("Index", "TipoAnuncios"))
+<h4>Detalle de información de tipos de anuncio</h4>
+<div class="box" style="padding:15px">
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombre.nombre)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.duracion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.duracion)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.precio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.precio)
+        </dd>
+
+    </dl>
+</div>
+
+<script type="text/javascript" charset="UTF-8">
+   
+
+    $('#mdlCtrl').on('hidden.bs.modal', function () {
+        var url = $("#RedirectTo").val();
+        ActivarLoader();
+         window.location.href = url;
+    })
+</script>
+
+
+<script>
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>
+
+

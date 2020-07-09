@@ -1,0 +1,45 @@
+﻿@model Model.ViewModel.AnuncioDTO
+
+    <div class="container-fluid">
+
+        <!-- Portfolio Item Heading -->
+        <h1 class="my-4">
+            @Model.titulo
+            @*<small>Secondary Text</small>*@
+        </h1>
+
+        <!-- Portfolio Item Row -->
+        <div class="row margin-bot">
+
+            <div class="col-md-12">
+                <img class="img-fluid" src="@Model.path" alt="">
+            </div>
+
+            <div class="col-md-6">
+                <h3 class="my-3">Descripción</h3>
+
+                <p>@Model.descripcion</p>
+            </div>
+
+            <div class="col-md-6">
+                <h3 class="my-3">Contacto</h3>
+                <div class="row">
+                    <div class="icon-card3 "><img src="~/Content/assets/Iconos/llamadas.png" /> </div>
+                    <p class="card-text">@Model.telefono</p>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="icon-card3 "><img src="~/Content/assets/Iconos/whatsapp.png" /> </div>
+                    <p class="card-text">@Model.celularContacto</p>
+                </div>  <br />
+                <p class="card-text">@Model.nombreContacto</p>
+                @if (Model.actCatalogo == true)
+                {
+                    <div class="flex-end">
+                        <a href="#" class="navbar-link float-right  ">Catálogo</a>
+                    </div>
+                }
+            </div>
+
+        </div>
+</div>

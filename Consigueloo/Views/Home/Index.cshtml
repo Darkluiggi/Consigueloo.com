@@ -1,0 +1,143 @@
+﻿@{
+    ViewBag.Title = "Consigueloo.com";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+<div class="main-container linear-gradient ">
+
+    <div class="cloud-image2 margin-top">
+        <img class="img-fluid" src="~/Images/logocon.png" />
+    </div>
+
+    <div class="cloud-image col-md-12">
+        <div class="container center ">
+
+            <h2 class="pad-right ">Busca, anuncia y </h2>
+
+            <h1 class="pad-bot">¡CRECE!</h1>
+
+        </div>
+
+        <div class="col-md-12">
+            <div class="input-group">
+                <input type="text" onkeyup="inputKeyUp(event)" id="searchField"class="form-control" placeholder="Búsqueda..." aria-label="Search" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="button" id="srchButton" onclick="BuscarEnAnuncios()">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="center col-md-12">
+            <a class="btn-anunciate pad" href="Anuncios/Anuncios/Pricing">
+                <h3 class="keep-calm clr-green pad-top">Anúnciate ya</h3>
+            </a>
+        </div>
+    </div>
+
+</div>
+
+<div id="slider">
+    <figure class="slidder">
+
+        <img   src="~/Images/BC1.jpg" alt="">
+
+
+        <img src="~/Images/BC2.jpg" alt="">
+
+        <img src="~/Images/BC3.jpg" alt="">
+
+        <img src="~/Images/BC4.jpg" alt="">
+
+    </figure>
+ 
+</div>
+
+<!-- end of "#banner" -->
+@*<div class="mid-container">
+        <div class="row">
+            <div class="box-container col-image-6 ">
+                <div class="box-image">
+                    <img src="~/Images/12271.jpg" />
+                </div>
+
+            </div>
+            <div class="box-container col-md-6 bg-blue">
+                <div class="box-text">
+                    <h1 class="l1">Acércate más a tu comunidad</h1>
+                </div>
+                <div>
+                    <h3 class="pad-left">Lorem ipsum...</h3>
+                </div>
+            </div>
+
+
+            <div class="box-container col-md-6 bg-green">
+                <div class="box-text">
+                    <h1 class="l1">Acércate más a tu comunidad</h1>
+                </div>
+
+            </div>
+            <div class="box-container col-image-6 ">
+                <div class="box-image">
+                    <img src="~/Images/63668.jpg" />
+                </div>
+            </div>
+        </div>
+    </div>*@
+<div class="mid-down-container">
+
+</div>
+<div id="destacados">
+
+</div>
+<script>
+   $(document).ready(function () {
+
+        $.ajax(
+            {
+                type: "POST",
+                url: '@Url.Action("ShowDestacados", "Home")',
+                datatype: "json",
+                contentType: 'application/json',
+
+                success: function (r) {
+                    $("#destacados").html(r);
+
+                }
+
+            });
+   });
+
+
+
+
+</script>
+<script>
+
+    function BuscarEnAnuncios() {
+        var busquedaModel = document.getElementById("searchField");
+        var busqueda = busquedaModel.value;
+         $.ajax(
+            {
+                type: "POST",
+                url: '@Url.Action("Buscar", "Anuncios", new { area = "Anuncios" })',
+                datatype: "json",
+                contentType: 'application/json',
+                data: JSON.stringify({"busqueda":busqueda}),
+                success: function (res) {
+                    var newDoc = document.open("text/html", "replace");
+                    newDoc.write(res);
+                }
+
+            });
+    }
+
+    function inputKeyUp(e) {
+        e.which = e.which || e.keyCode;
+        if (e.which == 13) {
+            BuscarEnAnuncios();
+        }
+    }
+
+</script>

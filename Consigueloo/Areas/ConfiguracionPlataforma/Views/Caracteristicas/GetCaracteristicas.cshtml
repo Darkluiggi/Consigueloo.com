@@ -1,0 +1,16 @@
+﻿@model IEnumerable<Model.ViewModel.CaracteristicasDTO>
+
+
+@foreach (var item in Model)
+{
+
+    <div class="col-md-12">
+        <input class="color-green" type="checkbox" name="@item.id" value="@item.nombre" id="@item.id">
+        <label for="@item.id"> @Html.DisplayFor(modelItem => item.nombre)</label>
+    </div>
+
+}
+
+
+
+

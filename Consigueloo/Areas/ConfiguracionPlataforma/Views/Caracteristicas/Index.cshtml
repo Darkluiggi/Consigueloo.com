@@ -1,0 +1,133 @@
+﻿@model IEnumerable<Model.ViewModel.CaracteristicasDTO>
+
+@{
+    ViewBag.Title = "Configuracion Caracteristicas";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+    <div class="container">
+        <h2 class="color-blue">Administrador de caracteristicas de anuncios</h2>
+        <div class="row">
+            <div class=" col-md-4">
+                <div class="container">
+                    <p>
+                        <input type="submit" value="Nueva Caracteristica"
+                               class="btn btn-primary btn-sm" id="btnNuevo"
+                               data-toggle="modal" data-target="#mdlCtrl" onclick="create()"
+                               style="margin-top:20px" />
+                    </p>
+                </div>
+
+            </div>
+            <div class="card mb-4 col-md-12" style="padding:14px;margin:auto;">
+                <div class="card-header"><i class="fas fa-table mr-1"></i>Caracteristicas activos</div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table table-striped" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.nombre)
+                                    </th>
+
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.nombre)
+                                    </th>
+                                </tr>
+                            </tfoot>
+
+
+                            @foreach (var item in Model)
+                            {
+                                <tr id="@Html.DisplayFor(modelItem => item.id)" data-toggle="modal" data-target="#mdlCtrl">
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.nombre)
+                                    </td>
+                                </tr>
+                            }
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- Modal -->
+<div class="modal fade" id="mdlCtrl" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog   modal-lg" role="document">
+        <div class="modal-content">
+            <div class="box box-warning" style="padding:14px">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <div id="dvcontent"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(
+        function () {
+            $('#dataTable tbody').on('click', 'tr', function () {
+                var data = $(this).attr('id');
+                ActivarLoader();
+                ajaxControl(data);
+            });
+        }
+    );
+
+    function create() {
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("Create", "Caracteristicas")',
+            datatype: "json",
+            contentType: 'application/json',
+            success: function (r) {
+                $("#dvcontent").html(r);
+                DesactivarLoader();
+            },
+            error: function (r) {
+                $("#dvcontent").html(r);
+                DesactivarLoader();
+            }
+        });
+    }
+    function ajaxControl(indx) {
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("Details", "Caracteristicas")',
+            datatype: "json",
+            contentType: 'application/json',
+            data: JSON.stringify({ "id": indx }),
+            success: function (r) {
+                $("#dvcontent").html(r);
+                DesactivarLoader();
+            },
+            error: function (r) {
+                $("#dvcontent").html(r);
+                DesactivarLoader();
+            }
+        });
+    }
+
+</script>
+
+<script>
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+
+
+    $(document).ready(
+        function () {
+            $("#searchform").submit(
+                function () {
+                    ActivarLoader();
+                }
+            );
+        }
+    );
+</script>

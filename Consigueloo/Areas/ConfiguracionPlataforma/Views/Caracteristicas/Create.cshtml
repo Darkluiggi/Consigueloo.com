@@ -1,0 +1,44 @@
+﻿
+@model Model.ViewModel.CaracteristicasDTO
+
+<div class="container-fluid">
+    @using (Ajax.BeginForm("CreateNew", "Caracteristicas", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "dvcontent", OnBegin = "ActivarLoader()", OnComplete = "DesactivarLoader()" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Ingrese el nuevo periodo</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-info" })
+
+            <div class="col-sm-6">
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.nombre, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.nombre, new { htmlAttributes = new { @class = "form-control" } })
+                        <p data-toggle="tooltip" title="Registre el nombre de la razón social" class="glyphicon glyphicon-info-sign" style="color:#949599;"></p> @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-info" })
+                    </div>
+                </div>
+
+
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Crear" class="btn btn-default" />
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    }
+
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>

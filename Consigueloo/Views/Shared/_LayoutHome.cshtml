@@ -1,0 +1,248 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>@ViewBag.Title - Consigueloo.com</title>
+    <link href="~/Content/css/styles.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+    <script src="~/Content/js/simpleBanner.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+</head>
+<body class="sb-sidenav-toggled">
+    <nav class="sb-nav-fixed">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-light">
+
+            <button class="btn btn-link btn-xlg " id="sidebarToggle" href="#">
+                <span class="fas fa-bars color-green"></span>
+            </button>
+            <a href="~/">
+                <div class="image-brand" href=""> <img class="img-fluid" src="~/Images/binoculares-01.png" /></div>
+            </a>
+
+            <ul class="nav navbar-nav  ml-auto ">
+                <li class="margin-right ">
+                    <a class="color-blue" href="@Url.Action("Index", "Home" , new { area = "" })">Inicio</a>
+                </li>
+                <li class="margin-right ">
+                    <a class="color-blue" href="@Url.Action("About", "Home" , new { area = "" })">Conócenos</a>
+                </li>
+                <li class="margin-right ">
+                    <a class="color-blue" href="@Url.Action("Services", "Home" , new { area = "" })">Servicios</a>
+                </li>
+                <li class="margin-right ">
+                    <a class="color-blue" href="@Url.Action("Contact", "Home" , new { area = "" })">Contáctanos</a>
+                </li>
+            </ul>
+            @if (Request.IsAuthenticated)
+            {
+                <ul class="navbar-nav ml-auto ml-md-0">
+                    @Html.Partial("_LoginPartial")
+                </ul>
+            }
+
+            <ul class="navbar-nav ml-auto ml-md-0">
+                @Html.Partial("_LoginPartial")
+            </ul>
+
+
+
+
+        </nav>
+
+
+        <!-- Navbar-->
+
+        <div id="layoutSidenav">
+
+            <!-- Sidebar -->
+            <div id="layoutSidenav_nav">
+                <nav class="sb-sidenav accordion sb-sidenav-light" id="sidenavAccordion">
+                    <div class="sb-sidenav-menu">
+                        <div class="nav">
+                            <div class="sb-sidenav-menu-heading">Servicios</div>                          
+                            <a class="nav-link" onclick="ActivarLoader()" href="@Url.Action("FilterCategoriasByName", "Anuncios", new { nombre="Inmuebles", area = "Anuncios" })">
+                                <div class="sb-nav-link-icon"><img src="~/Content/assets/Iconos/Categorias/Inmuebles.png" /></div>
+                                Inmuebles 
+                                
+                            </a>
+                            <a class="nav-link" onclick="ActivarLoader()" href="@Url.Action("FilterCategoriasByName", "Anuncios", new { nombre="Vehiculos", area = "Anuncios" })">
+                                <div class="sb-nav-link-icon"><img src="~/Content/assets/Iconos/Categorias/Vehículos.png" /></i></div>
+                                Vehículos
+                            </a>
+                            <a class="nav-link" onclick="ActivarLoader()" href="@Url.Action("FilterCategoriasByName", "Anuncios", new { nombre="Alimentos / Bebidas", area = "Anuncios" })">
+                                <div class="sb-nav-link-icon"><img src="~/Content/assets/Iconos/Categorias/Alimentos y bebidas.png" /></div>
+                                Alimentos / Bebidas
+                            </a>
+                            <a class="nav-link" onclick="ActivarLoader()" href="@Url.Action("FilterCategoriasByName", "Anuncios", new { nombre="Salud / Farmacia", area = "Anuncios" })">
+                                <div class="sb-nav-link-icon"><img src="~/Content/assets/Iconos/Categorias/Salud y farmacia.png" /></div>
+                                Salud / Farmacia
+                            </a>
+                            <a class="nav-link" onclick="ActivarLoader()" href="@Url.Action("FilterCategoriasByName", "Anuncios", new { nombre="Moda / Accesorios", area = "Anuncios" })">
+                                <div class="sb-nav-link-icon"><img src="~/Content/assets/Iconos/Categorias/Moda y accesorios.png" /></div>
+                                Moda / Accesorios
+                            </a>
+                            <div class="center">
+                                <a class="nav-link collapsed center" href="#" onclick="showCategorias()" data-toggle="modal" data-target="#categoriasModal">
+
+                                    VER MÁS
+
+                                </a>
+                            </div>
+
+                            <a class="nav-link" href="index.html">
+                                Buscar empleo
+                            </a>
+                            <a class="nav-link" href="index.html">
+                                Domicilios / Mensajería
+                            </a>
+                            <a class="nav-link" href="index.html">
+                                Anuncios Destacados
+                            </a>
+                            <a class="nav-link" href="index.html">
+                                Hacer Crecer Mi Emprendimiento
+                            </a>
+                            <a class="nav-link" href="index.html">
+                                Ayuda / PQR
+                            </a>
+
+                        </div>
+                    </div>
+
+                </nav>
+            </div>
+
+            <div id="layoutSidenav_content">
+                @RenderBody()
+
+                <footer>
+                    @Html.Partial("_Footer")
+                </footer>
+                <a class="scroll-to-top rounded" href="#" id="scrollToTop">
+                    <i class="fas fa-angle-up"></i>
+                </a>
+            </div>
+
+        </div>
+    </nav>
+    <!-- Scroll to Top Button-->
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" onclick="ActivarLoader()" href="javascript:document.getElementById('logoutForm').submit()">Cerrar sesión</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Categorías Modal-->
+    <div class="modal fade opacity" id="categoriasModal" tabindex="-1" role="dialog" aria-labelledby="categoriasModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg " role="document">
+            <div class="modal-content ">
+                <div class="modal-header ">
+                    <h1 class="modal-title color-blue2 " id="exampleModalLabel">Categorías</h1>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+
+                </div>
+                <div class="modal-body" id="divcategorias">
+
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="~/Content/js/scripts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+    <script src="~/Content/assets/demo/chart-area-demo.js"></script>
+    <script src="~/Content/assets/demo/chart-bar-demo.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+    <script src="~/Content/assets/demo/datatables-demo.js"></script>
+    <script>
+        $(document).on('scroll', function () {
+            var scrollDistance = $(this).scrollTop();
+            if (scrollDistance > 100) {
+                $('.scroll-to-top').fadeIn();
+            } else {
+                $('.scroll-to-top').fadeOut();
+            }
+        }); function waiter(event) {
+            $("#divLoading").show();
+        }
+
+
+        function ActivarLoader() {
+            $("#divLoading").show();
+        }
+
+        function DesactivarLoader() {
+            $("#divLoading").hide();
+        }
+        function showCategorias() {
+            ActivarLoader();
+             $.ajax(
+            {
+                type: "POST",
+                url: '@Url.Action("ShowCategorias", "Anuncios", new { area = "Anuncios" })',
+                datatype: "json",
+                contentType: 'application/json',
+                success: function (res) {
+
+                    $("#divcategorias").html(res);
+                    DesactivarLoader();
+                }
+
+            });
+        }
+
+        function filterCategoriasbyName(nombre) {
+            console.log(nombre);
+             $.ajax(
+            {
+                type: "POST",
+                url: '@Url.Action("FilterCategoriasByName", "Anuncios", new { area = "Anuncios" })',
+                datatype: "json",
+                     contentType: 'application/json',
+                     data: JSON.stringify({ "nombre": nombre}),
+                success: function (res) {
+
+                    var newDoc = document.open("text/html", "replace");
+                    newDoc.write(res);
+                    newDoc.close();
+
+                }
+
+            });
+        }
+
+    </script>
+
+    <div id="divLoading" class="loader">
+        <img src="~/Images/Webp.net-gifmaker.gif" class="image-loader">
+    </div>
+</body>
+</html>

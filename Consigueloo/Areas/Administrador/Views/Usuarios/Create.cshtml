@@ -1,0 +1,117 @@
+﻿
+@model Model.ViewModel.UsuariosDTO
+
+<div class="container-fluid">
+    
+        @Html.AntiForgeryToken()
+    <div class=" row">
+
+        <div class="col-12"><h4>Ingrese el nuevo usuario</h4></div>
+        
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-info" })
+
+        <div class="col-sm-6">
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.nombre, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.nombre, new { htmlAttributes = new { @class = "form-control" , id = "nombreInput" } })
+                    <p data-toggle="tooltip" title="Registre el nombre del usuario " class="glyphicon glyphicon-info-sign" style="color:#949599;"></p> @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-info" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.apellido, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.apellido, new { htmlAttributes = new { @class = "form-control" , id = "apellidoInput" } })
+                    <p data-toggle="tooltip" title="Registre el apellido del usuario" class="glyphicon glyphicon-info-sign" style="color:#949599;"></p> @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-info" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.correo, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.correo, new { htmlAttributes = new { @class = "form-control", id = "correoInput" } })
+                    <p data-toggle="tooltip" title="Registre el correo" class="glyphicon glyphicon-info-sign" style="color:#949599;"></p> @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-info" })
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                @Html.LabelFor(model => model.rol, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+
+                    @Html.DropDownList("rolInput", (SelectList)ViewBag.Roles, new { @class = "form-control" })
+                    @*@Html.EditorFor(model => model.rol, new { htmlAttributes = new { @class = "form-control" } })*@
+                    <p data-toggle="tooltip" title="Seleccione el rol de usuario" class="glyphicon glyphicon-info-sign" style="color:#949599;"></p> @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-info" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.password, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control", id = "passwordInput" } })
+                    <p data-toggle="tooltip" title="Registrela contraseña" class="glyphicon glyphicon-info-sign" style="color:#949599;"></p> @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-info" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.confirmPassword, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.confirmPassword, new { htmlAttributes = new { @class = "form-control", id = "confirmPasswordInput" } })
+                    <p data-toggle="tooltip" title="Confirme la contraseña" class="glyphicon glyphicon-info-sign" style="color:#949599;"></p>
+                    @Html.ValidationMessageFor(model => model.confirmPassword, "", new { @class = "text-info" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="button" value="Crear" class="btn btn-default" onclick="createNew()" />
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    
+
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+
+
+    function createNew() {
+        var rolModel = document.getElementById("rolInput");
+        var rol = rolModel.value;
+        var nombreModel = document.getElementById("nombreInput");
+        var nombre = nombreModel.value;
+        var apellidoModel = document.getElementById("apellidoInput");
+        var apellido = apellidoModel.value;
+        var correoModel = document.getElementById("correoInput");
+        var correo = correoModel.value;
+        var passwordModel = document.getElementById("passwordInput");
+        var password = passwordModel.value;
+        var confirmPasswordModel = document.getElementById("confirmPasswordInput");
+        var confirmPassword = confirmPasswordModel.value;
+        console.log(nombre);
+        console.log(apellido);
+
+         $.ajax({
+            type: "POST",
+             url: '@Url.Action("CreateNew", "Usuarios")',
+            datatype: "json",
+             contentType: 'application/json',
+             data: JSON.stringify({ "rol": rol, "nombre": nombre, "apellido": apellido, "correo": correo, "password": password, "confirmPassword": confirmPassword }),
+            success: function (r) {
+                $("#dvcontent").html(r);
+                DesactivarLoader();
+            },
+            error: function (r) {
+                $("#dvcontent").html(r);
+                DesactivarLoader();
+            }
+        });
+    }
+</script>

@@ -1,0 +1,19 @@
+﻿@model IEnumerable<Model.ViewModel.CaracteristicasDTO>
+
+    
+@foreach (var item in Model)
+{
+    
+    <div class="row ">
+        <div class="col-md-1">
+            <span class="fas fa-check color-green"></span>
+        </div>
+        <div class="col-md-10">
+            <label for="nombreCaracteristica+@item.id"> @Html.DisplayFor(modelItem => item.nombre)</label>
+        </div>
+    </div>
+   
+}
+
+
+

@@ -1,0 +1,169 @@
+﻿@model IEnumerable<Model.ViewModel.UsuariosDTO>
+
+@{
+    ViewBag.Title = "Configuracion Usuarios";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+    <div class="container">
+        <h2 class="color-blue">Administrador de Usuarios de Consigueloo</h2>
+        <div class="row">
+            <div class=" col-md-4">
+                <div class="container">
+                    <p>
+                        <input type="submit" value="Nuevo Usuario"
+                               class="btn btn-primary btn-sm" id="btnNuevo"
+                               data-toggle="modal" data-target="#mdlCtrl" onclick="create()"
+                               style="margin-top:20px" />
+                    </p>
+                </div>
+
+            </div>
+            <div class="card mb-4 col-md-12" style="padding:14px;margin:auto;">
+                <div class="card-header"><i class="fas fa-table mr-1"></i>Periodos activos</div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table table-striped" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.nombre)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.apellido)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.ciudad)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.correo)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.telefono)
+                                    </th>
+</thead>
+                            <tfoot>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.nombre)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.apellido)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.ciudad)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.correo)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.telefono)
+                                    </th>
+                                </tr>
+                            </tfoot>
+
+
+                            @foreach (var item in Model)
+                            {
+                        <tr id="@Html.DisplayFor(modelItem => item.id)" data-toggle="modal" data-target="#mdlCtrl">
+                            <td>
+                                @Html.DisplayFor(modelItem => item.nombre)
+                            </td>
+                            <th>
+                                @Html.DisplayFor(modelItem => item.apellido)
+                            </th>
+                            <th>
+                                @Html.DisplayFor(modelItem => item.ciudad)
+                            </th>
+                            <th>
+                                @Html.DisplayFor(modelItem => item.correo)
+                            </th>
+                            <th>
+                                @Html.DisplayFor(modelItem => item.telefono)
+                            </th>
+                        </tr>
+                            }
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- Modal -->
+<div class="modal fade" id="mdlCtrl" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog   modal-lg" role="document">
+        <div class="modal-content">
+            <div class="box box-warning" style="padding:14px">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <div id="dvcontent"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(
+        function () {
+            $('#dataTable tbody').on('click', 'tr', function () {
+                var data = $(this).attr('id');
+                ActivarLoader();
+                ajaxControl(data);
+            });
+        }
+    );
+
+    function create() {
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("Create", "Usuarios")',
+            datatype: "json",
+            contentType: 'application/json',
+            success: function (r) {
+                $("#dvcontent").html(r);
+                DesactivarLoader();
+            },
+            error: function (r) {
+                $("#dvcontent").html(r);
+                DesactivarLoader();
+            }
+        });
+    }
+    function ajaxControl(indx) {
+        console.log(indx);
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("Details", "Usuarios")',
+            datatype: "json",
+            contentType: 'application/json',
+            data: JSON.stringify({ "id": indx }),
+            success: function (r) {
+                $("#dvcontent").html(r);
+                DesactivarLoader();
+            },
+            error: function (r) {
+                $("#dvcontent").html(r);
+                DesactivarLoader();
+            }
+        });
+    }
+
+</script>
+
+<script>
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+
+
+    $(document).ready(
+        function () {
+            $("#searchform").submit(
+                function () {
+                    ActivarLoader();
+                }
+            );
+        }
+    );
+</script>

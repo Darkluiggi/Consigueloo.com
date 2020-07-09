@@ -1,0 +1,76 @@
+﻿@model Model.ViewModel.NombreAnunciosDTO
+    <div class="container">
+        <h4>Detalle de categoría de anuncios</h4>
+        <div class="row"  >
+            <div class="col-md-4">
+                <dl class="dl-horizontal">
+                    <dt style="margin-bottom:20px">
+                        @Html.DisplayNameFor(model => model.nombre)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.nombre)
+                    </dd>
+                </dl>
+            </div>
+            <div class="col-md-4">
+                <dl class="dl-horizontal">
+                    <dt style="margin-bottom:20px">
+                        @Html.DisplayNameFor(model => model.caracteristicas)
+                    </dt>
+                    <dd>
+                        <ul>
+                            @foreach (var item in Model.caracteristicas)
+                            {
+                                <li>@Html.DisplayFor(model => item.nombre)</li>
+
+                            }
+                        </ul>
+                    </dd>
+
+                </dl>
+            </div>
+            <div class="col-md-4">
+                <dl class="dl-horizontal">
+                    <dt style="margin-bottom:20px">
+                        @Html.DisplayNameFor(model => model.noIncluidas)
+                    </dt>
+                    <dd>
+                        <ul>
+                            @foreach (var item in Model.noIncluidas)
+                            {
+                                <li>@Html.DisplayFor(model => item.nombre)</li>
+
+                            }
+                        </ul>
+                    </dd>
+
+                </dl>
+            </div>
+
+        </div>
+        <div class="row">
+            <div>
+
+                @using (Ajax.BeginForm("Edit", "NombreAnuncios", new { id = Model.id }, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "dvcontent", OnBegin = "ActivarLoader()", OnComplete = "DesactivarLoader()" }))
+                {
+                    <input type="submit" value="Editar" class="btn btn-primary" id="btnEditar" width="200" />
+                }
+                <br />
+            </div>
+            <div class="col-md-2">
+
+                @using (Ajax.BeginForm("DeleteItem", "NombreAnuncios", new { id = Model.id }, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "dvcontent", OnBegin = "ActivarLoader()", OnComplete = "DesactivarLoader()" }))
+                {
+                    <input type="submit" value="Borrar" class="btn btn-primary" id="btnInactivar" width="200" />
+                }
+            </div>
+
+        </div>
+        <br />
+    </div>
+<script>
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>

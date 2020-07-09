@@ -1,0 +1,49 @@
+﻿@model Model.ViewModel.CategoriasDTO
+
+<h3>Esta seguro de borrar esta información?</h3>
+<div>
+  <br/>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombre)
+        </dd>
+
+       
+    </dl>
+
+    
+        <div class="form-actions no-color">
+            <input type="button" value="Borrar" class="btn btn-default" onclick="DeleteConfirmed(@Model.id)" /> 
+           
+        </div>
+    
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+
+    function DeleteConfirmed(indx) {
+            ActivarLoader()
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("DeleteConfirmed", "Categorias")',
+            datatype: "json",
+            contentType: 'application/json',
+            data: JSON.stringify({ "id": indx }),
+            success: function (r) {
+                $("#dvcontent").html(r);
+                DesactivarLoader();
+            },
+            error: function (r) {
+                $("#dvcontent").html(r);
+                DesactivarLoader();
+            }
+        });
+    }
+</script>

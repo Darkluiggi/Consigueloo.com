@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Model.ViewModel.CategoriasDTO>
+
+
+
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            
+        <div class="col-md-4" onclick="filterCategorias(@item.id)">
+            <a href="#">
+                <div class="categorias-card" id="@item.id" >
+                    <div class="categoria-img">
+                        <img src="@item.path" />
+                    </div>
+                    <div class="categoria-body">
+                        <span class="color-green">@item.nombre</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+        }
+    </div>
+</div>
+
+<script>
+    function filterCategorias(id) {
+        console.log(id);
+             $.ajax(
+            {
+                type: "POST",
+                url: '@Url.Action("FilterCategorias", "Anuncios", new { area = "Anuncios" })',
+                datatype: "html",
+                contentType: 'application/json',
+                data: JSON.stringify({"id":id}),
+                     success: function (res) {
+                         var newDoc = document.open("text/html", "replace");
+                         newDoc.write(res);
+                         newDoc.close();
+                         //document.write(res);
+                }
+
+            });
+        }
+</script>

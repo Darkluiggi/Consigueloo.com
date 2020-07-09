@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Model.ViewModel.AnuncioDTO>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="render-ads" class="container">
+    <h1 class="color-blue2">Anuncios</h1>
+  <h3>@ViewBag.Funcion "@ViewBag.Busqueda"</h3>
+
+    @Html.Partial("_Display", Model)
+
+
+</div>
+
+<!-- Logout Modal-->
+<div class="modal fade " id="anuncioModal" tabindex="-1" role="dialog" aria-labelledby="showSelected" aria-hidden="true">
+    <div class="modal-dialog modal-lg" >
+        <div class="modal-content">
+            <div class="container-fluid modal-card" id="showSelected">
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+        function showSelected(id) {
+           
+        $.ajax(
+            {
+                type: "POST",
+                url: '@Url.Action("ShowSelected", "Anuncios")',
+                datatype: "json",
+                contentType: 'application/json',
+                data: JSON.stringify({ "id": id }),
+                success: function (res) {
+                    
+                    $("#showSelected").html(res);
+
+                }
+
+            });
+
+    }
+
+</script>

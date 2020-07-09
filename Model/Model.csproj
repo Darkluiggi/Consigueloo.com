@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A03F38FF-6A5D-44AE-AC77-D47484BDE347}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Model</RootNamespace>
+    <AssemblyName>Model</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Anuncios\Anuncio.cs" />
+    <Compile Include="Anuncios\AnuncioTrabajo.cs" />
+    <Compile Include="Anuncios\Catalogo.cs" />
+    <Compile Include="ConfiguracionPlataforma\Localidades.cs" />
+    <Compile Include="ConfiguracionPlataforma\Caracteristicas.cs" />
+    <Compile Include="ConfiguracionPlataforma\NombreAnuncios.cs" />
+    <Compile Include="ConfiguracionPlataforma\Periodos.cs" />
+    <Compile Include="ConfiguracionPlataforma\TipoAnuncios.cs" />
+    <Compile Include="ModelBase.cs" />
+    <Compile Include="ConfiguracionPlataforma\Categorias.cs" />
+    <Compile Include="Usuarios\Roles.cs" />
+    <Compile Include="Usuarios\Usuarios.cs" />
+    <Compile Include="ViewModel\AnuncioTrabajoDTO.cs" />
+    <Compile Include="ViewModel\CategoriasDTO.cs" />
+    <Compile Include="ViewModel\AnuncioDTO.cs" />
+    <Compile Include="ViewModel\RolesDTO.cs" />
+    <Compile Include="ViewModel\CaracteristicasDTO.cs" />
+    <Compile Include="ViewModel\CatalogoDTO.cs" />
+    <Compile Include="ViewModel\LocalidadesDTO.cs" />
+    <Compile Include="ViewModel\NombreAnunciosDTO.cs" />
+    <Compile Include="ViewModel\PeriodosDTO.cs" />
+    <Compile Include="ViewModel\TipoAnunciosDTO.cs" />
+    <Compile Include="ViewModel\UsuariosDTO.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

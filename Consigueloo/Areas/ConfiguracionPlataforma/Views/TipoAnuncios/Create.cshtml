@@ -1,0 +1,112 @@
+﻿
+@model Model.ViewModel.TipoAnunciosDTO
+
+<div class="container-fluid">
+    
+        
+
+    <div class="form-horizontal">
+        <h4>Ingrese el tipo de anuncio</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-info" })
+    <div class="row">
+        <div class="col-md-6">
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.nombre, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.DropDownList("nombreInput", (SelectList)ViewBag.NombreAnuncio, new { @class = "form-control", @onchange= "getCaracteristicas(value)" })
+                    @*@Html.EditorFor(model => model.nombre, new { htmlAttributes = new { @class = "form-control", id = "nombreInput" } })*@
+                    <p data-toggle="tooltip" title="Registre el nombre del tipo de anuncio" class="glyphicon glyphicon-info-sign" style="color:#949599;"></p> @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-info" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.duracion, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.DropDownList("duracionInput", (SelectList)ViewBag.Periodos, new { @class = "form-control" })
+                    @*@Html.EditorFor(model => model.duracion, new { htmlAttributes = new { @class = "form-control", id = "duracionInput" } })*@
+                    <p data-toggle="tooltip" title="Registre la duracion del tipo de anuncio" class="glyphicon glyphicon-info-sign" style="color:#949599;"></p> @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-info" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.precio, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.precio, new { htmlAttributes = new { @class = "form-control", id = "precioInput", type = "number", min = "1", step = "0.01" } })
+                    <p data-toggle="tooltip" title="Registre el precio del tipo de anuncio" class="glyphicon glyphicon-info-sign" style="color:#949599;"></p> @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-info" })
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="container-fluid">
+                <h4>Características</h4>
+                <div  id="caracteristicas">
+                   @Html.Partial("NoSelected")
+                </div>
+                <p data-toggle="tooltip" title="Registre las caracteristicas del tipo de anuncio" class="glyphicon glyphicon-info-sign" style="color:#949599;"></p> @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-info" })
+            </div>
+        </div>
+    </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="button" value="Crear" class="btn btn-primary" onclick="createNew()" />
+                </div>
+            </div>
+
+
+
+        </div>
+      
+    </div>
+
+
+<script>
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+
+    function getCaracteristicas(id) {
+        console.log(id);
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("GetCaracteristicas", "TipoAnuncios")',
+            datatype: "json",
+            contentType: 'application/json',
+            data: JSON.stringify({ "id": id }),
+            success: function (r) {
+                $("#caracteristicas").html(r);
+                DesactivarLoader();
+            },
+            error: function (r) {
+                $("#caracteristicas").html(r);
+                DesactivarLoader();
+            }
+        });
+    }
+
+    function createNew() {
+        var nombreModel = document.getElementById("nombreInput");
+        var nombre = nombreModel.value;
+        var duracionModel = document.getElementById("duracionInput");
+        var duracion = duracionModel.value;
+        var precioModel = document.getElementById("precioInput");   
+        var precio = precioModel.value;
+
+         $.ajax({
+            type: "POST",
+            url: '@Url.Action("CreateNew", "TipoAnuncios")',
+            datatype: "json",
+             contentType: 'application/json',
+             data: JSON.stringify({ "nombre": nombre, "duracion": duracion, "precio": precio }),
+            success: function (r) {
+                $("#dvcontent").html(r);
+                DesactivarLoader();
+            },
+            error: function (r) {
+                $("#dvcontent").html(r);
+                DesactivarLoader();
+            }
+        });
+    }
+
+</script>

@@ -1,0 +1,212 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>@ViewBag.Title - Consigueloo.com</title>
+    <link href="~/Content/css/styles.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script src="~/Scripts/jquery-3.2.1.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+</head>
+<body class="sb-sidenav-toggled">
+    <nav class="sb-nav-fixed">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+
+            <button class="btn btn-link btn-xlg order-1 order-lg-0 " id="sidebarToggle" href="#">
+                <i class="fas fa-bars color-green"></i>
+            </button>
+
+            <div class="image-brand" href=""> <img class="img-fluid" src="~/Images/binoculares-01.png" /></div>
+
+            <ul class="nav navbar-nav  ml-auto mr-0 mr-md-3 my-2 my-md-0">
+                <li class="margin-right ">
+                    <a class="color-white2" href="/Home">Inicio</a>
+                </li>
+                <li class="margin-right ">
+                    <a class="color-white2" href="/Home/About">Conócenos</a>
+                </li>
+                <li class="margin-right ">
+                    <a class="color-white2" href="/Home">Servicios</a>
+                </li>
+                <li class="margin-right ">
+                    <a class="color-white2" href="/Home/Contact">Contáctanos</a>
+                </li>
+            </ul>
+
+
+
+            @*<a class="navbar-brand" href=""> <img src="~/Images/logocon.png" /></a>*@
+
+
+
+            <ul class="navbar-nav ml-auto ml-md-0">
+                @Html.Partial("_LoginPartial")
+            </ul>
+
+        </nav>
+
+
+        <!-- Navbar-->
+
+        <div id="layoutSidenav">
+
+            <!-- Sidebar -->
+            <div id="layoutSidenav_nav">
+                <nav class="sb-sidenav sb-sidenav-dark " id="sidenavAccordion">
+                    <div class="sb-sidenav-menu">
+                        <div class="nav">
+                            <div class="sb-sidenav-menu-heading">Core</div>
+                            <a class="nav-link" href="/Administrador/Administrador">
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                Administrador Consigueloo
+                            </a>
+                            <div class="sb-sidenav-menu-heading"> Configuración platadorma</div>
+                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePlatforma" aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                Configuración Plataforma
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapsePlatforma" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="/ConfiguracionPlataforma/Periodos">Periodos</a>
+                                    <a class="nav-link" href="/ConfiguracionPlataforma/NombreAnuncios">Nombre de anuncios</a>
+                                    <a class="nav-link" href="/ConfiguracionPlataforma/Localidades">Localidades</a>
+                                    <a class="nav-link" href="/ConfiguracionPlataforma/Caracteristicas">Características</a>
+                                    <a class="nav-link" href="/ConfiguracionPlataforma/TipoAnuncios">Tipos de anuncios</a>
+                                </nav>
+                            </div>
+                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAnuncios" aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                Administrar Anuncios
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseAnuncios" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="/Administrador/Administrador">Anuncios Activos</a>
+                                    <a class="nav-link" href="/ConfiguracionPlataforma/NombreAnuncios">Anuncios pendientes de activar</a>
+                                    <a class="nav-link" href="/ConfiguracionPlataforma/Localidades">Anuncios Inactivos</a>
+                                </nav>
+                            </div>
+                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUsuarios" aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                Administrar Usuarios
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseUsuarios" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="/Administrador/Usuarios">Administrar Usuarios</a>
+                                    <a class="nav-link" href="/Administrador/Roles">Administrar Roles</a>
+                                </nav>
+                            </div>
+                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                                <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                                Pages
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                        Authentication
+                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                    </a>
+                                    <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-parent="#sidenavAccordionPages">
+                                        <nav class="sb-sidenav-menu-nested nav"><a class="nav-link" href="login.html">Login</a><a class="nav-link" href="register.html">Register</a><a class="nav-link" href="password.html">Forgot Password</a></nav>
+                                    </div>
+                                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
+                                        Error
+                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                    </a>
+                                    <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-parent="#sidenavAccordionPages">
+                                        <nav class="sb-sidenav-menu-nested nav"><a class="nav-link" href="401.html">401 Page</a><a class="nav-link" href="404.html">404 Page</a><a class="nav-link" href="500.html">500 Page</a></nav>
+                                    </div>
+                                </nav>
+                            </div>
+
+                        </div>
+                    </nav>
+                    </div>
+            
+                    <div class="sb-sidenav-footer">
+                        <div class="small">Logged in as:</div>
+                        Administrador
+                    </div>
+            
+
+            <div id="layoutSidenav_content">
+                @RenderBody()
+                <footer>
+                    <p>&copy; @DateTime.Now.Year - Consigueloo.com</p>
+                </footer>
+                <a class="scroll-to-top rounded" href="#" id="scrollToTop">
+                    <i class="fas fa-angle-up"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+    <!-- Scroll to Top Button-->
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Cerrar sesión?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Seleccione cerrar sesión si está seguro que desea salir.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" onclick="ActivarLoader()" href="javascript:document.getElementById('logoutForm').submit()">Cerrar sesión</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="~/Content/js/scripts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+    <script src="~/Content/assets/demo/chart-area-demo.js"></script>
+    <script src="~/Content/assets/demo/chart-bar-demo.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+    <script src="~/Content/assets/demo/datatables-demo.js"></script>
+    <script>
+        $(document).on('scroll', function () {
+            var scrollDistance = $(this).scrollTop();
+            if (scrollDistance > 100) {
+                $('.scroll-to-top').fadeIn();
+            } else {
+                $('.scroll-to-top').fadeOut();
+            }
+        });
+        function waiter(event) {
+            $("#divLoading").show();
+        }
+
+
+        function ActivarLoader() {
+            $("#divLoading").show();
+        }
+
+        function DesactivarLoader() {
+            $("#divLoading").hide();
+        }
+
+    </script>
+
+    <div id="divLoading" class="loader">
+        <img src="~/Images/Webp.net-gifmaker.gif" class="image-loader">
+    </div>
+</body>
+</html>
