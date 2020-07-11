@@ -3,13 +3,11 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
     <div id="render-ads" class="container">
         <h1 class="color-blue2">Ofertas de trabajo</h1>
         <h3>@ViewBag.Funcion "@ViewBag.Busqueda"</h3>
 
         <div id="render-ads" class="container-fluid ">
-
             <div class="render-anuncios">
                 <div class="row">
                     @foreach (var item in Model)
@@ -38,17 +36,12 @@
                                             <p class="card-text">@item.correoContacto</p>
                                         </div>
                                     </div>
-                                </div>                     
-
-
+                                </div>                
                         </div>
                     }
                 </div>
             </div>
         </div>
-
-
-
     </div>
 
 <!-- Logout Modal-->
