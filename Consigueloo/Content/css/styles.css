@@ -2459,6 +2459,8 @@ textarea.form-control {
   line-height: 1.5;
   border-radius: 0.25rem;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  margin-right:5px;
+  margin-bottom:10px;
 }
 @media (prefers-reduced-motion: reduce) {
   .btn {
@@ -2939,8 +2941,16 @@ fieldset:disabled a.btn {
 .color-green{
     color:#53c995;
 }
-.color-green:hover{
-    color:#c5e23b;
+
+.color-green:hover {
+    color: #c5e23b;
+}
+.color-yellow {
+    color: #c5e23b;
+}
+
+.color-red {
+    color: #ef0b21;
 }
 .color-white {
     color: #fff;

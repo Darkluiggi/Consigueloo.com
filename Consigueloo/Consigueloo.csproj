@@ -567,6 +567,9 @@
     <Content Include="Areas\Anuncios\Views\Anuncios\Pricing - Copia.cshtml" />
     <Content Include="Areas\Anuncios\Views\AnuncioTrabajo\Index.cshtml" />
     <Content Include="Areas\Anuncios\Views\AnuncioTrabajo\Create.cshtml" />
+    <Content Include="Areas\Anuncios\Views\Anuncios\Pricing - Copia %282%29.cshtml" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\CustomProfile1.pubxml" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.2.1.js" />
     <Content Include="Scripts\jquery-3.2.1.min.js" />

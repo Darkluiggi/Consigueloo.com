@@ -29,24 +29,23 @@
             </button>
 
 
-            <div class="image-brand" href=""> <img class="img-fluid" src="~/Images/binoculares-01.png" /></div>
-
-
-            <ul class="nav navbar-nav  ml-auto mr-0 mr-md-3 my-2 my-md-0">
+            <a href="~/">
+                <div class="image-brand"> <img class="img-fluid" src="~/Images/binoculares-01.png" /></div>
+            </a>
+            <ul class="nav navbar-nav  ml-auto ">
                 <li class="margin-right ">
-                    <a class="color-white2" href="/Home">Inicio</a>
+                    <a class="color-white" href="@Url.Action("Index", "Home" , new { area = "" })">Inicio</a>
                 </li>
                 <li class="margin-right ">
-                    <a class="color-white2" href="/Home">Conócenos</a>
+                    <a class="color-white" href="@Url.Action("About", "Home" , new { area = "" })">Conócenos</a>
                 </li>
                 <li class="margin-right ">
-                    <a class="color-white2" href="/Home">Servicios</a>
+                    <a class="color-white" href="@Url.Action("Services", "Home" , new { area = "" })">Servicios</a>
                 </li>
                 <li class="margin-right ">
-                    <a class="color-white2" href="/Home">Contáctanos</a>
+                    <a class="color-white" href="@Url.Action("Contact", "Home" , new { area = "" })">Contáctanos</a>
                 </li>
             </ul>
-
 
 
 
@@ -93,7 +92,7 @@
                                 Moda / Accesorios
                             </a>
                             <div class="center">
-                                <a class="nav-link collapsed center" href="#" onclick="showCategorias()" data-toggle="modal" data-target="#categoriasModal">
+                                <a class="nav-link collapsed center" href="#" onclick="showCategorias()" data-toggle="modal" data-target="#categoriasbModal">
 
                                     VER MÁS
 
@@ -157,6 +156,25 @@
     </div>
 
 
+    <!-- Categorías Modal-->
+    <div class="modal fade opacity" id="categoriasbModal" tabindex="-1" role="dialog" aria-labelledby="categoriasbModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg " role="document">
+            <div class="modal-content ">
+                <div class="modal-header ">
+                    <h1 class="modal-title color-blue2 " id="exampleModalLabel">Categorías</h1>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+
+                </div>
+                <div class="modal-body" id="divcategoriasb">
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="~/Content/js/scripts.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
@@ -186,6 +204,41 @@
 
         function DesactivarLoader() {
             $("#divLoading").hide();
+        }
+        function showCategorias() {
+            ActivarLoader();
+             $.ajax(
+            {
+                type: "POST",
+                url: '@Url.Action("ShowCategorias", "Anuncios", new { area = "Anuncios" })',
+                datatype: "json",
+                contentType: 'application/json',
+                success: function (res) {
+
+                    $("#divcategoriasb").html(res);
+                    DesactivarLoader();
+                }
+
+            });
+        }
+         function filterCategoriasbyName(nombre) {
+            console.log(nombre);
+             $.ajax(
+            {
+                type: "POST",
+                url: '@Url.Action("FilterCategoriasByName", "Anuncios", new { area = "Anuncios" })',
+                datatype: "json",
+                     contentType: 'application/json',
+                     data: JSON.stringify({ "nombre": nombre}),
+                success: function (res) {
+
+                    var newDoc = document.open("text/html", "replace");
+                    newDoc.write(res);
+                    newDoc.close();
+
+                }
+
+            });
         }
 
     </script>

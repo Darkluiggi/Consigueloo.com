@@ -38,4 +38,5 @@ namespace Consigueloo.Models
             return new ApplicationDbContext();
         }
     }
+    
 }

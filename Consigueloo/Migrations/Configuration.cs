@@ -9,7 +9,7 @@ namespace Consigueloo.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(Consigueloo.Models.ApplicationDbContext context)

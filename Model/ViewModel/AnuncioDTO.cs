@@ -37,6 +37,14 @@ namespace Model.ViewModel
         public CategoriasDTO categoria { get; set; }
         public int? categoriaId { get; set; }
 
+        [DisplayName("Localidad")]
+        public LocalidadesDTO localidad { get; set; }
+        public int? localidadId { get; set; }
+
+        [DisplayName("Tipo de anuncio")]
+        public TipoAnunciosDTO tipoAnuncio { get; set; }
+        public int? tipoAnuncioId { get; set; }
+
     }
 
 }

@@ -160,6 +160,27 @@ namespace DAO
             }
 
         }
+        public List<string> getNombresAnuncios()
+        {
+            try
+            {
+                string nombreAnuncios;
+                List<NombreAnuncios> nombres = db.NombreAnuncios.Where(x => x.estado == true).ToList();
+                List<string> response = new List<string>();
+                nombres.ForEach(x => {
+
+                    nombreAnuncios = x.nombre;
+                    response.Add(nombreAnuncios);
+                });
+                return response;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
         public SelectList getLocalidadesdd(int? id)
         {
             try

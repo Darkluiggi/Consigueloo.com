@@ -26,6 +26,7 @@ namespace Consigueloo.Areas.Anuncios.Controllers
             anunciosDAO = new AnunciosDAO(this);
             tipoAnunciosDAO = new TipoAnunciosDAO(this);
             ViewBag.listaDuraciones = (new DropDownDAO()).getPeriodos();
+            ViewBag.nombresAnuncios = (new DropDownDAO()).getNombresAnuncios();
             categoriasDAO = new CategoriasDAO(this);
             ViewBag.Categorias = (new DropDownDAO()).getCategoriasdd(null);
         }
@@ -177,6 +178,18 @@ namespace Consigueloo.Areas.Anuncios.Controllers
             ViewBag.Funcion = Helpers.Constants.Anuncios.resultados;
             ViewBag.Busqueda = busqueda;
             List<AnuncioDTO> anuncios = anunciosDAO.buscar(busqueda);
+            return View("Index", anuncios);
+        }
+        public ActionResult FilterCategorias(int id)
+        {
+            List<AnuncioDTO> anuncios = anunciosDAO.filterByCategoriaId(id);
+            return View("Index", anuncios);
+        }
+        public ActionResult FilterCategoriasByName(string nombre)
+        {
+            ViewBag.Funcion = Helpers.Constants.Anuncios.categoria;
+            ViewBag.Busqueda = nombre;
+            List<AnuncioDTO> anuncios = anunciosDAO.filterByCategoriaName(nombre);
             return View("Index", anuncios);
         }
     }
