@@ -39,61 +39,59 @@
 
 <div id="slider">
     <figure class="slidder">
+        <a href="~/Anuncios/Anuncios" onclick="ActivarLoader()">
+            <img src="~/Images/BC1.jpg" alt="">
+        </a>
+        
 
-        <img   src="~/Images/BC1.jpg" alt="">
+        <a href="~/Anuncios/Anuncios" onclick="ActivarLoader()">
+            <img src="~/Images/BC2.jpg" alt="">
+        </a>
+        
+        <a href="~/Anuncios/Anuncios/Pricing" onclick="ActivarLoader()">
+            <img src="~/Images/BC3.jpg" alt="">
+        </a>
+        
+        <a href="~/Anuncios/Anuncios/Pricing" onclick="ActivarLoader()">
+            <img src="~/Images/BC4.jpg" alt="">
+        </a>
+       
 
+        <a href="~/Anuncios/AnuncioTrabajo" onclick="ActivarLoader()">
+            <img src="~/Images/BC5.jpg" alt="">
+        </a>
 
-        <img src="~/Images/BC2.jpg" alt="">
-
-        <img src="~/Images/BC3.jpg" alt="">
-
-        <img src="~/Images/BC4.jpg" alt="">
 
     </figure>
  
 </div>
 
 <!-- end of "#banner" -->
-@*<div class="mid-container">
-        <div class="row">
-            <div class="box-container col-image-6 ">
-                <div class="box-image">
-                    <img src="~/Images/12271.jpg" />
-                </div>
 
-            </div>
-            <div class="box-container col-md-6 bg-blue">
-                <div class="box-text">
-                    <h1 class="l1">Acércate más a tu comunidad</h1>
-                </div>
-                <div>
-                    <h3 class="pad-left">Lorem ipsum...</h3>
-                </div>
-            </div>
-
-
-            <div class="box-container col-md-6 bg-green">
-                <div class="box-text">
-                    <h1 class="l1">Acércate más a tu comunidad</h1>
-                </div>
-
-            </div>
-            <div class="box-container col-image-6 ">
-                <div class="box-image">
-                    <img src="~/Images/63668.jpg" />
-                </div>
-            </div>
-        </div>
-    </div>*@
 <div class="mid-down-container">
 
 </div>
-<div id="destacados">
+<div id="destacados" class="destacados-container">
 
 </div>
 <script>
-   
 
+    $(document).ready(function () {
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("ShowDestacados", "Home")',
+            datatype: "json",
+            contentType: 'application/json',
+            success: function (r) {
+                $("#destacados").html(r);
+                DesactivarLoader();
+            },
+            error: function (r) {
+                $("#destacados").html(r);
+                DesactivarLoader();
+            }
+        });
+    });
 
 
 
