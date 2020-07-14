@@ -171,6 +171,7 @@ namespace Consigueloo.Controllers
                     UserName = model.Email,
                     Email = model.Email,
                     Name = model.Name,
+                    LastName = model.LastName,
                     BirthDate = model.BirthDate,
                     HomeTown = model.HomeTown,
                 };

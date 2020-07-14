@@ -46,7 +46,7 @@
             @if (Request.IsAuthenticated)
             {
                 <ul class="navbar-nav ml-auto ml-md-0">
-                    @Html.Partial("_LoginPartial")
+                    @Html.Partial("_NotificationPartial")
                 </ul>
             }
 
@@ -92,14 +92,14 @@
                                 Moda / Accesorios
                             </a>
                             <div class="center">
-                                <a class="nav-link collapsed center" href="#" onclick="showCategorias()" data-toggle="modal" data-target="#categoriasModal">
+                                <a class="nav-link center" href="#" onclick="showCategorias()" data-toggle="modal" data-target="#categoriasModal">
 
                                     VER MÁS
 
                                 </a>
                             </div>
 
-                            <a class="nav-link" href="index.html">
+                            <a class="nav-link" href="~/Anuncios/AnuncioTrabajo">
                                 Buscar empleo
                             </a>
                             <a class="nav-link" href="index.html">

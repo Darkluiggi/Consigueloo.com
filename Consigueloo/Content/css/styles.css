@@ -10967,3 +10967,10 @@ h1,h2,h3,h4,h5,h6{
    right:0px;
    bottom:0px;
 }
+
+.render-info {
+    min-height: 550px;
+    width: 100%;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}

@@ -45,9 +45,12 @@
                     <a class="color-white" href="@Url.Action("Contact", "Home" , new { area = "" })">Contáctanos</a>
                 </li>
             </ul>
-
-
-
+            @if (Request.IsAuthenticated)
+            {
+                <ul class="navbar-nav ml-auto ml-md-0">
+                    @Html.Partial("_NotificationPartial")
+                </ul>
+            }
             <ul class="navbar-nav ml-auto ml-md-0 color-white">
                 @Html.Partial("_LoginPartial")
             </ul>
@@ -86,7 +89,7 @@
                                 Moda / Accesorios
                             </a>
                             <div class="center">
-                                <a class="nav-link collapsed center" href="#" onclick="showCategorias()" data-toggle="modal" data-target="#categoriasModal">
+                                <a class="nav-link  center" href="#" onclick="showCategorias()" data-toggle="modal" data-target="#categoriasModal">
 
                                     VER MÁS
 

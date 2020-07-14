@@ -42,189 +42,610 @@
         </div>
 
         <ul class="pricing-list bounce-invert">
-            @foreach (var item in Model)
-            {
-                foreach (var item2 in ViewBag.nombresAnuncios)
-                {
-                    if (item.nombre.nombre.Equals(item2))
+            <li>
+                <ul class="pricing-wrapper ">
+                    @foreach (var item in Model)
                     {
-                        if (!item2.Equals("Exitoso"))
+
+                        if (item.nombre.nombre.Equals("Aventurero"))
                         {
-                                <li>
-                                    <ul class="pricing-wrapper ">
-                                        @foreach (var periodos in ViewBag.listaDuraciones)
+                            foreach (var periodos in ViewBag.listaDuraciones)
+                            {
+                                if (periodos.Equals("Mensual"))
+                                {
+                                    <li data-type="@periodos" class="is-visible ">
+                                        @if (item.duracion.Equals(periodos))
                                         {
-                                            if (periodos.Equals("Mensual"))
-                                            {
-                                                if (item.duracion.Equals(periodos))
-                                                {
-
-                                                    <li data-type="@periodos" class="is-visible ">
-                                                        @if (item.duracion.Equals(periodos))
-                                                        {
-                                                            <header class="pricing-header">
-                                                                <h2>@item.nombre.nombre</h2>
-                                                                <div class="price">
-                                                                    <span class="currency">$</span>
-                                                                    <span class="value">@item.precio</span>
-                                                                    <span class="duration">mo</span>
-                                                                </div>
-                                                            </header>
-                                                            <div class="pricing-body">
-                                                                <ul class="pricing-features">
-                                                                    @foreach (var item3 in item.nombre.caracteristicas)
-                                                                    {
-                                                                        <li><span class="fas fa-check text-warning">&nbsp;</span>&nbsp;@item3.nombre</li>
-                                                                    }
-                                                                </ul>
-                                                                <ul class="pricing-nofeatures">
-                                                                    @foreach (var item4 in item.nombre.noIncluidas)
-                                                                    {
-
-                                                                        <li><span class="fas fa-times text-danger"></span>&nbsp;@item4.nombre</li>
-                                                                    }
-                                                                </ul>
-                                                            </div>
-                                                            <footer class="pricing-footer">
-                                                                <button class="select" onclick="showCategorias()" data-toggle="modal" data-target="#terminosModal">Adquirir</button>
-                                                            </footer>
-                                                        }
-                                                    </li>
-                                                }
-                                            }
-                                            else
-                                            {
-                                                if (item.duracion.Equals(periodos))
-                                                {
-                                                    <li data-type="@periodos" class="is-hidden ">
-                                                        @if (item.duracion.Equals(periodos))
-                                                        {
-                                                            <header class="pricing-header">
-                                                                <h2>@item.nombre.nombre</h2>
-                                                                <div class="price">
-                                                                    <span class="currency">$</span>
-                                                                    <span class="value">@item.precio</span>
-                                                                    <span class="duration">mo</span>
-                                                                </div>
-                                                            </header>
-                                                            <div class="pricing-body">
-                                                                <ul class="pricing-features">
-                                                                    @foreach (var item3 in item.nombre.caracteristicas)
-                                                                    {
-                                                                        <li><span class="fas fa-check text-warning">&nbsp;</span>&nbsp;@item3.nombre</li>
-                                                                    }
-                                                                </ul>
-                                                                <ul class="pricing-nofeatures">
-                                                                    @foreach (var item4 in item.nombre.noIncluidas)
-                                                                    {
-
-                                                                        <li><span class="fas fa-times text-danger"></span>&nbsp;@item4.nombre</li>
-                                                                    }
-                                                                </ul>
-                                                            </div>
-                                                            <footer class="pricing-footer">
-                                                                <button class="select" onclick="showCategorias()" data-toggle="modal" data-target="#terminosModal">Adquirir</button>
-                                                            </footer>
-                                                        }
-                                                    </li>
-                                                }
-
-                                            }
+                                            <header class="pricing-header">
+                                                <h2>@item.nombre.nombre</h2>
+                                                <div class="price">
+                                                    <span class="currency">$</span>
+                                                    <span class="value">@item.precio</span>
+                                                    <span class="duration">mo</span>
+                                                </div>
+                                            </header>
+                                            <div class="pricing-body">
+                                                <ul class="pricing-features">
+                                                    @foreach (var item3 in item.nombre.caracteristicas)
+                                                    {
+                                                        <li><span class="fas fa-check">&nbsp;</span>&nbsp;@item3.nombre</li>
+                                                    }
+                                                </ul>
+                                                <ul class="pricing-nofeatures">
+                                                    @foreach (var item4 in item.nombre.noIncluidas)
+                                                    {
+                                                        <li><span class="fas fa-times"></span>&nbsp;@item4.nombre</li>
+                                                    }
+                                                </ul>
+                                            </div>
+                                            <footer class="pricing-footer">
+                                                <a class="select" href="#" data-toggle="modal" data-target="#terminosModal">Adquirir</a>
+                                            </footer>
                                         }
-                                    </ul>
-                                </li>
-                            
-
-                        }
-                        else
-                        {
-                            <li class="exclusive">
-                                <ul class="pricing-wrapper ">
-                                    @foreach (var periodos in ViewBag.listaDuraciones)
-                                    {
-                                        if (periodos.Equals("Mensual"))
+                                    </li>
+                                }
+                                if (periodos.Equals("Trimestral"))
+                                {
+                                    <li data-type="@periodos" class="is-hidden ">
+                                        @if (item.duracion.Equals(periodos))
                                         {
-                                            if (item.duracion.Equals(periodos))
-                                            {
-                                                <li data-type="@periodos" class="is-visible ">
-                                                    @if (item.duracion.Equals(periodos))
+                                            <header class="pricing-header">
+                                                <h2>@item.nombre.nombre</h2>
+                                                <div class="price">
+                                                    <span class="currency">$</span>
+                                                    <span class="value">@item.precio</span>
+                                                    <span class="duration">trim</span>
+                                                </div>
+                                            </header>
+                                            <div class="pricing-body">
+                                                <ul class="pricing-features">
+                                                    @foreach (var item3 in item.nombre.caracteristicas)
                                                     {
-                                                        <header class="pricing-header">
-                                                            <h2>@item.nombre.nombre</h2>
-                                                            <div class="price">
-                                                                <span class="currency">$</span>
-                                                                <span class="value">@item.precio</span>
-                                                                <span class="duration">mo</span>
-                                                            </div>
-                                                        </header>
-                                                        <div class="pricing-body">
-                                                            <ul class="pricing-features">
-                                                                @foreach (var item3 in item.nombre.caracteristicas)
-                                                                {
-                                                                    <li><span class="fas fa-check text-primary">&nbsp;</span>&nbsp;@item3.nombre</li>
-                                                                }
-                                                            </ul>
-                                                            <ul class="pricing-nofeatures">
-                                                                @foreach (var item4 in item.nombre.noIncluidas)
-                                                                {
-
-                                                                    <li><span class="fas fa-times text-danger"></span>&nbsp;@item4.nombre</li>
-                                                                }
-                                                            </ul>
-                                                        </div>
-                                                        <footer class="pricing-footer">
-                                                            <button class="select" onclick="showCategorias()" data-toggle="modal" data-target="#terminosModal">Adquirir</button>
-                                                        </footer>
+                                                        <li><span class="fas fa-check">&nbsp;</span>&nbsp;@item3.nombre</li>
                                                     }
-                                                </li>
-                                            }
-                                            else
-                                            {
-                                                <li data-type="@periodos" class="is-hidden ">
-                                                    @if (item.duracion.Equals(periodos))
+                                                </ul>
+                                                <ul class="pricing-nofeatures">
+                                                    @foreach (var item4 in item.nombre.noIncluidas)
                                                     {
-                                                        <header class="pricing-header">
-                                                            <h2>@item.nombre.nombre</h2>
-                                                            <div class="price">
-                                                                <span class="currency">$</span>
-                                                                <span class="value">@item.precio</span>
-                                                                <span class="duration">mo</span>
-                                                            </div>
-                                                        </header>
-                                                        <div class="pricing-body">
-                                                            <ul class="pricing-features">
-                                                                @foreach (var item3 in item.nombre.caracteristicas)
-                                                                {
-                                                                    <li><span class="fas fa-check text-primary">&nbsp;</span>&nbsp;@item3.nombre</li>
-                                                                }
-                                                            </ul>
-                                                            <ul class="pricing-nofeatures">
-                                                                @foreach (var item4 in item.nombre.noIncluidas)
-                                                                {
-
-                                                                    <li><span class="fas fa-times text-danger"></span>&nbsp;@item4.nombre</li>
-                                                                }
-                                                            </ul>
-                                                        </div>
-                                                        <footer class="pricing-footer">
-                                                            <button class="select" onclick="showCategorias()" data-toggle="modal" data-target="#terminosModal">Adquirir</button>
-                                                        </footer>
+                                                        <li><span class="fas fa-times "></span>&nbsp;@item4.nombre</li>
                                                     }
-                                                </li>
-                                            }
+                                                </ul>
+                                            </div>
+                                            <footer class="pricing-footer">
+                                                <a class="select" href="#" data-toggle="modal" data-target="#terminosModal">Adquirir</a>
+                                            </footer>
                                         }
-                                    }
-                                    </ul>
-                            </li>
+                                    </li>
+                                }
+                                if (periodos.Equals("Anual"))
+                                {
+                                    <li data-type="@periodos" class="is-hidden ">
+                                        @if (item.duracion.Equals(periodos))
+                                        {
+                                            <header class="pricing-header">
+                                                <h2>@item.nombre.nombre</h2>
+                                                <div class="price">
+                                                    <span class="currency">$</span>
+                                                    <span class="value">@item.precio</span>
+                                                    <span class="duration">año</span>
+                                                </div>
+                                            </header>
+                                            <div class="pricing-body">
+                                                <ul class="pricing-features">
+                                                    @foreach (var item3 in item.nombre.caracteristicas)
+                                                    {
+                                                        <li><span class="fas fa-check">&nbsp;</span>&nbsp;@item3.nombre</li>
+                                                    }
+                                                </ul>
+                                                <ul class="pricing-nofeatures">
+                                                    @foreach (var item4 in item.nombre.noIncluidas)
+                                                    {
+                                                        <li><span class="fas fa-times"></span>&nbsp;@item4.nombre</li>
+                                                    }
+                                                </ul>
+                                            </div>
+                                            <footer class="pricing-footer">
+                                                <a class="select" href="#" data-toggle="modal" data-target="#terminosModal">Adquirir</a>
+                                            </footer>
+                                        }
+                                    </li>
+                                }
+                            }
                         }
                     }
-                }
-            }
+
+                </ul>
+            </li>
+
+            <li>
+                <ul class="pricing-wrapper ">
+                    @foreach (var item in Model)
+                    {
+
+                        if (item.nombre.nombre.Equals("Emprendedor"))
+                        {
+                            foreach (var periodos in ViewBag.listaDuraciones)
+                            {
+                                if (periodos.Equals("Mensual"))
+                                {
+                                    <li data-type="@periodos" class="is-visible ">
+                                        @if (item.duracion.Equals(periodos))
+                                        {
+                                            <header class="pricing-header">
+                                                <h2>@item.nombre.nombre</h2>
+                                                <div class="price">
+                                                    <span class="currency">$</span>
+                                                    <span class="value">@item.precio</span>
+                                                    <span class="duration">mo</span>
+                                                </div>
+                                            </header>
+                                            <div class="pricing-body">
+                                                <ul class="pricing-features">
+                                                    @foreach (var item3 in item.nombre.caracteristicas)
+                                                    {
+                                                        <li><span class="fas fa-check">&nbsp;</span>&nbsp;@item3.nombre</li>
+                                                    }
+                                                </ul>
+                                                <ul class="pricing-nofeatures">
+                                                    @foreach (var item4 in item.nombre.noIncluidas)
+                                                    {
+                                                        <li><span class="fas fa-times"></span>&nbsp;@item4.nombre</li>
+                                                    }
+                                                </ul>
+                                            </div>
+                                            <footer class="pricing-footer">
+                                                <a class="select" href="#" data-toggle="modal" data-target="#terminosModal">Adquirir</a>
+                                            </footer>
+                                        }
+                                    </li>
+                                }
+                                if (periodos.Equals("Trimestral"))
+                                {
+                                    <li data-type="@periodos" class="is-hidden ">
+                                        @if (item.duracion.Equals(periodos))
+                                        {
+                                            <header class="pricing-header">
+                                                <h2>@item.nombre.nombre</h2>
+                                                <div class="price">
+                                                    <span class="currency">$</span>
+                                                    <span class="value">@item.precio</span>
+                                                    <span class="duration">trim</span>
+                                                </div>
+                                            </header>
+                                            <div class="pricing-body">
+                                                <ul class="pricing-features">
+                                                    @foreach (var item3 in item.nombre.caracteristicas)
+                                                    {
+                                                        <li><span class="fas fa-check">&nbsp;</span>&nbsp;@item3.nombre</li>
+                                                    }
+
+                                                </ul>
+                                                <ul class="pricing-nofeatures">
+                                                    @foreach (var item4 in item.nombre.noIncluidas)
+                                                    {
+                                                        <li><span class="fas fa-times"></span>&nbsp;@item4.nombre</li>
+                                                    }
+                                                </ul>
+                                            </div>
+                                            <footer class="pricing-footer">
+                                                <a class="select" href="#" data-toggle="modal" data-target="#terminosModal">Adquirir</a>
+                                            </footer>
+
+                                        }
+                                    </li>
+                                }
+                                if (periodos.Equals("Anual"))
+                                {
+                                    <li data-type="@periodos" class="is-hidden ">
+                                        @if (item.duracion.Equals(periodos))
+                                        {
+                                            <header class="pricing-header">
+                                                <h2>@item.nombre.nombre</h2>
+                                                <div class="price">
+                                                    <span class="currency">$</span>
+                                                    <span class="value">@item.precio</span>
+                                                    <span class="duration">año</span>
+                                                </div>
+                                            </header>
+                                            <div class="pricing-body">
+                                                <ul class="pricing-features">
+                                                    @foreach (var item3 in item.nombre.caracteristicas)
+                                                    {
+                                                        <li><span class="fas fa-check">&nbsp;</span>&nbsp;@item3.nombre</li>
+                                                    }
+                                                </ul>
+                                                <ul class="pricing-nofeatures">
+                                                    @foreach (var item4 in item.nombre.noIncluidas)
+                                                    {
+                                                        <li><span class="fas fa-times"></span>&nbsp;@item4.nombre</li>
+                                                    }
+                                                </ul>
+                                            </div>
+                                            <footer class="pricing-footer">
+                                                <a class="select" href="#" data-toggle="modal" data-target="#terminosModal">Adquirir</a>
+                                            </footer>
+                                        }
+                                    </li>
+                                }
+                            }
+                        }
+                    }
+                </ul>
+            </li>
+            <li>
+                <ul class="pricing-wrapper ">
+                    @foreach (var item in Model)
+                    {
+
+                        if (item.nombre.nombre.Equals("Optimista"))
+                        {
+                            foreach (var periodos in ViewBag.listaDuraciones)
+                            {
+                                if (periodos.Equals("Mensual"))
+                                {
+                                    <li data-type="@periodos" class="is-visible ">
+                                        @if (item.duracion.Equals(periodos))
+                                        {
+                                            <header class="pricing-header">
+                                                <h2>@item.nombre.nombre</h2>
+                                                <div class="price">
+                                                    <span class="currency">$</span>
+                                                    <span class="value">@item.precio</span>
+                                                    <span class="duration">mo</span>
+                                                </div>
+                                            </header>
+                                            <div class="pricing-body">
+                                                <ul class="pricing-features">
+                                                    @foreach (var item3 in item.nombre.caracteristicas)
+                                                    {
+                                                        <li><span class="fas fa-check">&nbsp;</span>&nbsp;@item3.nombre</li>
+                                                    }
+
+                                                </ul>
+                                                <ul class="pricing-nofeatures">
+                                                    @foreach (var item4 in item.nombre.noIncluidas)
+                                                    {
+                                                        <li><span class="fas fa-times"></span>&nbsp;@item4.nombre</li>
+                                                    }
+                                                </ul>
+                                            </div>
+                                            <footer class="pricing-footer">
+                                                <a class="select" href="#" data-toggle="modal" data-target="#terminosModal">Adquirir</a>
+                                            </footer>
+
+                                        }
+                                    </li>
+                                }
+                                if (periodos.Equals("Trimestral"))
+                                {
+                                    <li data-type="@periodos" class="is-hidden ">
+                                        @if (item.duracion.Equals(periodos))
+                                        {
+                                            <header class="pricing-header">
+                                                <h2>@item.nombre.nombre</h2>
+                                                <div class="price">
+                                                    <span class="currency">$</span>
+                                                    <span class="value">@item.precio</span>
+                                                    <span class="duration">trim</span>
+                                                </div>
+                                            </header>
+                                            <div class="pricing-body">
+                                                <ul class="pricing-features">
+                                                    @foreach (var item3 in item.nombre.caracteristicas)
+                                                    {
+                                                        <li><span class="fas fa-check">&nbsp;</span>&nbsp;@item3.nombre</li>
+                                                    }
+
+                                                </ul>
+                                                <ul class="pricing-nofeatures">
+                                                    @foreach (var item4 in item.nombre.noIncluidas)
+                                                    {
+                                                        <li><span class="fas fa-times"></span>&nbsp;@item4.nombre</li>
+                                                    }
+                                                </ul>
+                                            </div>
+                                            <footer class="pricing-footer">
+                                                <a class="select" href="#" data-toggle="modal" data-target="#terminosModal">Adquirir</a>
+                                            </footer>
+
+                                        }
+                                    </li>
+                                }
+                                if (periodos.Equals("Anual"))
+                                {
+                                    <li data-type="@periodos" class="is-hidden ">
+                                        @if (item.duracion.Equals(periodos))
+                                        {
+                                            <header class="pricing-header">
+                                                <h2>@item.nombre.nombre</h2>
+                                                <div class="price">
+                                                    <span class="currency">$</span>
+                                                    <span class="value">@item.precio</span>
+                                                    <span class="duration">año</span>
+                                                </div>
+                                            </header>
+                                            <div class="pricing-body">
+                                                <ul class="pricing-features">
+                                                    @foreach (var item3 in item.nombre.caracteristicas)
+                                                    {
+                                                        <li><span class="fas fa-check">&nbsp;</span>&nbsp;@item3.nombre</li>
+                                                    }
+
+                                                </ul>
+                                                <ul class="pricing-nofeatures">
+                                                    @foreach (var item4 in item.nombre.noIncluidas)
+                                                    {
+                                                        <li><span class="fas fa-times"></span>&nbsp;@item4.nombre</li>
+                                                    }
+                                                </ul>
+                                            </div>
+                                            <footer class="pricing-footer">
+                                                <a class="select" href="#" data-toggle="modal" data-target="#terminosModal">Adquirir</a>
+                                            </footer>
+
+                                        }
+                                    </li>
+                                }
+
+                            }
+                        }
+
+
+                    }
+
+                </ul>
+            </li>
+            <li>
+                <ul class="pricing-wrapper ">
+                    @foreach (var item in Model)
+                    {
+
+                        if (item.nombre.nombre.Equals("Vencedor"))
+                        {
+                            foreach (var periodos in ViewBag.listaDuraciones)
+                            {
+                                if (periodos.Equals("Mensual"))
+                                {
+                                    <li data-type="@periodos" class="is-visible ">
+                                        @if (item.duracion.Equals(periodos))
+                                        {
+                                            <header class="pricing-header">
+                                                <h2>@item.nombre.nombre</h2>
+                                                <div class="price">
+                                                    <span class="currency">$</span>
+                                                    <span class="value">@item.precio</span>
+                                                    <span class="duration">mo</span>
+                                                </div>
+                                            </header>
+                                            <div class="pricing-body">
+                                                <ul class="pricing-features">
+                                                    @foreach (var item3 in item.nombre.caracteristicas)
+                                                    {
+                                                        <li><span class="fas fa-check">&nbsp;</span>&nbsp;@item3.nombre</li>
+                                                    }
+
+                                                </ul>
+                                                <ul class="pricing-nofeatures">
+                                                    @foreach (var item4 in item.nombre.noIncluidas)
+                                                    {
+                                                        <li><span class="fas fa-times"></span>&nbsp;@item4.nombre</li>
+                                                    }
+                                                </ul>
+                                            </div>
+                                            <footer class="pricing-footer">
+                                                <a class="select" href="#" data-toggle="modal" data-target="#terminosModal">Adquirir</a>
+                                            </footer>
+
+                                        }
+                                    </li>
+                                }
+                                if (periodos.Equals("Trimestral"))
+                                {
+                                    <li data-type="@periodos" class="is-hidden ">
+                                        @if (item.duracion.Equals(periodos))
+                                        {
+                                            <header class="pricing-header">
+                                                <h2>@item.nombre.nombre</h2>
+                                                <div class="price">
+                                                    <span class="currency">$</span>
+                                                    <span class="value">@item.precio</span>
+                                                    <span class="duration">trim</span>
+                                                </div>
+                                            </header>
+                                            <div class="pricing-body">
+                                                <ul class="pricing-features">
+                                                    @foreach (var item3 in item.nombre.caracteristicas)
+                                                    {
+                                                        <li><span class="fas fa-check">&nbsp;</span>&nbsp;@item3.nombre</li>
+                                                    }
+
+                                                </ul>
+                                                <ul class="pricing-nofeatures">
+                                                    @foreach (var item4 in item.nombre.noIncluidas)
+                                                    {
+                                                        <li><span class="fas fa-times"></span>&nbsp;@item4.nombre</li>
+                                                    }
+                                                </ul>
+                                            </div>
+                                            <footer class="pricing-footer">
+                                                <a class="select" href="#" data-toggle="modal" data-target="#terminosModal">Adquirir</a>
+                                            </footer>
+
+                                        }
+                                    </li>
+                                }
+                                if (periodos.Equals("Anual"))
+                                {
+                                    <li data-type="@periodos" class="is-hidden ">
+                                        @if (item.duracion.Equals(periodos))
+                                        {
+                                            <header class="pricing-header">
+                                                <h2>@item.nombre.nombre</h2>
+                                                <div class="price">
+                                                    <span class="currency">$</span>
+                                                    <span class="value">@item.precio</span>
+                                                    <span class="duration">año</span>
+                                                </div>
+                                            </header>
+                                            <div class="pricing-body">
+                                                <ul class="pricing-features">
+                                                    @foreach (var item3 in item.nombre.caracteristicas)
+                                                    {
+                                                        <li><span class="fas fa-check">&nbsp;</span>&nbsp;@item3.nombre</li>
+                                                    }
+
+                                                </ul>
+                                                <ul class="pricing-nofeatures">
+                                                    @foreach (var item4 in item.nombre.noIncluidas)
+                                                    {
+                                                        <li><span class="fas fa-times"></span>&nbsp;@item4.nombre</li>
+                                                    }
+                                                </ul>
+                                            </div>
+                                            <footer class="pricing-footer">
+                                                <a class="select" href="#" data-toggle="modal" data-target="#terminosModal">Adquirir</a>
+                                            </footer>
+
+                                        }
+                                    </li>
+                                }
+
+                            }
+                        }
+
+
+                    }
+
+                </ul>
+            </li>
+
+            <li class="exclusive">
+                <ul class="pricing-wrapper">
+                    @foreach (var item in Model)
+                    {
+
+                        if (item.nombre.nombre.Equals("Exitoso"))
+                        {
+                            foreach (var periodos in ViewBag.listaDuraciones)
+                            {
+                                if (periodos.Equals("Mensual"))
+                                {
+                                    <li data-type="@periodos" class="is-visible ">
+                                        @if (item.duracion.Equals(periodos))
+                                        {
+                                            <header class="pricing-header">
+                                                <h2>@item.nombre.nombre</h2>
+                                                <div class="price">
+                                                    <span class="currency">$</span>
+                                                    <span class="value">@item.precio</span>
+                                                    <span class="duration">mo</span>
+                                                </div>
+                                            </header>
+                                            <div class="pricing-body">
+                                                <ul class="pricing-features">
+                                                    @foreach (var item3 in item.nombre.caracteristicas)
+                                                    {
+                                                        <li><span class="fas fa-check">&nbsp;</span>&nbsp;@item3.nombre</li>
+                                                    }
+                                                </ul>
+                                                <ul class="pricing-nofeatures">
+                                                    @foreach (var item4 in item.nombre.noIncluidas)
+                                                    {
+                                                        <li>
+                                                            <span class="fas fa-times">
+
+                                                            </span>
+                                                            &nbsp;@item4.nombre
+                                                        </li>
+                                                    }
+                                                </ul>
+                                            </div>
+                                            <footer class="pricing-footer">
+                                                <a class="select" href="#" data-toggle="modal" data-target="#terminosModal">Adquirir</a>
+                                            </footer>
+                                        }
+                                    </li>
+                                }
+                                if (periodos.Equals("Trimestral"))
+                                {
+                                    <li data-type="@periodos" class="is-hidden ">
+                                        @if (item.duracion.Equals(periodos))
+                                        {
+                                            <header class="pricing-header">
+                                                <h2>@item.nombre.nombre</h2>
+                                                <div class="price">
+                                                    <span class="currency">$</span>
+                                                    <span class="value">@item.precio</span>
+                                                    <span class="duration">trim</span>
+                                                </div>
+                                            </header>
+                                            <div class="pricing-body">
+                                                <ul class="pricing-features">
+                                                    @foreach (var item3 in item.nombre.caracteristicas)
+                                                    {
+                                                        <li><span class="fas fa-check">&nbsp;</span>&nbsp;@item3.nombre</li>
+                                                    }
+
+                                                </ul>
+                                                <ul class="pricing-nofeatures">
+                                                    @foreach (var item4 in item.nombre.noIncluidas)
+                                                    {
+                                                        <li><span class="fas fa-times"></span>&nbsp;@item4.nombre</li>
+                                                    }
+                                                </ul>
+                                            </div>
+                                            <footer class="pricing-footer">
+                                                <a class="select" href="#" data-toggle="modal" data-target="#terminosModal">Adquirir</a>
+                                            </footer>
+
+                                        }
+                                    </li>
+                                }
+                                if (periodos.Equals("Anual"))
+                                {
+                                    <li data-type="@periodos" class="is-hidden ">
+                                        @if (item.duracion.Equals(periodos))
+                                        {
+                                            <header class="pricing-header">
+                                                <h2>@item.nombre.nombre</h2>
+                                                <div class="price">
+                                                    <span class="currency">$</span>
+                                                    <span class="value">@item.precio</span>
+                                                    <span class="duration">año</span>
+                                                </div>
+                                            </header>
+                                            <div class="pricing-body">
+                                                <ul class="pricing-features">
+                                                    @foreach (var item3 in item.nombre.caracteristicas)
+                                                    {
+                                                        <li><span class="fas fa-check">&nbsp;</span>&nbsp;@item3.nombre</li>
+                                                    }
+
+                                                </ul>
+                                                <ul class="pricing-nofeatures">
+                                                    @foreach (var item4 in item.nombre.noIncluidas)
+                                                    {
+                                                        <li><span class="fas fa-times"></span>&nbsp;@item4.nombre</li>
+                                                    }
+                                                </ul>
+                                            </div>
+                                            <footer class="pricing-footer">
+                                                <a class="select"href="#" data-toggle="modal" data-target="#terminosModal">Adquirir</a>
+                                            </footer>
+                                        }
+                                    </li>
+                                }
+                            }
+                        }
+                    }
+                </ul>
+            </li>
         </ul>
     </div>
 </div>
+
 <!-- Términos y condiciones Modal-->
-<div class="modal fade opacity" id="terminosModal" tabindex="-1" role="dialog" aria-labelledby="temrinosModalLabel" aria-hidden="true">
+<div class="modal fade opacity" id="terminosModal" tabindex="-1" role="dialog" aria-labelledby="terminosModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg " role="document">
         <div class="modal-content ">
             <div class="modal-header ">
@@ -240,18 +661,17 @@
                 <div class="col-md-6">
                     <input type="checkbox" id="terminosCheck" /> <span>Aceptar términos y condiciones</span>
                 </div>
-                    <button class="btn bg-white color-blue shadow-button">
-                        Aceptar
-                    </button>
-                    <button class="btn bg-white color-blue shadow-button">
-                        Cancelar
-                    </button>
+                <button class="btn bg-white color-blue shadow-button">
+                    Aceptar
+                </button>
+                <button class="btn bg-white color-blue shadow-button">
+                    Cancelar
+                </button>
             </div>
 
-            </div>
         </div>
+    </div>
 </div>
-
 
 
 <script>

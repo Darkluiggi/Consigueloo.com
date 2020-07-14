@@ -67,25 +67,29 @@ namespace DAO
                 //Mapeo de clase
                 var anuncio = db.Anuncios.Where(x=> x.estado==true).ToList();
                 List<AnuncioDTO> anuncios=new List<AnuncioDTO>();
+                if (anuncio!=null)
+                {
+                    foreach (var item in anuncio)
+                    {
+                        AnuncioDTO anuncioModel = new AnuncioDTO();
+                        anuncioModel.titulo = item.titulo;
+                        anuncioModel.nombreContacto = item.nombreContacto;
+                        anuncioModel.telefono = item.telefono;
+                        anuncioModel.actCatalogo = item.actCatalogo;
+                        anuncioModel.actImagen = item.actImagen;
+                        anuncioModel.celularContacto = item.celularContacto;
+                        anuncioModel.descripcion = item.descripcion;
+                        anuncioModel.id = item.id;
+                        anuncioModel.path = imageHelper.GetImageFromByteArray(item.imagen);
+                        anuncioModel.fechaActivacion = item.fechaActivacion;
+                        anuncioModel.fechaCancelacion = item.fechaCancelacion;
+                        anuncioModel.categoria = categoriasDAO.Find(item.categoriaId);
+                        anuncioModel.categoriaId = item.categoriaId;
 
-                foreach(var item in anuncio){
-                    AnuncioDTO anuncioModel = new AnuncioDTO();
-                    anuncioModel.titulo = item.titulo;
-                    anuncioModel.nombreContacto = item.nombreContacto;
-                    anuncioModel.telefono = item.telefono;
-                    anuncioModel.actCatalogo = item.actCatalogo;
-                    anuncioModel.actImagen = item.actImagen;
-                    anuncioModel.celularContacto = item.celularContacto;
-                    anuncioModel.descripcion = item.descripcion;
-                    anuncioModel.id = item.id;
-                    anuncioModel.path = imageHelper.GetImageFromByteArray(item.imagen);
-                    anuncioModel.fechaActivacion = item.fechaActivacion;
-                    anuncioModel.fechaCancelacion = item.fechaCancelacion;
-                    anuncioModel.categoria = categoriasDAO.Find(item.categoriaId);
-                    anuncioModel.categoriaId = item.categoriaId;                    
-
-                    anuncios.Add(anuncioModel);
-                }         
+                        anuncios.Add(anuncioModel);
+                    }
+                }
+                      
 
             
                 return anuncios;

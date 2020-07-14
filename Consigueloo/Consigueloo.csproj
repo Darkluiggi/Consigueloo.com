@@ -490,7 +490,6 @@
     <Content Include="Areas\Administrador\Views\web.config" />
     <Content Include="Areas\Anuncios\Views\Anuncios\Create.cshtml" />
     <Content Include="Areas\Anuncios\Views\Anuncios\Index.cshtml" />
-    <Content Include="Areas\Anuncios\Views\Anuncios\Pricing.cshtml" />
     <Content Include="Areas\Anuncios\Views\Anuncios\_Display.cshtml" />
     <Content Include="Areas\Anuncios\Views\Anuncios\_ShowSelected.cshtml" />
     <Content Include="Areas\Anuncios\Views\web.config" />
@@ -567,7 +566,8 @@
     <Content Include="Areas\Anuncios\Views\Anuncios\Pricing - Copia.cshtml" />
     <Content Include="Areas\Anuncios\Views\AnuncioTrabajo\Index.cshtml" />
     <Content Include="Areas\Anuncios\Views\AnuncioTrabajo\Create.cshtml" />
-    <Content Include="Areas\Anuncios\Views\Anuncios\Pricing - Copia %282%29.cshtml" />
+    <Content Include="Areas\Anuncios\Views\Anuncios\Pricing.cshtml" />
+    <Content Include="Areas\Anuncios\Views\Anuncios\Pricing - Copia %283%29.cshtml" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile1.pubxml" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
@@ -642,6 +642,7 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Views\Shared\_ErrorPage.cshtml" />
+    <Content Include="Views\Shared\_NotificationPartial.cshtml" />
     <None Include="Web1.Debug.config">
       <DependentUpon>Web1.config</DependentUpon>
     </None>

@@ -29,7 +29,7 @@
         </div>
         <br />
         <div class="center col-md-12">
-            <a class="btn-anunciate pad" href="Anuncios/Anuncios/Pricing">
+            <a class="btn-anunciate pad" href="Anuncios/Anuncios/Pricing" onclick="ActivarLoader()">
                 <h3 class="keep-calm clr-green pad-top">Anúnciate ya</h3>
             </a>
         </div>
@@ -92,22 +92,7 @@
 
 </div>
 <script>
-   $(document).ready(function () {
-
-        $.ajax(
-            {
-                type: "POST",
-                url: '@Url.Action("ShowDestacados", "Home")',
-                datatype: "json",
-                contentType: 'application/json',
-
-                success: function (r) {
-                    $("#destacados").html(r);
-
-                }
-
-            });
-   });
+   
 
 
 
