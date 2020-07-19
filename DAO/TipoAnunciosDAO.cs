@@ -96,9 +96,10 @@ namespace DAO
         {
             try
             {
-                
+                int id_ = (int)id;
                 //Mapeo de clase
-                TipoAnuncios model = db.TiposAnuncio.Find(id);
+                TipoAnuncios model = new TipoAnuncios();
+                model= db.TiposAnuncio.Include(x=> x.nombre).FirstOrDefault(x=> x.id==id_);
                 TipoAnunciosDTO response = new TipoAnunciosDTO();
                 response.id = model.id;
                 response.duracion = model.duracion;

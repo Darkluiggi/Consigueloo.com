@@ -26,13 +26,13 @@ namespace Model.Anuncios
         [ForeignKey("categoria")]
         public int? categoriaId { get; set; }
         public Categorias categoria { get; set; }
-        //[ForeignKey("localidad")]
-        //public int? localidadId { get; set; }
-        //public Localidades localidad { get; set; }
+        [ForeignKey("localidad")]
+        public int? localidadId { get; set; }
+        public Localidades localidad { get; set; }
 
-        //[ForeignKey("tipoAnuncio")]
-        //public int? tipoAnuncioId { get; set; }
-        //public TipoAnuncios tipoAnuncio { get; set; }
+        [ForeignKey("tipoAnuncio")]
+        public int? tipoAnuncioId { get; set; }
+        public TipoAnuncios tipoAnuncio { get; set; }
 
     }
 }

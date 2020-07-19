@@ -4,30 +4,71 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div id="render-ads" class="container">
-    <h1 class="color-blue2">Anuncios</h1>
-  <h3>@ViewBag.Funcion "@ViewBag.Busqueda"</h3>
+    <div id="render-ads" class="container">
+        <div class="row pad-bot">
+            <div class="col-md-12">
+                <h2 class="color-blue3 pad-top3">Anuncios</h2>
+            </div>
+            <div class="col-md-12 ">
+                @if (string.IsNullOrEmpty(ViewBag.Funcion))
+                {
+                    <h4>Anuncios en Consigueloo</h4>
+                }
+                else
+                {
 
-    @Html.Partial("_Display", Model)
+                    <h4>@ViewBag.Funcion "@ViewBag.Busqueda"</h4>
+                }
+            </div>
+        </div>
+        <div class="row pad-bot2">
+            <div class="col-lg-1">
+                <h5>Buscar</h5>
 
+            </div>
+            <div class="col-lg-4">
+                <div class="input-group">
+                    <input type="text" onkeyup="inputKeyUp(event)" id="searchField" class="form-control" placeholder="Búsqueda..." aria-label="Search" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="button" id="srchButton" onclick="BuscarEnAnuncios()">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
 
-</div>
+            </div>
+            <div class="col-lg-4">
 
-<!-- Logout Modal-->
-<div class="modal fade " id="anuncioModal" tabindex="-1" role="dialog" aria-labelledby="showSelected" aria-hidden="true">
-    <div class="modal-dialog modal-lg" >
-        <div class="modal-content">
-            <div class="container-fluid modal-card" id="showSelected">
+                @Html.DropDownList("localidadesInput", (SelectList)ViewBag.Categorias, new { @class = "form-control" })
 
+            </div>
+            <div class="col-lg-3">
+
+                @Html.DropDownList("localidadesInput", (SelectList)ViewBag.Localidades, new { @class = "form-control" })
 
             </div>
         </div>
-    </div>
-</div>
+        <div class="row pad-bot">
+            @Html.Partial("_Display", Model)
+         </div>
 
-<script>
+        </div>
+
+        <!-- Logout Modal-->
+        <div class="modal fade " id="anuncioModal" tabindex="-1" role="dialog" aria-labelledby="showSelected" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="container-fluid modal-card" id="showSelected">
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
         function showSelected(id) {
-           
+
         $.ajax(
             {
                 type: "POST",
@@ -36,7 +77,7 @@
                 contentType: 'application/json',
                 data: JSON.stringify({ "id": id }),
                 success: function (res) {
-                    
+
                     $("#showSelected").html(res);
 
                 }
@@ -45,4 +86,4 @@
 
     }
 
-</script>
+        </script>

@@ -2,9 +2,6 @@
 @model Model.ViewModel.TipoAnunciosDTO
 
 <div class="container-fluid">
-    
-        
-
     <div class="form-horizontal">
         <h4>Ingrese el tipo de anuncio</h4>
         <hr />
@@ -31,7 +28,9 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.precio, htmlAttributes: new { @class = "control-label col-md-3" })
                 <div class="col-md-9">
-                    @Html.EditorFor(model => model.precio, new { htmlAttributes = new { @class = "form-control", id = "precioInput", type = "number", min = "1", step = "0.01" } })
+                    @*@Html.EditorFor(model => model.precio, new { htmlAttributes = new { @class = "form-control", id = "precioInput", type = "number", min = "1", step = "0.01" } })*@
+
+                    @Html.EditorFor(model => model.precio, new { htmlAttributes = new { @class = "form-control", id = "precioInput"} })
                     <p data-toggle="tooltip" title="Registre el precio del tipo de anuncio" class="glyphicon glyphicon-info-sign" style="color:#949599;"></p> @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-info" })
                 </div>
             </div>

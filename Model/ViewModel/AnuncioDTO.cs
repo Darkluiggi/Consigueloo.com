@@ -11,6 +11,13 @@ namespace Model.ViewModel
 {
     public class AnuncioDTO
     {
+        public AnuncioDTO()
+        {
+            tipoAnuncio = new TipoAnunciosDTO();
+            localidad = new LocalidadesDTO();
+            categoria = new CategoriasDTO();
+
+        }
         public int id { get; set; }
         [DisplayName("Título")]
         public string  titulo { get; set; }

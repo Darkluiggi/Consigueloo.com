@@ -18,34 +18,19 @@
                                 <div class="col-md-12">
                                     <div class="card-body">
                                         <h3 class="card-title color-blue3">
-                                           Descripción
+                                            Descripción
                                         </h3>
                                         <p class="card-text">@item.descripcion</p>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
-                                    <div class="card-body display-grid">
-                                        <h4 class="card-title color-blue3">
-                                            @item.titulo
-                                        </h4>
-                                        <div class="row">
-                                            <div class="icon-card "><img src="~/Content/assets/Iconos/llamadas.png" /> </div>
-                                            <p class="card-text pad-top2">@item.telefono</p>
+                                    
+                                    @if (item.actCatalogo == true)
+                                    {
+                                        <div class="flex-end">
+                                            <a href="#" class="navbar-link float-right color-blue ">Catálogo</a>
                                         </div>
-                                        <br />
-                                        <div class="row">
-                                            <div class="icon-card "><img src="~/Content/assets/Iconos/whatsapp.png" /> </div>
-                                            <p class="card-text pad-top2">@item.celularContacto</p>
-                                        </div>  <br />
-                                        <a>Representante: </a>
-                                        <p class="card-text">@item.nombreContacto</p>
-                                        @if (item.actCatalogo == true)
-                                        {
-                                            <div class="flex-end">
-                                                <a href="#" class="navbar-link float-right color-blue ">Catálogo</a>
-                                            </div>
-                                        }
-                                    </div>
+                                    }
                                 </div>
 
                             </div>
@@ -55,28 +40,25 @@
                     else
                     {
                         <div class="card h-50  center-from-top " data-toggle="modal" data-target="#anuncioModal" onclick="showSelected(@item.id)">
-                            <div class="card-body display-grid ">
-                                <h4 class="card-title">
-                                    <a href="#">@item.titulo</a>
-                                </h4>
-                                <p class="card-text">@item.descripcion</p>
-                                <br />
-                                <div class="row">
-                                    <div class="icon-card "><img src="~/Content/assets/Iconos/llamadas.png" /> </div>
-                                    <p class="card-text">@item.telefono</p>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    
                                 </div>
-                                <br />
-                                <div class="row">
-                                    <div class="icon-card"><img src="~/Content/assets/Iconos/whatsapp.png" /> </div>
-                                    <p class="card-text">@item.celularContacto</p>
-                                </div>  <br />
-                                <p class="card-text">@item.nombreContacto</p>
+                                <div class="col-md-12">
+                                    <div class="card-body">
+                                        <h3 class="card-title color-blue3">
+                                            Descripción
+                                        </h3>
+                                        <p class="card-text">@item.descripcion</p>
+                                    </div>
+                                </div>
+                                
                             </div>
-                        </div>
-                    }
+                            </div>
+                                }
 
 
-                </div>
+                            </div>
             }
         </div>
     </div>

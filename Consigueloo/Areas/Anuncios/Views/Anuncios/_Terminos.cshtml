@@ -1,0 +1,56 @@
+﻿@model Model.ViewModel.TipoAnunciosDTO
+
+
+
+
+    <div class="container row  ">
+        <div class="terminos-container col-md-12 margin-bot">
+            <p>Términos y condiciones</p>
+        </div>
+        <div class="col-md-6">
+            <input type="checkbox" id="terminosCheck" onclick="disableAcceptBtn()" /> <span>Aceptar términos y condiciones</span>
+        </div>
+        <div class="col-md-6">
+            <button class="btn bg-white color-blue shadow-button" onclick="aceptar(@Model.id)" id="btnAceptar" disabled>
+                Aceptar
+            </button>
+            <button class="btn bg-white color-blue shadow-button">
+                Cancelar
+            </button>
+        </div>
+    </div>
+    <script>
+
+
+    function disableAcceptBtn() {
+        var checked = document.getElementById("terminosCheck").checked;
+        console.log(checked);
+        if (checked) {
+            document.getElementById("btnAceptar").disabled = false;;
+        }
+        else {
+            document.getElementById("btnAceptar").disabled = true;
+        }
+
+    }
+    function aceptar(id) {
+        console.log(id);
+        ActivarLoader();
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("Create", "Anuncios" , new { area = "Anuncios" })',
+            datatype: "json",
+            contentType: 'application/json',
+            data: JSON.stringify({ "id": id }),
+            success: function (res) {
+                var newDoc = document.open("text/html", "replace");
+                newDoc.write(res);
+                newDoc.close();
+            },
+            error: function (r) {
+                $("#divterminos").html(r);
+                DesactivarLoader();
+            }
+        });
+    }
+    </script>

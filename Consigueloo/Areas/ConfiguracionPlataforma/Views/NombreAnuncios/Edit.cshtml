@@ -1,39 +1,102 @@
 ﻿@model Model.ViewModel.NombreAnunciosDTO
 
-<h4>Editar la información</h4>
+<h4>Editar la información Nombre de anuncio</h4>
 
-@using (Ajax.BeginForm("EditItem", "NombreAnuncios", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "dvcontent", OnBegin = "ActivarLoader()", OnComplete = "DesactivarLoader()" }))
-{
-    @Html.AntiForgeryToken()
+
     
 <div class="form-horizontal">
-    <h4>Razon Social</h4>
+    
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-info" })
     @Html.HiddenFor(model => model.id)
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.nombre, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.nombre, new { htmlAttributes = new { @class = "form-control" } })
-            <p data-toggle="tooltip" title="Razón social registrada" class="glyphicon glyphicon-info-sign" style="color:#949599;"></p> @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-info" })
+<div class=" row">
+    <div class="col-sm-6">
+        <div class="form-group">
+            @Html.LabelFor(model => model.nombre, htmlAttributes: new { @class = "control-label col-md-2"})
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.nombre, new { htmlAttributes = new { @class = "form-control", id = "nombreInput" } })
+                <p data-toggle="tooltip" title="Nombre de anuncio registrado" class="fas fa-info-circle" style="color:#949599;"></p> @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-info" })
+            </div>
         </div>
     </div>
-
-   
-       
     
 
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Guardar" class="btn btn-default" />
+
+    <div class="col-sm-6">
+        <div class="form-group">
+            Características
+            <div class="col-md-9" id="caracteristicas">
+
+            </div>
+            <p data-toggle="tooltip" title="Seleccione las caracteristicas del nombre de anuncio" class="glyphicon glyphicon-info-sign" style="color:#949599;"></p>
+            @Html.ValidationMessageFor(model => model.caracteristicas, "", new { @class = "text-info" })
         </div>
     </div>
 </div>
-}
+       
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="button" value="Guardar" class="btn btn-primary" onclick="edit(@Model.id)" />
+        </div>
+    </div>
+</div>
+
 
 <script>
     $(document).ready(function () {
         $('[data-toggle="tooltip"]').tooltip();
     });
+</script>
+<script>
+    var dataList = new Array;
+    $(document).on('change', 'input[type="checkbox"]', function (e) {
+        var name = this;
+        if (this.checked) {
+            dataList.push(name.id);
+        }
+        else {
+
+            var pos = dataList.indexOf(name.id);
+            dataList.splice(pos, 1);
+        }
+    });
+    $(document).ready(function () {
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("GetCaracteristicas", "Caracteristicas")',
+            datatype: "json",
+            contentType: 'application/json',
+            success: function (r) {
+                $("#caracteristicas").html(r);
+                DesactivarLoader();
+            },
+            error: function (r) {
+                $("#caracteristicas").html(r);
+                DesactivarLoader();
+            }
+        });
+    });
+
+    function edit(id) {
+        var nombreModel = document.getElementById("nombreInput");
+        var nombre = nombreModel.value;
+        console.log(id);
+         $.ajax({
+            type: "POST",
+            url: '@Url.Action("EditItem", "NombreAnuncios")',
+            datatype: "json",
+             contentType: 'application/json',
+             data: JSON.stringify({"id":id, "nombre": nombre,  "dataList": dataList }),
+            success: function (r) {
+                $("#dvcontent").html(r);
+                DesactivarLoader();
+            },
+            error: function (r) {
+                $("#dvcontent").html(r);
+                DesactivarLoader();
+            }
+        });
+    }
+
 </script>

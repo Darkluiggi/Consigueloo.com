@@ -29,6 +29,7 @@ namespace Consigueloo.Areas.Anuncios.Controllers
             ViewBag.nombresAnuncios = (new DropDownDAO()).getNombresAnuncios();
             categoriasDAO = new CategoriasDAO(this);
             ViewBag.Categorias = (new DropDownDAO()).getCategoriasdd(null);
+            ViewBag.Localidades = (new DropDownDAO()).getLocalidadesdd(null);
         }
         // GET: Anuncios/Anuncios
         public ActionResult Index()
@@ -46,14 +47,23 @@ namespace Consigueloo.Areas.Anuncios.Controllers
         }
 
         // GET: Anuncios/Anuncios/Create
-        public ActionResult Create()
+      
+        public ActionResult Create(int? id)
         {
+            TipoAnunciosDTO anuncio = new TipoAnunciosDTO();
+            anuncio = tipoAnunciosDAO.Find(id);
+            List<String> list = new List<string>();
+            anuncio.nombre.caracteristicas.ForEach(x =>
+            {
+                list.Add(x.nombre);
+            });
+            ViewBag.Caracteristicas = list;
             return View();
         }
 
         // POST: Anuncios/Anuncios/Create
         [HttpPost]
-        public ActionResult Create(object sender, EventArgs e)
+        public ActionResult CreateNew(object sender, EventArgs e)
         {
             try
             {
@@ -67,12 +77,17 @@ namespace Consigueloo.Areas.Anuncios.Controllers
                     anuncio.telefono = Request.Form["telefono"];
                     anuncio.celularContacto = Request.Form["celularContacto"];
                     anuncio.descripcion = Request.Form["descripcion"];
+                    
                     string actImagen = Request.Form["actImagen"];
                     if (actImagen.Contains("true"))
                     {
                         anuncio.actImagen = true;
                         var binaryReader = new BinaryReader(Request.Files["imagen"].InputStream);
                         anuncio.imagen = binaryReader.ReadBytes(Request.Files["imagen"].ContentLength);
+                    }
+                    else
+                    {
+                        anuncio.imagen = new byte[0];
                     }
 
                     string actCatalogo = Request.Form["actCatalogo"];
@@ -104,21 +119,7 @@ namespace Consigueloo.Areas.Anuncios.Controllers
             return View();
         }
 
-        // POST: Anuncios/Anuncios/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        
 
         // GET: Anuncios/Anuncios/Delete/5
         public ActionResult Delete(int id)
@@ -191,6 +192,12 @@ namespace Consigueloo.Areas.Anuncios.Controllers
             ViewBag.Busqueda = nombre;
             List<AnuncioDTO> anuncios = anunciosDAO.filterByCategoriaName(nombre);
             return View("Index", anuncios);
+        }
+        [HttpPost]
+        public ActionResult CargarTerminos(int? id)
+        {
+            TipoAnunciosDTO model = tipoAnunciosDAO.Find(id);
+            return PartialView("_Terminos", model);
         }
     }
 

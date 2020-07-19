@@ -1,12 +1,15 @@
 ﻿@model Model.ViewModel.AnuncioDTO
 
     <div class="container-fluid">
-
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
         <!-- Portfolio Item Heading -->
-        <h1 class="my-4">
+        <h1 class="my-4 color-blue3">
             @Model.titulo
             @*<small>Secondary Text</small>*@
         </h1>
+
 
         <!-- Portfolio Item Row -->
         <div class="row margin-bot">
@@ -16,13 +19,13 @@
             </div>
 
             <div class="col-md-6">
-                <h3 class="my-3">Descripción</h3>
+                <h3 class="my-3 color-blue3">Descripción</h3>
 
                 <p>@Model.descripcion</p>
             </div>
 
             <div class="col-md-6">
-                <h3 class="my-3">Contacto</h3>
+                <h3 class="my-3 color-blue3">Contacto</h3>
                 <div class="row">
                     <div class="icon-card3 "><img src="~/Content/assets/Iconos/llamadas.png" /> </div>
                     <p class="card-text">@Model.telefono</p>
@@ -42,4 +45,4 @@
             </div>
 
         </div>
-</div>
+    </div>

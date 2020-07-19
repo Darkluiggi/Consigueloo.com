@@ -55,11 +55,7 @@ namespace Consigueloo.Areas.ConfiguracionPlataforma.Controllers
 
         }
 
-        // GET: ConfiguracionPlataforma/Configuracion/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
+      
 
 
         // GET: ConfiguracionPlataforma/Configuracion/Delete/5
@@ -87,8 +83,8 @@ namespace Consigueloo.Areas.ConfiguracionPlataforma.Controllers
 
             return PartialView("Details", nombreAnuncio);
         }
-   
-    public ActionResult Edit(int? id)
+        [HttpPost]
+        public ActionResult Edit(int? id)
     {
         if (id == null)
         {
@@ -104,10 +100,10 @@ namespace Consigueloo.Areas.ConfiguracionPlataforma.Controllers
 
     
     [HttpPost]
-    public ActionResult EditItem( string nombre, List<string> dataList)
+    public ActionResult EditItem( int id,string nombre, List<string> dataList)
     {
        
-            NombreAnunciosDTO nombreAnuncios = nombreAnunciosDAO.Update(nombre, dataList);
+            NombreAnunciosDTO nombreAnuncios = nombreAnunciosDAO.Update(id,nombre, dataList);
             return PartialView("Confirm", nombreAnuncios);
       
     }
@@ -119,12 +115,12 @@ namespace Consigueloo.Areas.ConfiguracionPlataforma.Controllers
         {
             return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
         }
-            NombreAnunciosDTO razonSocial = nombreAnunciosDAO.Find(id);
-        if (razonSocial == null)
+            NombreAnunciosDTO nombreAnuncio = nombreAnunciosDAO.Find(id);
+        if (nombreAnuncio == null)
         {
             return HttpNotFound();
         }
-        return PartialView("Delete", razonSocial);
+        return PartialView("Delete", nombreAnuncio);
     }
 
     // POST: ConfiguracionEmpresa/RazonesSociales/Delete/5

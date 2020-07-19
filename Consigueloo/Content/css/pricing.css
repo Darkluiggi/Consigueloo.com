@@ -534,6 +534,7 @@ a {
     width: auto;
 }
 
+
     .pricing-features li {
         float: none;
         width: auto;
@@ -570,7 +571,7 @@ a {
         width: 100px;
         float: left;
         padding: 0.6em 0.5em;
-        font-size: 1.1rem;
+        font-size: 1.2rem;
         text-align: center;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -579,7 +580,6 @@ a {
 
     .pricing-nofeatures em {
         display: block;
-        margin-bottom: 5px;
         font-weight: 600;
     }
 
@@ -590,7 +590,7 @@ a {
     .pricing-nofeatures li {
         float: none;
         width: auto;
-        padding: 1em;
+       
     }
 
 .exclusive .pricing-nofeatures li {

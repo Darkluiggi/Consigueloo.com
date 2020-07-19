@@ -132,8 +132,9 @@ namespace Consigueloo.Areas.ConfiguracionPlataforma.Controllers
         }
         return PartialView("Edit", periodos);
     }
-        
+
         // GET: ConfiguracionEmpresa/RazonesSociales/Delete/5
+        [HttpPost]
         public ActionResult DeleteItem(int? id)
     {
         if (id == null)

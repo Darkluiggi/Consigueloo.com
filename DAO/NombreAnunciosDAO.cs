@@ -151,7 +151,7 @@ namespace DAO
             }
         }
 
-        public NombreAnunciosDTO Update(string nombre, List<string> dataList)
+        public NombreAnunciosDTO Update(int id, string nombre, List<string> dataList)
         {
             NombreAnunciosDTO model = new NombreAnunciosDTO();
             try
@@ -171,28 +171,60 @@ namespace DAO
                 model.noIncluidas = caracteristicas.Except(model.caracteristicas).ToList();
                 //Mapeo de clase
 
-                NombreAnuncios response = new NombreAnuncios();
+                NombreAnuncios response = db.NombreAnuncios.Include(x=>x.caracteristicas).Include(x=> x.noIncluidas).First(x=>x.id==id);
                 response.nombre = model.nombre;
-                model.caracteristicas.ForEach(x =>
+                if (response.caracteristicas.Count==0)
                 {
-                    Caracteristicas item = new Caracteristicas();
-                    item.nombre = x.nombre;
-                    item.id = x.id;
-                    response.caracteristicas.Add(item);
-                });
-                model.noIncluidas.ForEach(x =>
-                {
-                    Caracteristicas item = new Caracteristicas();
-                    item.nombre = x.nombre;
-                    item.id = x.id;
+                    model.caracteristicas.ForEach(y =>
+                    {
+                        Caracteristicas item = new Caracteristicas();
+                        item.nombre = y.nombre;
+                        item.id = y.id;
+                        response.caracteristicas.Add(item);
 
-                    response.noIncluidas.Add(item);
-                });
+                    });
+                }
+                else
+                {
+                    response.caracteristicas.Clear();
+                    model.caracteristicas.ForEach(y =>
+                    {
+                        Caracteristicas item = new Caracteristicas();
+                        item.nombre = y.nombre;
+                        item.id = y.id;
+                        response.caracteristicas.Add(item);
+                    });
+                }
+                if (response.noIncluidas.Count==0)
+                {
+                    model.noIncluidas.ForEach(y =>
+                    {
+                        Caracteristicas item = new Caracteristicas();
+                        item.nombre = y.nombre;
+                        item.id = y.id;
+                        response.noIncluidas.Add(item);
+
+                    });
+                }
+                else
+                {
+                    response.noIncluidas.Clear();
+                    model.noIncluidas.ForEach(x =>
+                    {
+                        Caracteristicas item = new Caracteristicas();
+                        item.nombre = x.nombre;
+                        item.id = x.id;
+                        response.noIncluidas.Add(item);
+                        
+                    });
+                }
+                    
+               
 
                 db.Entry(response).State = EntityState.Modified;
                 db.SaveChanges();
 
-                model = this.Find(model.id);
+                model = Find(id);
 
                 ViewInfoMensaje.setMensaje(controller, MensajeBuilder.EditarMsgSuccess(entidad), Helpers.InfoMensajes.ConstantsLevels.SUCCESS);
                 return model;
