@@ -1,37 +1,27 @@
 ﻿@model IEnumerable<Model.ViewModel.AnuncioDTO>
 
-    
+    <h4 class="color-blue3 margin-top2">ANUNCIOS DESTACADOS</h4>
     <div id="render-ads " class="container-fluid div-destacados pad-top">
+        
         <div class="row2 ">
             @foreach (var item in Model)
             {
-                <div class="col-lg-3 mb-3">
-                    <div class="card ">
-                        @if (item.actImagen == true)
-                        {
-                            <a href="#"><img class="card-img-top" src="@item.path" alt=""></a>
-                        }
-                        else
-                        {
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <a href="#">@item.titulo</a>
-                                </h4>
-                                <p class="card-text">@item.descripcion</p>
-                                <div class="row">
-                                    <div class="icon-card2"><img src="~/Content/assets/Iconos/llamadas.png" /> </div>
-                                    <p class="card-text">@item.telefono</p>
-                                </div>
-                                <br />
-                                <div class="row">
-                                    <div class="icon-card2 "><img src="~/Content/assets/Iconos/whatsapp.png" /> </div>
-                                    <p class="card-text">@item.celularContacto</p>
-                                </div>  <br />
-                                <p class="card-text">@item.nombreContacto</p>
-                            </div>
-                        }
-                    </div>
+                <div class="col-lg-4 mb-4">
+                    <div class="card-destacados  ">
+                            <a class="destacados" href="#" style="background-image:url(@item.path)">
+                                <span class="fas fa-star color-gold"></span>
+                            </a>
+                            
+                       
+                    </div>                        
+                          
+                           
+                       
+                        @*<a href="#"><img class="card-img-top" src="@item.path" alt="">
+        <span class="fas fa-star-0 color-gold"></span>
+        </a>*@
 
+                    
                 </div>
 
 
@@ -54,7 +44,7 @@
 
     let scrollMovePoint = 0;
     const max_scroll = wrapper.scrollWidth;
-    let operand = 320;
+    let operand = 440;
         function moveRight() {
 
 

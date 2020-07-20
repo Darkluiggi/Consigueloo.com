@@ -18,18 +18,20 @@
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
 </head>
-<body >
+<body>
+    
     <nav class="sb-nav-fixed">
+        
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-light">
 
             <button class="btn btn-link btn-xlg " id="sidebarToggle" href="#">
-                <span class="fas fa-bars color-green"></span>
+                <i class="fas fa-bars color-green"></i>
             </button>
-            <a href="~/">
-                <div class="image-brand" href=""> <img  src="~/Images/binoculares-01.png" /></div>
-            </a>
 
-            <ul class="nav navbar-nav  ml-auto ">
+            <a href="~/">
+                <div class="image-brand"> <img class="img-fluid" src="~/Images/binoculares-01.png" /></div>
+            </a>
+            <ul class="nav navbar-nav  ml-auto menu-top">
                 <li class="margin-right ">
                     <a class="color-blue" href="@Url.Action("Index", "Home" , new { area = "" })">Inicio</a>
                 </li>
@@ -37,7 +39,19 @@
                     <a class="color-blue" href="@Url.Action("About", "Home" , new { area = "" })">Conócenos</a>
                 </li>
                 <li class="margin-right ">
-                    <a class="color-blue" href="@Url.Action("Services", "Home" , new { area = "" })">Servicios</a>
+                    <a class="color-blue" href="@Url.Action("Enterprises", "Home" , new { area = "" })">Empresas</a>
+                </li>
+                <li class="margin-right dropdown">
+                    <a class="color-blue dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Servicios
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Anuncios</a>
+                        <a class="dropdown-item" href="#">Publica tu anuncio</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Encuentra empleo</a>
+                        <a class="dropdown-item" href="#">Busca talento</a>
+                    </div>
                 </li>
                 <li class="margin-right ">
                     <a class="color-blue" href="@Url.Action("Contact", "Home" , new { area = "" })">Contáctanos</a>
@@ -49,15 +63,12 @@
                     @Html.Partial("_NotificationPartial")
                 </ul>
             }
-
-            <ul class="navbar-nav ml-auto ml-md-0">
+            <ul class="navbar-nav ml-auto ml-md-0 color-white">
                 @Html.Partial("_LoginPartial")
             </ul>
-
-
-
-
         </nav>
+
+
 
 
         <!-- Navbar-->
@@ -69,11 +80,11 @@
                 <nav class="sb-sidenav accordion sb-sidenav-light" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
-                            <div class="sb-sidenav-menu-heading">Servicios</div>                          
+                            <div class="sb-sidenav-menu-heading">Servicios</div>
                             <a class="nav-link" onclick="ActivarLoader()" href="@Url.Action("FilterCategoriasByName", "Anuncios", new { nombre="Inmuebles", area = "Anuncios" })">
                                 <div class="sb-nav-link-icon"><img src="~/Content/assets/Iconos/Categorias/Inmuebles.png" /></div>
-                                Inmuebles 
-                                
+                                Inmuebles
+
                             </a>
                             <a class="nav-link" onclick="ActivarLoader()" href="@Url.Action("FilterCategoriasByName", "Anuncios", new { nombre="Vehiculos", area = "Anuncios" })">
                                 <div class="sb-nav-link-icon"><img src="~/Content/assets/Iconos/Categorias/Vehículos.png" /></i></div>
@@ -133,6 +144,7 @@
             </div>
 
         </div>
+
     </nav>
     <!-- Scroll to Top Button-->
     <!-- Logout Modal-->
@@ -168,7 +180,7 @@
                 <div class="modal-body" id="divcategorias">
 
                 </div>
-                
+
             </div>
         </div>
     </div>

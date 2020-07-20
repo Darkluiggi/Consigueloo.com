@@ -605,7 +605,6 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\toastr.min.js" />
     <Content Include="Scripts\wizard.js" />
-    <Content Include="Views\Home\index.html" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
     <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
@@ -621,7 +620,6 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\Index_.cshtml" />
     <Content Include="Views\Home\View.cshtml" />
     <Content Include="Views\Home\_Display.cshtml" />
     <Content Include="Views\Manage\AddPhoneNumber.cshtml" />

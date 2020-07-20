@@ -20,7 +20,7 @@
 
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 </head>
-<body class="sb-sidenav-toggled">
+<body>
     <nav class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark linear-gradient">
 
@@ -31,7 +31,7 @@
             <a href="~/">
                 <div class="image-brand"> <img class="img-fluid" src="~/Images/binoculares-01.png" /></div>
             </a>
-            <ul class="nav navbar-nav  ml-auto ">
+            <ul class="nav navbar-nav  ml-auto menu-top">
                 <li class="margin-right ">
                     <a class="color-white" href="@Url.Action("Index", "Home" , new { area = "" })">Inicio</a>
                 </li>
@@ -39,7 +39,19 @@
                     <a class="color-white" href="@Url.Action("About", "Home" , new { area = "" })">Conócenos</a>
                 </li>
                 <li class="margin-right ">
-                    <a class="color-white" href="@Url.Action("Services", "Home" , new { area = "" })">Servicios</a>
+                    <a class="color-white" href="@Url.Action("Enterprises", "Home" , new { area = "" })">Empresas</a>
+                </li>
+                <li class="margin-right dropdown">
+                    <a class="color-white dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Servicios
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Anuncios</a>
+                        <a class="dropdown-item" href="#">Publica tu anuncio</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Encuentra empleo</a>
+                        <a class="dropdown-item" href="#">Busca talento</a>
+                    </div>
                 </li>
                 <li class="margin-right ">
                     <a class="color-white" href="@Url.Action("Contact", "Home" , new { area = "" })">Contáctanos</a>
@@ -54,6 +66,7 @@
             <ul class="navbar-nav ml-auto ml-md-0 color-white">
                 @Html.Partial("_LoginPartial")
             </ul>
+           
         </nav>
 
 

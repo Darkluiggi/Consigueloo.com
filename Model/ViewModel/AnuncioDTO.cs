@@ -51,6 +51,7 @@ namespace Model.ViewModel
         [DisplayName("Tipo de anuncio")]
         public TipoAnunciosDTO tipoAnuncio { get; set; }
         public int? tipoAnuncioId { get; set; }
+        public bool destacado { get; set; }
 
     }
 

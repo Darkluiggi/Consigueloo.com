@@ -46,7 +46,7 @@ namespace Consigueloo.Controllers
 
         public ActionResult ShowDestacados()
         {            
-            List<AnuncioDTO> anuncios = anunciosDAO.ListarAnuncios();
+            List<AnuncioDTO> anuncios = anunciosDAO.ShowDestacados();
             return PartialView("_Display", anuncios);
         }
 

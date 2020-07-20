@@ -17,11 +17,13 @@ namespace DAO
         private ApplicationDbContext db;
         private ImageHelper imageHelper;
         private CategoriasDAO categoriasDAO;
+        private LocalidadesDAO localidadesDAO;
         public AnunciosDAO(Controller controller)
         {
             db = new ApplicationDbContext();
             imageHelper = new ImageHelper();
             categoriasDAO = new CategoriasDAO(controller);
+            localidadesDAO = new LocalidadesDAO(controller);
         }
 
         public void GuardarAnuncio(AnuncioDTO anuncio, string categoria)
@@ -59,6 +61,49 @@ namespace DAO
                 throw;
             }
         }
+
+        public List<AnuncioDTO> ShowDestacados()
+        {
+            try
+            {
+
+                //Mapeo de clase
+                var anuncio = db.Anuncios.Where(x => x.estado == true && x.destacado).ToList();
+                List<AnuncioDTO> anuncios = new List<AnuncioDTO>();
+                if (anuncio != null)
+                {
+                    foreach (var item in anuncio)
+                    {
+                        AnuncioDTO anuncioModel = new AnuncioDTO();
+                        anuncioModel.titulo = item.titulo;
+                        anuncioModel.nombreContacto = item.nombreContacto;
+                        anuncioModel.telefono = item.telefono;
+                        anuncioModel.actCatalogo = item.actCatalogo;
+                        anuncioModel.actImagen = item.actImagen;
+                        anuncioModel.celularContacto = item.celularContacto;
+                        anuncioModel.descripcion = item.descripcion;
+                        anuncioModel.id = item.id;
+                        anuncioModel.path = imageHelper.GetImageFromByteArray(item.imagen);
+                        anuncioModel.fechaActivacion = item.fechaActivacion;
+                        anuncioModel.fechaCancelacion = item.fechaCancelacion;
+                        anuncioModel.categoria = categoriasDAO.Find(item.categoriaId);
+                        anuncioModel.categoriaId = item.categoriaId;
+
+                        anuncios.Add(anuncioModel);
+                    }
+                }
+
+
+
+                return anuncios;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
         public List<AnuncioDTO> ListarAnuncios()
         {
             try
@@ -97,7 +142,7 @@ namespace DAO
             catch (Exception ex)
             {
 
-                throw;
+                throw ex;
             }
         }
 
@@ -129,20 +174,35 @@ namespace DAO
             }
         }
 
+        public List<AnuncioDTO> filterByLocalidadId(int id)
+        {
+            try
+            {
+                List<AnuncioDTO> response = ListarAnuncios();
+                response = response.Where(x => x.localidadId == id).ToList();
+                return response;
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
         public List<AnuncioDTO> filterByCategoriaId(int id)
         {
             try
             {
-                CategoriasDTO categoria = categoriasDAO.Find(id);
                 List<AnuncioDTO> response = ListarAnuncios();
                 response = response.Where(x => x.categoriaId == id).ToList();
                 return response;
 
     }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                throw ex;
             }
         }
 

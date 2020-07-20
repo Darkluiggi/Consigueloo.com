@@ -77,24 +77,28 @@ namespace Consigueloo.Areas.Anuncios.Controllers
                     anuncio.telefono = Request.Form["telefono"];
                     anuncio.celularContacto = Request.Form["celularContacto"];
                     anuncio.descripcion = Request.Form["descripcion"];
-                    
+                    anuncio.imagen = new byte[0];
                     string actImagen = Request.Form["actImagen"];
-                    if (actImagen.Contains("true"))
+                    string actCatalogo = Request.Form["actCatalogo"];
+                    if (actImagen != null)
                     {
-                        anuncio.actImagen = true;
-                        var binaryReader = new BinaryReader(Request.Files["imagen"].InputStream);
-                        anuncio.imagen = binaryReader.ReadBytes(Request.Files["imagen"].ContentLength);
-                    }
-                    else
-                    {
-                        anuncio.imagen = new byte[0];
+                        if (actImagen.Contains("true"))
+                        {
+                            anuncio.actImagen = true;
+                            var binaryReader = new BinaryReader(Request.Files["imagen"].InputStream);
+                            anuncio.imagen = binaryReader.ReadBytes(Request.Files["imagen"].ContentLength);
+                        }
+                       
                     }
 
-                    string actCatalogo = Request.Form["actCatalogo"];
-                    if (actCatalogo.Contains("true"))
+                    if (actCatalogo != null)
                     {
-                        anuncio.actCatalogo = true;
+                        if (actCatalogo.Contains("true"))
+                        {
+                            anuncio.actCatalogo = true;
+                        }
                     }
+                        
                    
                     anunciosDAO.GuardarAnuncio(anuncio,categoria);
 
@@ -184,6 +188,14 @@ namespace Consigueloo.Areas.Anuncios.Controllers
         public ActionResult FilterCategorias(int id)
         {
             List<AnuncioDTO> anuncios = anunciosDAO.filterByCategoriaId(id);
+            return View("Index", anuncios);
+        }
+        public ActionResult FilterByLocalidad(int id)
+        {
+            
+            List<AnuncioDTO> anuncios = anunciosDAO.filterByLocalidadId(id);
+            ViewBag.Funcion = Helpers.Constants.Anuncios.busqueda;
+            ViewBag.Busqueda = (new LocalidadesDAO(this)).Find(id);
             return View("Index", anuncios);
         }
         public ActionResult FilterCategoriasByName(string nombre)

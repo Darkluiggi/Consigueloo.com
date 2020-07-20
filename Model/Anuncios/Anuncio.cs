@@ -30,9 +30,10 @@ namespace Model.Anuncios
         public int? localidadId { get; set; }
         public Localidades localidad { get; set; }
 
-        [ForeignKey("tipoAnuncio")]
+        [ForeignKey("tipoAnuncio")] 
         public int? tipoAnuncioId { get; set; }
         public TipoAnuncios tipoAnuncio { get; set; }
+        public bool destacado { get; set; }
 
     }
 }

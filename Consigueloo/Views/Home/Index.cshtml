@@ -103,6 +103,7 @@
 <script>
 
     function BuscarEnAnuncios() {
+        ActivarLoader();
         var busquedaModel = document.getElementById("searchField");
         var busqueda = busquedaModel.value;
          $.ajax(
@@ -115,6 +116,7 @@
                 success: function (res) {
                     var newDoc = document.open("text/html", "replace");
                     newDoc.write(res);
+                    newDoc.close();
                 }
 
             });
