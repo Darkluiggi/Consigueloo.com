@@ -118,7 +118,7 @@ namespace DAO
                 return localidades;
 
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 ViewInfoMensaje.setMensaje(controller, MensajeBuilder.EditarMsgError(entidad), Helpers.InfoMensajes.ConstantsLevels.ERROR);
                 return localidades;

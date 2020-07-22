@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace Consigueloo.Services
 {
-    class PerfilValidator
+    public class PerfilValidator
     {
         UsuarioDAO usuariosDAO;
         public PerfilValidator(Controller controller)

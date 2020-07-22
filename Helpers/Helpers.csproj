@@ -41,11 +41,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants\Periodos.cs" />
     <Compile Include="Constants\Anuncios.cs" />
     <Compile Include="Constants\Usuarios.cs" />
     <Compile Include="InfoMensajes\ConstantsLevels.cs" />
     <Compile Include="InfoMensajes\MensajeBuilder.cs" />
     <Compile Include="InfoMensajes\ViewInfoMensaje.cs" />
+    <Compile Include="Methods\DateHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />

@@ -33,7 +33,8 @@ namespace Model.Anuncios
         [ForeignKey("tipoAnuncio")] 
         public int? tipoAnuncioId { get; set; }
         public TipoAnuncios tipoAnuncio { get; set; }
-        public bool destacado { get; set; }
+        public bool actDestacado { get; set; }
+        public bool actRedesSociales { get; set; }
 
     }
 }

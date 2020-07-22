@@ -24,6 +24,7 @@ namespace Consigueloo.Controllers
         public AccountController()
         {
             usuarioDAO = new UsuarioDAO(this);
+           
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )

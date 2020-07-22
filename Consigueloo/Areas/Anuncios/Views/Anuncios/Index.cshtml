@@ -22,27 +22,27 @@
             </div>
         </div>
         <div class="row pad-bot2">
-            <div class="col-lg-1">
+            <div class="col-12">
                 <h5>Buscar</h5>
 
             </div>
-            <div class="col-lg-4">
+            <div class="col-md-4">
                 <div class="input-group">
                     <input type="text" onkeyup="inputKeyUp(event)" id="searchField" class="form-control" placeholder="Búsqueda..." aria-label="Search" aria-describedby="basic-addon2">
                     <div class="input-group-append">
-                        <button class="btn btn-primary" type="button" id="srchButton" onclick="BuscarEnAnuncios()">
+                        <button class="btn btn-primary find-btn" type="button" id="srchButton" onclick="BuscarEnAnuncios()">
                             <i class="fas fa-search"></i>
                         </button>
                     </div>
                 </div>
 
             </div>
-            <div class="col-lg-4">
+            <div class="col-md-4">
 
                 @Html.DropDownList("categoriasInput", (SelectList)ViewBag.Categorias, new { @class = "form-control" })
 
             </div>
-            <div class="col-lg-3">
+            <div class="col-md-4">
 
                 @Html.DropDownList("localidadesInput", (SelectList)ViewBag.Localidades, new { @class = "form-control", onchange= "FilterByLocalidad()" })
 

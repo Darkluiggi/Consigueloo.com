@@ -230,7 +230,7 @@ namespace DAO
                 return model;
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 ViewInfoMensaje.setMensaje(controller, MensajeBuilder.EditarMsgError(entidad), Helpers.InfoMensajes.ConstantsLevels.ERROR);
                 return model;

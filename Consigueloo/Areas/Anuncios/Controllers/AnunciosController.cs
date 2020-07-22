@@ -57,6 +57,7 @@ namespace Consigueloo.Areas.Anuncios.Controllers
             {
                 list.Add(x.nombre);
             });
+            ViewBag.Duracion = anuncio.duracion;
             ViewBag.Caracteristicas = list;
             return View();
         }
@@ -80,6 +81,7 @@ namespace Consigueloo.Areas.Anuncios.Controllers
                     anuncio.imagen = new byte[0];
                     string actImagen = Request.Form["actImagen"];
                     string actCatalogo = Request.Form["actCatalogo"];
+                    string duracion = Request.Form["duracion"];
                     if (actImagen != null)
                     {
                         if (actImagen.Contains("true"))
@@ -87,8 +89,7 @@ namespace Consigueloo.Areas.Anuncios.Controllers
                             anuncio.actImagen = true;
                             var binaryReader = new BinaryReader(Request.Files["imagen"].InputStream);
                             anuncio.imagen = binaryReader.ReadBytes(Request.Files["imagen"].ContentLength);
-                        }
-                       
+                        }                       
                     }
 
                     if (actCatalogo != null)
@@ -98,15 +99,14 @@ namespace Consigueloo.Areas.Anuncios.Controllers
                             anuncio.actCatalogo = true;
                         }
                     }
-                        
-                   
-                    anunciosDAO.GuardarAnuncio(anuncio,categoria);
+
+                    anunciosDAO.GuardarAnuncio(anuncio,categoria,duracion);
 
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
 
-                    throw;
+                    throw ex;
                 }
 
                 return RedirectToAction("Index");
@@ -146,20 +146,6 @@ namespace Consigueloo.Areas.Anuncios.Controllers
                 return View();
             }
         }
-        //[HttpPost]
-        //public void Upload(HttpPostedFileBase file)
-        //{
-        //    //Access the File using the Name of HTML INPUT File.
-        //    HttpPostedFileBase postedFile = file;
-
-        //    //Check if File is available.
-        //    if (postedFile != null && postedFile.ContentLength > 0)
-        //    {
-        //        //Save the File.
-        //        string filePath = Server.MapPath("~/Uploads/") + Path.GetFileName(postedFile.FileName);
-        //        postedFile.SaveAs(filePath);
-        //    }
-        //}
 
         public ActionResult Pricing()
         {
@@ -194,8 +180,8 @@ namespace Consigueloo.Areas.Anuncios.Controllers
         {
             
             List<AnuncioDTO> anuncios = anunciosDAO.filterByLocalidadId(id);
-            ViewBag.Funcion = Helpers.Constants.Anuncios.busqueda;
-            ViewBag.Busqueda = (new LocalidadesDAO(this)).Find(id);
+            ViewBag.Funcion = Helpers.Constants.Anuncios.localidades;
+            ViewBag.Busqueda = (new LocalidadesDAO(this)).Find(id).nombre;
             return View("Index", anuncios);
         }
         public ActionResult FilterCategoriasByName(string nombre)
@@ -210,6 +196,23 @@ namespace Consigueloo.Areas.Anuncios.Controllers
         {
             TipoAnunciosDTO model = tipoAnunciosDAO.Find(id);
             return PartialView("_Terminos", model);
+        }
+        [HttpPost]
+        public ActionResult verificarNotificaciones()
+        {
+            string model = anunciosDAO.VerificarNofiticaciones();
+            return Json( model, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult chartAreaData()
+        {
+            ChartDataDTO model = anunciosDAO.ChartAreaData();
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult chartBarData()
+        {
+            ChartDataDTO model = anunciosDAO.chartBarData();
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
     }
 

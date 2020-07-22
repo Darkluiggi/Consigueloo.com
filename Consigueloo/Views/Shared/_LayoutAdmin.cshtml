@@ -16,24 +16,21 @@
     <script src="~/Scripts/jquery-3.2.1.js"></script>
     <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
 </head>
-<body class="sb-sidenav-toggled">
+<body >
     <nav class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-
             <button class="btn btn-link btn-xlg order-1 order-lg-0 " id="sidebarToggle" href="#">
                 <i class="fas fa-bars color-green"></i>
             </button>
-
-            <div class="image-brand" href=""> <img class="img-fluid" src="~/Images/binoculares-01.png" /></div>
-
+            < <a href="~/">
+                <div class="image-brand"> <img class="img-fluid" src="~/Images/binoculares-01.png" /></div>
+            </a>
             <ul class="nav navbar-nav  ml-auto menu-top">
-
             </ul>
-                <ul class="navbar-nav ml-auto ml-md-0">
-                    @Html.Partial("_LoginPartial")
-                </ul>
+            <ul class="navbar-nav ml-auto ml-md-0">
+                @Html.Partial("_LoginPartial")
+            </ul>
         </nav>
-
 
         <!-- Navbar-->
 
@@ -113,14 +110,11 @@
                             </div>
 
                         </div>
-                        </div>
-                    </nav>
                     </div>
+                </nav>
+            </div>
             
-                    <div class="sb-sidenav-footer">
-                        <div class="small">Logged in as:</div>
-                        Administrador
-                    </div>
+                    
             
 
             <div id="layoutSidenav_content">

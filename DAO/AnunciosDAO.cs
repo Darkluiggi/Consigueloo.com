@@ -1,12 +1,10 @@
-﻿using AutoMapper;
+﻿
 using Model.Anuncios;
 using Model.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Persistence;
 using System.Web.Mvc;
 
@@ -26,7 +24,7 @@ namespace DAO
             localidadesDAO = new LocalidadesDAO(controller);
         }
 
-        public void GuardarAnuncio(AnuncioDTO anuncio, string categoria)
+        public void GuardarAnuncio(AnuncioDTO anuncio, string categoria, string duracion)
         {
             try
             {
@@ -34,7 +32,7 @@ namespace DAO
                 CategoriasDTO cat = categoriasDAO.Find(categoriaId);
                 anuncio.categoria = cat;
                 anuncio.fechaActivacion = DateTime.Today;
-                anuncio.fechaCancelacion = anuncio.fechaActivacion.AddDays(15);
+                anuncio.fechaCancelacion = anuncio.fechaActivacion.AddDays(60);
                 
                 Anuncio anuncioModel = new Anuncio();
                 anuncioModel.titulo = anuncio.titulo;
@@ -68,7 +66,7 @@ namespace DAO
             {
 
                 //Mapeo de clase
-                var anuncio = db.Anuncios.Where(x => x.estado == true && x.destacado).ToList();
+                var anuncio = db.Anuncios.Where(x => x.estado == true && x.actDestacado).ToList();
                 List<AnuncioDTO> anuncios = new List<AnuncioDTO>();
                 if (anuncio != null)
                 {
@@ -174,6 +172,105 @@ namespace DAO
             }
         }
 
+        public string VerificarNofiticaciones()
+        {
+            try
+            {
+                var anuncios = ListarAnuncios();
+                var today = DateTime.Today;
+                string result="";
+
+                anuncios.ForEach(x =>
+                {
+                    int fechaResultado = today.CompareTo(x.fechaCancelacion);
+
+                    if (fechaResultado < 10)
+                    {
+                        result ="Su anuncio vence en 3 días";
+                    }
+                });
+                return result;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+        public ChartDataDTO ChartAreaData()
+        {
+            try
+            {
+                var anuncios = ListarAnuncios();
+                var today = DateTime.Today;
+
+                ChartDataDTO result = new ChartDataDTO();
+
+                for (int i = 15; i >= 0; i--)
+                {
+
+                    DateTime fechaResultado = today.AddDays(-i);
+                    var model = anuncios.Where(x => x.fechaActivacion.Day == fechaResultado.Day).ToList();
+                    result.datos.Add(model.Count.ToString());
+                    string fecha = construirFecha(fechaResultado.Month.ToString(),fechaResultado.Day.ToString());
+                    result.periodos.Add(fecha);
+                }
+                                   
+                return result;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        private string construirFecha(string Mes, string día)
+        {
+            try
+            {
+                string month; 
+                string result= Mes + " " + día;
+
+                return result;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public ChartDataDTO chartBarData()
+        {
+            try
+            {
+                var anuncios = ListarAnuncios();
+                var today = DateTime.Today;
+                ChartDataDTO result = new ChartDataDTO();
+
+                for (int i = 5; i >= 0; i--)
+                {
+
+                    DateTime fechaResultado = today.AddMonths (-i);
+                    var model = anuncios.Where(x => x.fechaActivacion.Month == fechaResultado.Month).ToList();
+                    result.datos.Add(model.Count.ToString());
+                    result.periodos.Add(fechaResultado.Month.ToString());
+                }
+
+
+                return result;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public List<AnuncioDTO> filterByLocalidadId(int id)
         {
             try
@@ -264,5 +361,17 @@ namespace DAO
                 throw;
             }
         }
+    }
+
+    public class ChartDataDTO
+    {
+        public ChartDataDTO()
+        {
+            periodos = new List<string>();
+            datos = new List<string>();
+        }
+        public List<string> periodos { get; set; }
+        public List<string> datos { get; set; }
+        public string carne { get; set; }
     }
 }

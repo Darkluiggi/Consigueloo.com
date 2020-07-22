@@ -121,7 +121,7 @@ namespace DAO
                 return caracteristicas;
 
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 ViewInfoMensaje.setMensaje(controller, MensajeBuilder.EditarMsgError(entidad), Helpers.InfoMensajes.ConstantsLevels.ERROR);
                 return caracteristicas;
