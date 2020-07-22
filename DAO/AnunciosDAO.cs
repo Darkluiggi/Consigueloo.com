@@ -7,6 +7,7 @@ using System.Data.Entity;
 using System.Linq;
 using Persistence;
 using System.Web.Mvc;
+using Helpers.Methods;
 
 namespace DAO
 {
@@ -16,12 +17,16 @@ namespace DAO
         private ImageHelper imageHelper;
         private CategoriasDAO categoriasDAO;
         private LocalidadesDAO localidadesDAO;
+        private DateHelper dateHelper;
+
+
         public AnunciosDAO(Controller controller)
         {
             db = new ApplicationDbContext();
             imageHelper = new ImageHelper();
             categoriasDAO = new CategoriasDAO(controller);
             localidadesDAO = new LocalidadesDAO(controller);
+            dateHelper = new DateHelper();
         }
 
         public void GuardarAnuncio(AnuncioDTO anuncio, string categoria, string duracion)
@@ -231,7 +236,7 @@ namespace DAO
         {
             try
             {
-                string month; 
+                string month=dateHelper.stringToMonth(Mes); 
                 string result= Mes + " " + día;
 
                 return result;
