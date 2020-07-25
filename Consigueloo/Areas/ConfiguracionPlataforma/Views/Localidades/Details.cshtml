@@ -1,8 +1,9 @@
 ﻿@model Model.ViewModel.LocalidadesDTO
 
-<h4>Detalle de información de Razón Social</h4>
-<div class="row" style="padding:15px">
-    <div class="col-md-3">
+<h4 class="col-md-12">Detalle de información de Razón Social</h4>
+<hr />
+<div class="row" style="padding:15px; margin-left:10px;">
+    <div class="col-md-4">
         <dl class="dl-horizontal">
             <dt style="margin-bottom:20px">
                 @Html.DisplayNameFor(model => model.nombre)
@@ -16,17 +17,17 @@
     <dl class="dl-horizontal">
         <dt>
 
-            @using(Ajax.BeginForm("Edit", "Localidades", new { id = Model.id }, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "dvcontent", OnBegin = "ActivarLoader()", OnComplete = "DesactivarLoader()" }))
+            @using (Ajax.BeginForm("Edit", "Localidades", new { id = Model.id }, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "dvcontent", OnBegin = "ActivarLoader()", OnComplete = "DesactivarLoader()" }))
             {
-            <input type="submit" value="Editar" class="btn btn-default" id="btnEditar" width="200" />
+                <input type="submit" value="Editar" class="btn btn-primary" id="btnEditar" width="200" />
             }
             <br />
         </dt>
         <dd>
 
-            @using(Ajax.BeginForm("DeleteItem", "Localidades", new { id = Model.id }, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "dvcontent", OnBegin = "ActivarLoader()", OnComplete = "DesactivarLoader()" }))
+            @using (Ajax.BeginForm("DeleteItem", "Localidades", new { id = Model.id }, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "dvcontent", OnBegin = "ActivarLoader()", OnComplete = "DesactivarLoader()" }))
             {
-            <input type="submit" value="Borrar" class="btn btn-default" id="btnInactivar" width="200" />
+                <input type="submit" value="Borrar" class="btn btn-danger" id="btnInactivar" width="200" />
             }
         </dd>
 

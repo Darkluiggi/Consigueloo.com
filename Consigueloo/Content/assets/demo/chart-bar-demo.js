@@ -11,12 +11,12 @@ function DrawBarChart(dataBar) {
     var myLineChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: ["January", "February", "March", "April", "May", "June"],
+            labels: dataBar.periodos,
             datasets: [{
-                label: "Revenue",
+                label: "Anuncios",
                 backgroundColor: "rgba(2,117,216,1)",
                 borderColor: "rgba(2,117,216,1)",
-                data: dataBar,
+                data: dataBar.datos,
             }],
         },
         options: {

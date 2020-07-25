@@ -1,29 +1,62 @@
 ﻿@model Model.ViewModel.UsuariosDTO
 
 <h3>Esta seguro de borrar esta información?</h3>
-<div>
-  <br/>
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.nombre)
-        </dt>
+<hr />
+<div class="row" style="padding:15px; margin-left:20px;">
+    <div class="col-md-4">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.nombre)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.nombre)
-        </dd>
+            <dd style="margin-bottom:20px">
+                @Html.DisplayFor(model => model.nombre)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.apellido)
+            </dt>
 
-       
-    </dl>
+            <dd style="margin-bottom:20px">
+                @Html.DisplayFor(model => model.apellido)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.correo)
+            </dt>
 
-    
-        <div class="form-actions no-color">
-            <input type="button" value="Borrar" class="btn btn-default" onclick="DeleteConfirmed(@Model.id)" /> 
-           
-        </div>
-    
-</div>
+            <dd style="margin-bottom:20px">
+                @Html.DisplayFor(model => model.correo)
+            </dd>
+            
+        </dl>
 
-<script>
+    </div>
+    <div class="col-md-4">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.ciudad)
+            </dt>
+
+            <dd style="margin-bottom:20px">
+                @Html.DisplayFor(model => model.ciudad)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.rol)
+            </dt>
+
+            <dd style="margin-bottom:20px">
+                @Html.DisplayFor(model => model.rol.nombre)
+            </dd>
+        </dl>
+    </div>
+
+            <div class="form-actions no-color">
+                <input type="button" value="Borrar" class="btn btn-danger" onclick="DeleteConfirmed(@Model.id)" />
+
+            </div>
+
+    </div>
+
+    <script>
     $(document).ready(function () {
         $('[data-toggle="tooltip"]').tooltip();
     });
@@ -46,4 +79,4 @@
             }
         });
     }
-</script>
+    </script>

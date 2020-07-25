@@ -1,7 +1,8 @@
 ﻿@model Model.ViewModel.CaracteristicasDTO
 
-<h4>Detalle de información de Razón Social</h4>
-<div class="row" style="padding:15px">
+<h4>Detalle de información de la característica</h4>
+<hr />
+<div class="row" style=" padding: 15px;margin-left:20px;">
     <div class="col-md-3">
         <dl class="dl-horizontal">
             <dt style="margin-bottom:20px">
@@ -13,26 +14,26 @@
             </dd>
         </dl>
     </div>
-        <dl class="dl-horizontal">
-            <dt>
+    <dl class="dl-horizontal">
+        <dt>
 
-                @using (Ajax.BeginForm("Edit", "Caracteristicas", new { id = Model.id }, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "dvcontent", OnBegin = "ActivarLoader()", OnComplete = "DesactivarLoader()" }))
-                {
-                    <input type="submit" value="Editar" class="btn btn-default" id="btnEditar" width="200" />
-                }
-                <br />
-            </dt>
-            <dd>
+            @using (Ajax.BeginForm("Edit", "Caracteristicas", new { id = Model.id }, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "dvcontent", OnBegin = "ActivarLoader()", OnComplete = "DesactivarLoader()" }))
+            {
+                <input type="submit" value="Editar" class="btn btn-primary" id="btnEditar" width="200" />
+            }
+            <br />
+        </dt>
+        <dd>
 
-                @using (Ajax.BeginForm("DeleteItem", "Caracteristicas", new { id = Model.id }, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "dvcontent", OnBegin = "ActivarLoader()", OnComplete = "DesactivarLoader()" }))
-                {
-                    <input type="submit" value="Borrar" class="btn btn-default" id="btnInactivar" width="200" />
-                }
-            </dd>
+            @using (Ajax.BeginForm("DeleteItem", "Caracteristicas", new { id = Model.id }, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "dvcontent", OnBegin = "ActivarLoader()", OnComplete = "DesactivarLoader()" }))
+            {
+                <input type="submit" value="Borrar" class="btn btn-danger" id="btnInactivar" width="200" />
+            }
+        </dd>
 
-        </dl>
-        <br />
-    </div>
+    </dl>
+    <br />
+</div>
 
 <script>
     $(document).ready(function () {

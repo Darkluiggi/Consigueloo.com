@@ -75,13 +75,6 @@ namespace Consigueloo.Areas.Administrador.Controllers
         }
 
 
-        // GET: ConfiguracionPlataforma/Configuracion/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: ConfiguracionPlataforma/Configuracion/Delete/5
 
         [HttpPost]
         // GET: ConfiguracionPlataforma/Configuracion/Details/5
@@ -118,14 +111,22 @@ namespace Consigueloo.Areas.Administrador.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditItem([Bind(Include = "id,nombre")] UsuariosDTO caracteristicass)
+        public ActionResult EditItem(string nombre, string apellido, string correo, string rol, string password, string confirmPassword)
         {
+            UsuariosDTO model = new UsuariosDTO();
+            model.nombre = nombre;
+            model.apellido = apellido;
+            model.correo = correo;
+            model.password = password;
+            model.confirmPassword = confirmPassword;
+
             if (ModelState.IsValid)
             {
-                caracteristicass = usuariosDAO.Update(caracteristicass);
-                return PartialView("Confirm", caracteristicass);
+                model = usuariosDAO.Update(model, rol);
+                return PartialView("Confirm", model);                
             }
-            return PartialView("Edit", caracteristicass);
+            return PartialView("Edit", model);
+
         }
 
         // GET: ConfiguracionEmpresa/RazonesSociales/Delete/5

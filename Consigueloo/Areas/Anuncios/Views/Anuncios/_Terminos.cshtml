@@ -36,6 +36,7 @@
     function aceptar(id) {
         console.log(id);
         ActivarLoader();
+
         $.ajax({
             type: "POST",
             url: '@Url.Action("Create", "Anuncios" , new { area = "Anuncios" })',

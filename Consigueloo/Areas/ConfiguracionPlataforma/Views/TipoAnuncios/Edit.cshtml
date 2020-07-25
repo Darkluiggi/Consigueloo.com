@@ -3,18 +3,18 @@
 <h4>Editar la información</h4>
 
 
-
+<h4>Tipo de anuncio</h4>
+<hr />
 @Html.ValidationSummary(true, "", new { @class = "text-info" })
-<div class="form-horizontal">
-    <h4>Tipo de anuncio</h4>
-    <hr />
+<div class="form-horizontal col-md-6">
+
     @Html.HiddenFor(model => model.id)
 
     <div class="form-group">
         @Html.LabelFor(model => model.nombre, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.DropDownList("nombreInput", (SelectList)ViewBag.NombreAnuncio, new { @class = "form-control", @onchange = "getCaracteristicas(value)" })
-           <p data-toggle="tooltip" title="Tipo de anuncio registrado" class="glyphicon glyphicon-info-sign" style="color:#949599;"></p>
+            <p data-toggle="tooltip" title="Tipo de anuncio registrado" class="fas fa-info-circle" style="color:#949599;"></p>
             @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-info" })
         </div>
     </div>
@@ -22,7 +22,7 @@
         @Html.LabelFor(model => model.duracion, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.DropDownList("duracionInput", (SelectList)ViewBag.Periodos, new { @class = "form-control" })
-            <p data-toggle="tooltip" title="Duración de anuncio registrada" class="glyphicon glyphicon-info-sign" style="color:#949599;"></p>
+            <p data-toggle="tooltip" title="Duración de anuncio registrada" class="fas fa-info-circle" style="color:#949599;"></p>
             @Html.ValidationMessageFor(model => model.duracion, "", new { @class = "text-info" })
         </div>
     </div>
@@ -30,7 +30,7 @@
         @Html.LabelFor(model => model.precio, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.precio, new { htmlAttributes = new { @class = "form-control" } })
-            <p data-toggle="tooltip" title="Precio de anuncio registrado" class="glyphicon glyphicon-info-sign" style="color:#949599;"></p>
+            <p data-toggle="tooltip" title="Precio de anuncio registrado" class="fas fa-info-circle" style="color:#949599;"></p>
             @Html.ValidationMessageFor(model => model.precio, "", new { @class = "text-info" })
         </div>
     </div>
@@ -50,5 +50,5 @@
         $('[data-toggle="tooltip"]').tooltip();
     });
 
-    
+
 </script>

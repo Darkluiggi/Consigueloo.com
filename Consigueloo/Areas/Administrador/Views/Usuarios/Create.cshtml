@@ -17,21 +17,21 @@
                 @Html.LabelFor(model => model.nombre, htmlAttributes: new { @class = "control-label col-md-3" })
                 <div class="col-md-9">
                     @Html.EditorFor(model => model.nombre, new { htmlAttributes = new { @class = "form-control" , id = "nombreInput" } })
-                    <p data-toggle="tooltip" title="Registre el nombre del usuario " class="glyphicon glyphicon-info-sign" style="color:#949599;"></p> @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-info" })
+                    <p data-toggle="tooltip" title="Registre el nombre del usuario " class="fas fa-info-circle" style="color:#949599;"></p> @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-info" })
                 </div>
             </div>
             <div class="form-group">
                 @Html.LabelFor(model => model.apellido, htmlAttributes: new { @class = "control-label col-md-3" })
                 <div class="col-md-9">
                     @Html.EditorFor(model => model.apellido, new { htmlAttributes = new { @class = "form-control" , id = "apellidoInput" } })
-                    <p data-toggle="tooltip" title="Registre el apellido del usuario" class="glyphicon glyphicon-info-sign" style="color:#949599;"></p> @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-info" })
+                    <p data-toggle="tooltip" title="Registre el apellido del usuario" class="fas fa-info-circle" style="color:#949599;"></p> @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-info" })
                 </div>
             </div>
             <div class="form-group">
                 @Html.LabelFor(model => model.correo, htmlAttributes: new { @class = "control-label col-md-3" })
                 <div class="col-md-9">
                     @Html.EditorFor(model => model.correo, new { htmlAttributes = new { @class = "form-control", id = "correoInput" } })
-                    <p data-toggle="tooltip" title="Registre el correo" class="glyphicon glyphicon-info-sign" style="color:#949599;"></p> @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-info" })
+                    <p data-toggle="tooltip" title="Registre el correo" class="fas fa-info-circle" style="color:#949599;"></p> @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-info" })
                 </div>
             </div>
         </div>
@@ -42,29 +42,29 @@
 
                     @Html.DropDownList("rolInput", (SelectList)ViewBag.Roles, new { @class = "form-control" })
                     @*@Html.EditorFor(model => model.rol, new { htmlAttributes = new { @class = "form-control" } })*@
-                    <p data-toggle="tooltip" title="Seleccione el rol de usuario" class="glyphicon glyphicon-info-sign" style="color:#949599;"></p> @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-info" })
+                    <p data-toggle="tooltip" title="Seleccione el rol de usuario" class="fas fa-info-circle" style="color:#949599;"></p> @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-info" })
                 </div>
             </div>
             <div class="form-group">
                 @Html.LabelFor(model => model.password, htmlAttributes: new { @class = "control-label col-md-3" })
                 <div class="col-md-9">
-                    @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control", id = "passwordInput" } })
-                    <p data-toggle="tooltip" title="Registrela contraseña" class="glyphicon glyphicon-info-sign" style="color:#949599;"></p> @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-info" })
+                    @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control", id = "passwordInput", type = "password" } })
+                    <p data-toggle="tooltip" title="Registre la contraseña" class="fas fa-info-circle" style="color:#949599;"></p> @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-info" })
                 </div>
             </div>
 
             <div class="form-group">
                 @Html.LabelFor(model => model.confirmPassword, htmlAttributes: new { @class = "control-label col-md-3" })
                 <div class="col-md-9">
-                    @Html.EditorFor(model => model.confirmPassword, new { htmlAttributes = new { @class = "form-control", id = "confirmPasswordInput" } })
-                    <p data-toggle="tooltip" title="Confirme la contraseña" class="glyphicon glyphicon-info-sign" style="color:#949599;"></p>
+                    @Html.EditorFor(model => model.confirmPassword, new { htmlAttributes = new { @class = "form-control", id = "confirmPasswordInput" , type="password" } })
+                    <p data-toggle="tooltip" title="Confirme la contraseña" class="fas fa-info-circle" style="color:#949599;"></p>
                     @Html.ValidationMessageFor(model => model.confirmPassword, "", new { @class = "text-info" })
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="button" value="Crear" class="btn btn-default" onclick="createNew()" />
+                    <input type="button" value="Crear" class="btn btn-primary" onclick="createNew()" />
                 </div>
             </div>
 

@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<Model.ViewModel.AnuncioDTO>
 
-    <h4 class="color-blue3 margin-top2">ANUNCIOS DESTACADOS</h4>
+    <h4 class="color-blue3 margin-top2" style="text-align:center">ANUNCIOS DESTACADOS</h4>
     <div id="render-ads " class="container-fluid div-destacados pad-top">
         
         <div class="row2 ">
@@ -8,19 +8,11 @@
             {
                 <div class="col-lg-4 mb-4">
                     <div class="card-destacados  ">
-                            <a class="destacados" href="#" style="background-image:url(@item.path)">
+                            <a class="destacados" href="@Url.Action("Anuncio", "Anuncios", new { id= item.id, area = "Anuncios" })" style="background-image:url(@item.path)">
                                 <span class="fas fa-star color-gold"></span>
                             </a>
-                            
-                       
                     </div>                        
                           
-                           
-                       
-                        @*<a href="#"><img class="card-img-top" src="@item.path" alt="">
-        <span class="fas fa-star-0 color-gold"></span>
-        </a>*@
-
                     
                 </div>
 
@@ -69,3 +61,4 @@
        
     
     </script>
+    

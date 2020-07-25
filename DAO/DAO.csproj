@@ -50,6 +50,7 @@
     <Compile Include="AnunciosDAO.cs" />
     <Compile Include="CategoriasDAO.cs" />
     <Compile Include="AnuncioTrabajoDAO.cs" />
+    <Compile Include="NotificacionesDAO.cs" />
     <Compile Include="RolesDAO.cs" />
     <Compile Include="NombreAnunciosDAO.cs" />
     <Compile Include="DropDownDAO.cs" />

@@ -1,8 +1,9 @@
 ﻿@model Model.ViewModel.CategoriasDTO
 
 <h3>Esta seguro de borrar esta información?</h3>
+<hr />
 <div>
-  <br/>
+
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.nombre)
@@ -12,15 +13,15 @@
             @Html.DisplayFor(model => model.nombre)
         </dd>
 
-       
+
     </dl>
 
-    
-        <div class="form-actions no-color">
-            <input type="button" value="Borrar" class="btn btn-default" onclick="DeleteConfirmed(@Model.id)" /> 
-           
-        </div>
-    
+
+    <div class="form-actions no-color">
+        <input type="button" value="Borrar" class="btn btn-default" onclick="DeleteConfirmed(@Model.id)" />
+
+    </div>
+
 </div>
 
 <script>

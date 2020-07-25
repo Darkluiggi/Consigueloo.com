@@ -1,29 +1,43 @@
 ﻿@model Model.ViewModel.TipoAnunciosDTO
 
 <h3>Esta seguro de borrar esta información?</h3>
-<div>
-  <br/>
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.nombre)
-        </dt>
+<hr />
+<div class="row" style="padding:15px; margin-left:20px;">
+    <div class="col-md-4">
+        <dl class="dl-horizontal">
+            <dt >
+                @Html.DisplayNameFor(model => model.nombre)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.nombre)
-        </dd>
+            <dd style="margin-bottom:20px">
+                @Html.DisplayFor(model => model.nombre.nombre)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.duracion)
+            </dt>
 
-       
-    </dl>
+            <dd style="margin-bottom:20px">
+                @Html.DisplayFor(model => model.duracion)
+            </dd>
 
-    
-        <div class="form-actions no-color">
-            <input type="button" value="Borrar" class="btn btn-default" onclick="DeleteConfirmed(@Model.id)" /> 
-           
-        </div>
-    
+            <dt>
+                @Html.DisplayNameFor(model => model.precio)
+            </dt>
+
+            <dd style="margin-bottom:20px">
+                @Html.DisplayFor(model => model.precio)
+            </dd>
+        </dl>
+
 </div>
+        <div class="form-actions no-color">
+            <input type="button" value="Borrar" class="btn btn-danger" onclick="DeleteConfirmed(@Model.id)" />
 
-<script>
+        </div>
+
+    </div>
+
+    <script>
     $(document).ready(function () {
         $('[data-toggle="tooltip"]').tooltip();
     });
@@ -46,4 +60,4 @@
             }
         });
     }
-</script>
+    </script>

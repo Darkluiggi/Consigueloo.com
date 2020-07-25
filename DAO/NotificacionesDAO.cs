@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Helpers.InfoMensajes;
+using Model.Anuncios;
 using Model.ConfiguraciónPlataforma;
 using Model.ViewModel;
 using Persistence;
@@ -13,34 +14,34 @@ using System.Web.Mvc;
 
 namespace DAO
 {
-    public class PeriodosDAO
+    public class NotificacionesDAO
     {
         ApplicationDbContext db;
         Controller controller;
-        private const string entidad = "Periodo";
+        private const string entidad = "Notificacion";
 
-        public PeriodosDAO(Controller controller)
+        public NotificacionesDAO(Controller controller)
         {
             db = new ApplicationDbContext();
             this.controller = controller;
         }
             
 
-        public List<PeriodosDTO> getList()
+        public List<NotificacionDTO> getList()
         {
             try
             {
-                List<Periodos> periodosModel = db.PeriodoAnuncios.Where(x => x.estado == true).ToList();
-                List<PeriodosDTO> responseList = new List<PeriodosDTO>(); ;
+                List<Notificacion> notificacionsModel = db.Notificaciones.Where(x => x.estado == true).ToList();
+                List<NotificacionDTO> responseList = new List<NotificacionDTO>(); ;
                 var config = new MapperConfiguration(cfg => {
-                    cfg.CreateMap<Periodos, PeriodosDTO>();
+                    cfg.CreateMap<Notificacion, NotificacionDTO>();
                 });
 
                 IMapper mapper = config.CreateMapper();
                 //Mapeo de clase
-                periodosModel.ForEach(x =>
+                notificacionsModel.ForEach(x =>
                 {
-                    PeriodosDTO response = mapper.Map<Periodos, PeriodosDTO>(x);
+                    NotificacionDTO response = mapper.Map<Notificacion, NotificacionDTO>(x);
                     responseList.Add(response);
                 });
                 return responseList;         
@@ -53,22 +54,22 @@ namespace DAO
             }
         }
 
-        public void Add(PeriodosDTO periodo)
+        public void Add(NotificacionDTO notificacion)
         {
             try
             {
                 var config = new MapperConfiguration(cfg =>
                 {
-                    cfg.CreateMap<PeriodosDTO, Periodos>();
+                    cfg.CreateMap<NotificacionDTO, Notificacion>();
                 });
 
                 IMapper mapper = config.CreateMapper();
                 //Mapeo de clase
 
-                Periodos response = mapper.Map<PeriodosDTO, Periodos>(periodo);
-                db.PeriodoAnuncios.Add(response);
+                Notificacion response = mapper.Map<NotificacionDTO, Notificacion>(notificacion);
+                db.Notificaciones.Add(response);
                 db.SaveChanges();
-                ViewInfoMensaje.setMensaje(controller, MensajeBuilder.CrearMsgSuccess(entidad), Helpers.InfoMensajes.ConstantsLevels.SUCCESS);
+                
             }
 
             catch (Exception)
@@ -78,19 +79,19 @@ namespace DAO
             }
         }
 
-        public PeriodosDTO Find(int? id)
+        public NotificacionDTO Find(int? id)
         {
             try
             {
                 var config = new MapperConfiguration(cfg =>
                 {
-                    cfg.CreateMap<Periodos, PeriodosDTO>();
+                    cfg.CreateMap<Notificacion, NotificacionDTO>();
                 });
 
                 IMapper mapper = config.CreateMapper();
                 //Mapeo de clase
-                Periodos model = db.PeriodoAnuncios.Find(id);
-                PeriodosDTO response = mapper.Map<Periodos, PeriodosDTO>(model);
+                Notificacion model = db.Notificaciones.Find(id);
+                NotificacionDTO response = mapper.Map<Notificacion, NotificacionDTO>(model);
                 return response;
             }
             catch (Exception)
@@ -100,29 +101,29 @@ namespace DAO
             }
         }
 
-        public PeriodosDTO Update(PeriodosDTO periodos)
+        public NotificacionDTO Update(NotificacionDTO notificacions)
         {
             try
             {
                 var config = new MapperConfiguration(cfg => {
-                    cfg.CreateMap<PeriodosDTO, Periodos>();
+                    cfg.CreateMap<NotificacionDTO, Notificacion>();
                 });
                 IMapper mapper = config.CreateMapper();
-                Periodos periodosModel = mapper.Map<PeriodosDTO, Periodos>(periodos);
+                Notificacion notificacionsModel = mapper.Map<NotificacionDTO, Notificacion>(notificacions);
 
-                db.Entry(periodosModel).State = EntityState.Modified;
+                db.Entry(notificacionsModel).State = EntityState.Modified;
                 db.SaveChanges();
 
-                periodos = this.Find(periodos.id);
+                notificacions = this.Find(notificacions.id);
 
-                ViewInfoMensaje.setMensaje(controller, MensajeBuilder.EditarMsgSuccess(entidad), Helpers.InfoMensajes.ConstantsLevels.SUCCESS);
-                return periodos;
+                
+                return notificacions;
 
             }
             catch (Exception)
             {
-                ViewInfoMensaje.setMensaje(controller, MensajeBuilder.EditarMsgError(entidad), Helpers.InfoMensajes.ConstantsLevels.ERROR);
-                return periodos;
+                
+                return notificacions;
             }
         }
 
@@ -130,15 +131,15 @@ namespace DAO
         {
             try
             {
-                Periodos razonsocial = db.PeriodoAnuncios.Find(id);
+                Notificacion razonsocial = db.Notificaciones.Find(id);
                 razonsocial.estado = false;
                 db.Entry(razonsocial).State = EntityState.Modified;
                 db.SaveChanges();
-                ViewInfoMensaje.setMensaje(controller, MensajeBuilder.BorrarMsgSuccess(entidad), Helpers.InfoMensajes.ConstantsLevels.SUCCESS);
+                
             }
             catch (Exception)
             {
-                ViewInfoMensaje.setMensaje(controller, MensajeBuilder.BorrarMsgError(entidad), Helpers.InfoMensajes.ConstantsLevels.ERROR);
+                
             }
         }
 

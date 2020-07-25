@@ -16,9 +16,8 @@
 </div>
 
 <script type="text/javascript" charset="UTF-8">
-    @*$(document).ready(function() {
-        if ("@ViewBag.message.length" > 0) {
-            console.log("@ViewBag.message.length");
+   $(document).ready(function() {
+        if ("!@string.IsNullOrEmpty(ViewBag.message)") {
             $.notify.defaults({ className: "@ViewBag.level" });
             $.notify(
                 "@Html.Raw(ViewBag.message)",
@@ -27,8 +26,7 @@
                 }
             );
       }
-    });*@
-
+    });
     $('#mdlCtrl').on('hidden.bs.modal', function () {
         var url = $("#RedirectTo").val();
         ActivarLoader();

@@ -29,7 +29,7 @@ namespace DAO
             dateHelper = new DateHelper();
         }
 
-        public void GuardarAnuncio(AnuncioDTO anuncio, string categoria, string duracion)
+        public void GuardarAnuncio(AnuncioDTO anuncio, string categoria, string duracion, string localidad)
         {
             try
             {
@@ -37,6 +37,9 @@ namespace DAO
                 CategoriasDTO cat = categoriasDAO.Find(categoriaId);
                 anuncio.categoria = cat;
                 anuncio.fechaActivacion = DateTime.Today;
+                int localidadId = Int32.Parse(localidad);
+                LocalidadesDTO loc = localidadesDAO.Find(localidadId);
+                anuncio.localidad=loc;
                 anuncio.fechaCancelacion = anuncio.fechaActivacion.AddDays(60);
                 
                 Anuncio anuncioModel = new Anuncio();
@@ -53,6 +56,7 @@ namespace DAO
 
                 anuncioModel.actCatalogo = anuncio.actCatalogo;
                 anuncioModel.categoria = db.Categorias.Find(anuncio.categoria.id);
+                anuncioModel.localidad = db.Localidades.Find(anuncio.localidad.id);
 
                 db.Anuncios.Add(anuncioModel);
                 db.SaveChanges();
@@ -133,7 +137,7 @@ namespace DAO
                         anuncioModel.fechaCancelacion = item.fechaCancelacion;
                         anuncioModel.categoria = categoriasDAO.Find(item.categoriaId);
                         anuncioModel.categoriaId = item.categoriaId;
-
+                        anuncioModel.localidadId = item.localidadId;
                         anuncios.Add(anuncioModel);
                     }
                 }
@@ -237,7 +241,7 @@ namespace DAO
             try
             {
                 string month=dateHelper.stringToMonth(Mes); 
-                string result= Mes + " " + día;
+                string result= month + " " + día;
 
                 return result;
 
@@ -263,7 +267,8 @@ namespace DAO
                     DateTime fechaResultado = today.AddMonths (-i);
                     var model = anuncios.Where(x => x.fechaActivacion.Month == fechaResultado.Month).ToList();
                     result.datos.Add(model.Count.ToString());
-                    result.periodos.Add(fechaResultado.Month.ToString());
+                    string Mes = dateHelper.stringToMonth(fechaResultado.Month.ToString()); 
+                    result.periodos.Add(Mes);
                 }
 
 

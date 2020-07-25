@@ -1,7 +1,8 @@
 ﻿@model Model.ViewModel.UsuariosDTO
 
 @Html.Hidden("RedirectTo", Url.Action("Index", "Usuarios"))
-<h4>Detalle de información de Razón Social</h4>
+<h4>Detalle de información de Usuario</h4>
+<hr />
 <div class="box" style="padding:15px">
     <dl class="dl-horizontal">
         <dt>
@@ -42,9 +43,8 @@
 </div>
 
 <script type="text/javascript" charset="UTF-8">
-    @*$(document).ready(function() {
-        if ("@ViewBag.message.length" > 0) {
-            console.log("@ViewBag.message.length");
+  $(document).ready(function() {
+        if ("!@string.IsNullOrEmpty(ViewBag.message)") {
             $.notify.defaults({ className: "@ViewBag.level" });
             $.notify(
                 "@Html.Raw(ViewBag.message)",
@@ -53,7 +53,7 @@
                 }
             );
       }
-    });*@
+    });
 
     $('#mdlCtrl').on('hidden.bs.modal', function () {
         var url = $("#RedirectTo").val();

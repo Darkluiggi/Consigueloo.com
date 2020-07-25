@@ -66,8 +66,10 @@ namespace DAO
                 //Mapeo de clase
 
                 Localidades response = mapper.Map<LocalidadesDTO, Localidades>(periodo);
+
                 db.Localidades.Add(response);
                 db.SaveChanges();
+                ViewInfoMensaje.setMensaje(controller, MensajeBuilder.CrearMsgSuccess(entidad), Helpers.InfoMensajes.ConstantsLevels.SUCCESS);
             }
 
             catch (Exception)

@@ -82,6 +82,7 @@ namespace DAO
                     .Include(x=>x.noIncluidas).FirstOrDefault(x=>x.id==tipoAnuncio.nombre.id);
                 db.TiposAnuncio.Add(response);
                 db.SaveChanges();
+                ViewInfoMensaje.setMensaje(controller, MensajeBuilder.CrearMsgSuccess(entidad), Helpers.InfoMensajes.ConstantsLevels.SUCCESS);
                 return tipoAnuncio;
             }
 

@@ -25,11 +25,11 @@
 
 <script>
     function filterCategorias(id) {
-        console.log(id);
+        ActivarLoader();
              $.ajax(
             {
                 type: "POST",
-                url: '@Url.Action("FilterCategorias", "Anuncios", new { area = "Anuncios" })',
+                url: '@Url.Action("FilterByCategory", "Anuncios", new { area = "Anuncios" })',
                 datatype: "html",
                 contentType: 'application/json',
                 data: JSON.stringify({"id":id}),
@@ -37,6 +37,7 @@
                          var newDoc = document.open("text/html", "replace");
                          newDoc.write(res);
                          newDoc.close();
+                         DesactivarLoader();
                          //document.write(res);
                 }
 

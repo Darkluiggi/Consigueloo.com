@@ -1,38 +1,117 @@
 ﻿@model Model.ViewModel.UsuariosDTO
 <h4>Editar la información</h4>
 
-@using (Ajax.BeginForm("EditItem", "Usuarios", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "dvcontent", OnBegin = "ActivarLoader()", OnComplete = "DesactivarLoader()" }))
-{
+
     @Html.AntiForgeryToken()
-    
-<div class="form-horizontal">
-    <h4>Razon Social</h4>
+    <h4>Usuario</h4>
     <hr />
+
     @Html.ValidationSummary(true, "", new { @class = "text-info" })
     @Html.HiddenFor(model => model.id)
+    <div class="row">
+        <div class="form-horizontal col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(model => model.nombre, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.nombre, new { htmlAttributes = new { @class = "form-control", id = "nombreInput" } })
+                    <p data-toggle="tooltip" title="Nombre registrado" class="fas fa-info-circle" style="color:#949599;"></p> @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-info" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.apellido, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.apellido, new { htmlAttributes = new { @class = "form-control", id = "apellidoInput" } })
+                    <p data-toggle="tooltip" title="Apellido registrado" class="fas fa-info-circle" style="color:#949599;"></p> @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-info" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.correo, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.correo, new { htmlAttributes = new { @class = "form-control", id = "correoInput" } })
+                    <p data-toggle="tooltip" title="Correo registrado" class="fas fa-info-circle" style="color:#949599;"></p> @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-info" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.ciudad, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ciudad, new { htmlAttributes = new { @class = "form-control", id = "ciudadInput" } })
+                    <p data-toggle="tooltip" title="Ciudad registrada" class="fas fa-info-circle" style="color:#949599;"></p> @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-info" })
+                </div>
+            </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.nombre, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.nombre, new { htmlAttributes = new { @class = "form-control" } })
-            <p data-toggle="tooltip" title="Localidad registrada" class="glyphicon glyphicon-info-sign" style="color:#949599;"></p> @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-info" })
+        </div>
+        <div class="form-horizontal col-md-6">
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.rol, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("rolInput", (SelectList)ViewBag.Roles, new { @class = "form-control" })
+                    <p data-toggle="tooltip" title="Rol registrado" class="fas fa-info-circle" style="color:#949599;"></p> @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-info" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.password, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control", id = "ciudadInput", type = "password" } })
+                    <p data-toggle="tooltip" title="Contraseña registrada" class="fas fa-info-circle" style="color:#949599;"></p> @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-info" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.confirmPassword, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.confirmPassword, new { htmlAttributes = new { @class = "form-control", id = "ciudadInput", type="password" } })
+                    <p data-toggle="tooltip" title="Confirme la contraseña" class="fas fa-info-circle" style="color:#949599;"></p>
+                    @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-info" })
+                </div>
+            </div>
         </div>
     </div>
-
-   
-       
-    
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Guardar" class="btn btn-default" />
+        <div class="form-group coml-md-6">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="button" value="Guardar" class="btn btn-primary" onclick="editItem()" />
+            </div>        
         </div>
-    </div>
-</div>
-}
+
 
 <script>
     $(document).ready(function () {
         $('[data-toggle="tooltip"]').tooltip();
     });
+</script>
+
+<script>
+    function editItem() {
+        var rolModel = document.getElementById("rolInput");
+        var rol = rolModel.value;
+        var nombreModel = document.getElementById("nombreInput");
+        var nombre = nombreModel.value;
+        var apellidoModel = document.getElementById("apellidoInput");
+        var apellido = apellidoModel.value;
+        var correoModel = document.getElementById("correoInput");
+        var correo = correoModel.value;
+        var passwordModel = document.getElementById("passwordInput");
+        var password = passwordModel.value;
+        var confirmPasswordModel = document.getElementById("confirmPasswordInput");
+        var confirmPassword = confirmPasswordModel.value;
+        console.log(nombre);
+        console.log(apellido);
+
+         $.ajax({
+            type: "POST",
+             url: '@Url.Action("EditItem", "Usuarios")',
+            datatype: "json",
+             contentType: 'application/json',
+             data: JSON.stringify({ "rol": rol, "nombre": nombre, "apellido": apellido, "correo": correo, "password": password, "confirmPassword": confirmPassword }),
+            success: function (r) {
+                $("#dvcontent").html(r);
+                DesactivarLoader();
+            },
+            error: function (r) {
+                $("#dvcontent").html(r);
+                DesactivarLoader();
+            }
+        });
+    }
+
+
 </script>

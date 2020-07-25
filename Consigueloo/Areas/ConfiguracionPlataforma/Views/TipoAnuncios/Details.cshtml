@@ -2,6 +2,7 @@
 
     <div class="container">
         <h4>Detalle del tipo de anuncio</h4>
+        <hr />
         <div class="row" style="padding:15px">
             <div class="col-md-3">
                 <dl class="dl-horizontal">
@@ -50,7 +51,7 @@
 
                         @using (Ajax.BeginForm("DeleteItem", "TipoAnuncios", new { id = Model.id }, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "dvcontent", OnBegin = "ActivarLoader()", OnComplete = "DesactivarLoader()" }))
                         {
-                            <input type="submit" value="Borrar" class="btn btn-primary" id="btnInactivar" width="200" />
+                            <input type="submit" value="Borrar" class="btn btn-danger" id="btnInactivar" width="200" />
                         }
                     </dd>
 

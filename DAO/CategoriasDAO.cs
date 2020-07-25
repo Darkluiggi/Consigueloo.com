@@ -72,7 +72,7 @@ namespace DAO
                 IMapper mapper = config.CreateMapper();
                 //Mapeo de clase
                 Categorias anunciolModel = mapper.Map<CategoriasDTO, Categorias>(categoria);
-
+                ViewInfoMensaje.setMensaje(controller, MensajeBuilder.CrearMsgSuccess(entidad), ConstantsLevels.SUCCESS);
 
                 db.Categorias.Add(anunciolModel);
                 db.SaveChanges();

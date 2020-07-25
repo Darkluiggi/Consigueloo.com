@@ -84,8 +84,8 @@ namespace DAO
                     });
                 });
                 model.noIncluidas = caracteristicas.Except(model.caracteristicas).ToList();
-                var remove = model.noIncluidas.FirstOrDefault(x => x.nombre.Equals("Imagen"));
-                model.noIncluidas.Remove(remove);
+                //var remove = model.noIncluidas.FirstOrDefault(x => x.nombre.Equals("Imagen"));
+                //model.noIncluidas.Remove(remove);
                 //Mapeo de clase
 
                 NombreAnuncios response = new NombreAnuncios();
@@ -107,6 +107,7 @@ namespace DAO
                 });
                 db.NombreAnuncios.Add(response);
                 db.SaveChanges();
+                ViewInfoMensaje.setMensaje(controller, MensajeBuilder.CrearMsgSuccess(entidad), Helpers.InfoMensajes.ConstantsLevels.SUCCESS);
                 return model;
             }
 

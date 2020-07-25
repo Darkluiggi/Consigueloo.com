@@ -1,0 +1,52 @@
+﻿@model Model.ViewModel.AnuncioDTO
+
+@{
+    ViewBag.Title = "Anuncio";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+    <div class="container-fluid">
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+        <!-- Portfolio Item Heading -->
+        <h1 class="my-4 color-blue3">
+            @Model.titulo
+            @*<small>Secondary Text</small>*@
+        </h1>
+
+
+        <!-- Portfolio Item Row -->
+        <div class="row margin-bot">
+
+            <div class="col-image-12 anuncio-image ">
+                <img src="@Model.path" alt="">
+            </div>
+
+            <div class="col-md-6">
+                <h3 class="my-3 color-blue3">Descripción</h3>
+
+                <p>@Model.descripcion</p>
+            </div>
+
+            <div class="col-md-6">
+                <h3 class="my-3 color-blue3">Contacto</h3>
+                <div class="row">
+                    <div class="icon-card3 "><img src="~/Content/assets/Iconos/llamadas.png" /> </div>
+                    <p class="card-text">@Model.telefono</p>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="icon-card3 "><img src="~/Content/assets/Iconos/whatsapp.png" /> </div>
+                    <p class="card-text">@Model.celularContacto</p>
+                </div>  <br />
+                <p class="card-text">@Model.nombreContacto</p>
+                @if (Model.actCatalogo == true)
+                {
+                    <div class="flex-end">
+                        <a href="#" class="navbar-link float-right  ">Catálogo</a>
+                    </div>
+                }
+            </div>
+
+        </div>
+    </div>

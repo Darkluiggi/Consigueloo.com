@@ -26,6 +26,7 @@ namespace Persistence
         public DbSet<Model.Usuarios.Roles> Roles { get; set; }
         public DbSet<Model.Usuarios.Usuarios> Usuarios { get; set; }
         public DbSet<Model.Anuncios.Anuncio> Anuncios { get; set; }
+        public DbSet<Model.Anuncios.Notificacion> Notificaciones { get; set; }
         public DbSet<Model.Anuncios.Catalogo> Catalogos { get; set; }
         public DbSet<TipoAnuncios> TiposAnuncio { get; set; }
         public DbSet<Periodos> PeriodoAnuncios { get; set; }

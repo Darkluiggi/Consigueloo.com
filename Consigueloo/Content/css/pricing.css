@@ -972,3 +972,100 @@ a {
     .price-title h1 {
         font-size: 2.5rem;
     }
+
+@media (min-width: 299px) {
+    .price-header {
+        width: 100%;
+        
+    }
+
+        .price-title h1 {
+            font-size: 1.8rem;
+        }
+    .c-switch button {
+        position: relative;
+        padding: 0.875em 1em;
+        font-weight: bold;
+        font-size: 0.9rem;
+    }
+    .pricing-header h2 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+        margin-top: 10px;
+    }
+    .exclusive .pricing-wrapper > li {
+        background-color: #53c995;
+    }
+    .exclusive .select {
+        background-color: #1bbc9d;
+        color: #ffffff;
+    }
+}
+
+@media (min-width: 567px) {
+    .price-header {
+        width: 65%;
+    }
+    
+
+        .price-title h1 {
+            font-size: 2rem;
+        }
+    .value {
+        font-size: 2.5rem;
+        font-weight: 300;
+    }
+    .exclusive .pricing-wrapper > li {
+        background-color: #53c995;
+    }
+    .exclusive .select {
+        background-color: #1bbc9d;
+        color: #ffffff;
+    }
+}
+
+@media (min-width: 768px) {
+    .price-header {
+        width: 45%;
+       
+    }
+  
+
+        .price-title h1 {
+            font-size: 2rem;
+        }
+    .pricing-header h2 {
+        font-size: 1.1rem;
+        margin-bottom: 20px;
+        margin-top: 10px;
+    }
+    
+    .value {
+        font-size: 2.5rem;
+        font-weight: 300;
+    }
+
+}
+
+@media (min-width: 996px) {
+    .price-header {
+        width: 40%;
+    }
+ 
+
+        .price-title h1 {
+            font-size: 2.2rem;
+        }
+}
+
+@media (min-width: 1200px) {
+    .price-header {
+        width: 40%;
+    }
+
+  
+
+        .price-title h1 {
+            font-size: 2.3rem;
+        }
+}

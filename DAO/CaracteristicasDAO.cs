@@ -68,6 +68,7 @@ namespace DAO
                 //Mapeo de clase
 
                 Caracteristicas response = mapper.Map<CaracteristicasDTO, Caracteristicas>(caracteristica);
+                ViewInfoMensaje.setMensaje(controller, MensajeBuilder.CrearMsgSuccess(entidad), ConstantsLevels.SUCCESS);
                 db.Caracteristicas.Add(response);
                 db.SaveChanges();
             }

@@ -4,17 +4,17 @@
     ViewBag.Title = "Error";
 }
 
-    <div class="main-container">
-        <h1 class="text-danger">Error.</h1>
+    <div class="info-container">
+        <h3 class="text-danger">Error.</h3>
 
         @{
             if (String.IsNullOrEmpty(ViewBag.errorMessage))
             {
-                <h2 class="text-danger">Error al procesar la solicitud.</h2>
+                <h4 class="text-dark">Página no accesible.</h4>
             }
             else
             {
-                <h2 class="text-danger">@ViewBag.errorMessage</h2>
+                <h4 class="text-dark">@ViewBag.errorMessage</h4>
             }
         }
     </div>

@@ -1,41 +1,72 @@
 ﻿@model Model.ViewModel.UsuariosDTO
 
-<h4>Detalle de información de Razón Social</h4>
-<div class="row" style="padding:15px">
+<h4>Detalle de información de Usuario</h4>
+<hr />
+<div class="row" style="padding:15px; margin-left:10px;">
     <div class="col-md-3">
         <dl class="dl-horizontal">
-            <dt style="margin-bottom:20px">
+            <dt>
                 @Html.DisplayNameFor(model => model.nombre)
             </dt>
 
             <dd>
                 @Html.DisplayFor(model => model.nombre)
             </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.apellido)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.apellido)
+            </dd>
+
+
         </dl>
     </div>
-    <dl class="dl-horizontal">
-        <dt>
+    <div class="col-md-3">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.correo)
+            </dt>
 
-            @using(Ajax.BeginForm("Edit", "Usuarios", new { id = Model.id }, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "dvcontent", OnBegin = "ActivarLoader()", OnComplete = "DesactivarLoader()" }))
-            {
-            <input type="submit" value="Editar" class="btn btn-default" id="btnEditar" width="200" />
-            }
-            <br />
-        </dt>
-        <dd>
+            <dd>
+                @Html.DisplayFor(model => model.correo)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.rol)
+            </dt>
 
-            @using(Ajax.BeginForm("DeleteItem", "Usuarios", new { id = Model.id }, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "dvcontent", OnBegin = "ActivarLoader()", OnComplete = "DesactivarLoader()" }))
-            {
-            <input type="submit" value="Borrar" class="btn btn-default" id="btnInactivar" width="200" />
-            }
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.rol.nombre)
+            </dd>
 
-    </dl>
-    <br />
-</div>
 
-<script>
-    $(document).ready(function () {
-        $('[data-toggle="tooltip"]').tooltip();
-    });
-</script>
+        </dl>
+    </div>
+    <div class="col-md-3">
+        <dl class="dl-horizontal">
+            <dt>
+
+                @using (Ajax.BeginForm("Edit", "Usuarios", new { id = Model.id }, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "dvcontent", OnBegin = "ActivarLoader()", OnComplete = "DesactivarLoader()" }))
+                {
+                    <input type="submit" value="Editar" class="btn btn-primary" id="btnEditar" width="200" />
+                }
+                <br />
+            </dt>
+            <dd>
+
+                @using (Ajax.BeginForm("DeleteItem", "Usuarios", new { id = Model.id }, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "dvcontent", OnBegin = "ActivarLoader()", OnComplete = "DesactivarLoader()" }))
+                {
+                    <input type="submit" value="Borrar" class="btn btn-danger" id="btnInactivar" width="200" />
+                }
+            </dd>
+
+        </dl>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>

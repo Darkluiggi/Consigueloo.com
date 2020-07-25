@@ -7,26 +7,23 @@
     @Html.AntiForgeryToken()
     
 <div class="form-horizontal">
-    <h4>Razon Social</h4>
+    <h4>Periodo</h4>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-info" })
     @Html.HiddenFor(model => model.id)
 
-    <div class="form-group">
+    <div class="form-group col-md-6">
         @Html.LabelFor(model => model.nombre, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.nombre, new { htmlAttributes = new { @class = "form-control" } })
-            <p data-toggle="tooltip" title="Razón social registrada" class="glyphicon glyphicon-info-sign" style="color:#949599;"></p> @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-info" })
+            <p data-toggle="tooltip" title="Periodo registrado" class="fas fa-info-circle" style="color:#949599;"></p> @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-info" })
         </div>
     </div>
 
-   
-       
-    
 
-    <div class="form-group">
+    <div class="form-group col-md-6">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Guardar" class="btn btn-default" />
+            <input type="submit" value="Guardar" class="btn btn-primary" />
         </div>
     </div>
 </div>

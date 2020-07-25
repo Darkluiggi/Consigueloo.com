@@ -32,6 +32,7 @@ namespace Consigueloo.Areas.ConfiguracionPlataforma.Controllers
                     return View(response);
                 }
             }
+            ViewBag.errorMessage = "No tiene permisos para acceder a esta página.";
             return View("Error");
         }
 
@@ -47,24 +48,14 @@ namespace Consigueloo.Areas.ConfiguracionPlataforma.Controllers
         [HttpPost]
         public ActionResult CreateNew(string nombre, List<string> dataList)
         {
-            NombreAnunciosDTO nombreAnuncio= new NombreAnunciosDTO();
             
-                nombreAnuncio = nombreAnunciosDAO.Add(nombre, dataList);
-                return PartialView("Confirm", nombreAnuncio);
+            
+            NombreAnunciosDTO nombreAnuncio = nombreAnunciosDAO.Add(nombre, dataList);
+            return PartialView("Confirm", nombreAnuncio);
             
 
         }
 
-      
-
-
-        // GET: ConfiguracionPlataforma/Configuracion/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: ConfiguracionPlataforma/Configuracion/Delete/5
 
         [HttpPost]
         // GET: ConfiguracionPlataforma/Configuracion/Details/5

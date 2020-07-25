@@ -14,7 +14,7 @@
                 <div class="col-md-9">
                     @Html.DropDownList("nombreInput", (SelectList)ViewBag.NombreAnuncio, new { @class = "form-control", @onchange= "getCaracteristicas(value)" })
                     @*@Html.EditorFor(model => model.nombre, new { htmlAttributes = new { @class = "form-control", id = "nombreInput" } })*@
-                    <p data-toggle="tooltip" title="Registre el nombre del tipo de anuncio" class="glyphicon glyphicon-info-sign" style="color:#949599;"></p> @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-info" })
+                    <p data-toggle="tooltip" title="Registre el nombre del tipo de anuncio" class="fas fa-info-circle" style="color:#949599;"></p> @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-info" })
                 </div>
             </div>
             <div class="form-group">
@@ -22,7 +22,7 @@
                 <div class="col-md-9">
                     @Html.DropDownList("duracionInput", (SelectList)ViewBag.Periodos, new { @class = "form-control" })
                     @*@Html.EditorFor(model => model.duracion, new { htmlAttributes = new { @class = "form-control", id = "duracionInput" } })*@
-                    <p data-toggle="tooltip" title="Registre la duracion del tipo de anuncio" class="glyphicon glyphicon-info-sign" style="color:#949599;"></p> @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-info" })
+                    <p data-toggle="tooltip" title="Registre la duracion del tipo de anuncio" class="fas fa-info-circle" style="color:#949599;"></p> @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-info" })
                 </div>
             </div>
             <div class="form-group">
@@ -31,7 +31,7 @@
                     @*@Html.EditorFor(model => model.precio, new { htmlAttributes = new { @class = "form-control", id = "precioInput", type = "number", min = "1", step = "0.01" } })*@
 
                     @Html.EditorFor(model => model.precio, new { htmlAttributes = new { @class = "form-control", id = "precioInput"} })
-                    <p data-toggle="tooltip" title="Registre el precio del tipo de anuncio" class="glyphicon glyphicon-info-sign" style="color:#949599;"></p> @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-info" })
+                    <p data-toggle="tooltip" title="Registre el precio del tipo de anuncio" class="fas fa-info-circle" style="color:#949599;"></p> @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-info" })
                 </div>
             </div>
         </div>
@@ -41,7 +41,7 @@
                 <div  id="caracteristicas">
                    @Html.Partial("NoSelected")
                 </div>
-                <p data-toggle="tooltip" title="Registre las caracteristicas del tipo de anuncio" class="glyphicon glyphicon-info-sign" style="color:#949599;"></p> @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-info" })
+                <p data-toggle="tooltip" title="Registre las caracteristicas del tipo de anuncio" class="fas fa-info-circle" style="color:#949599;"></p> @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-info" })
             </div>
         </div>
     </div>

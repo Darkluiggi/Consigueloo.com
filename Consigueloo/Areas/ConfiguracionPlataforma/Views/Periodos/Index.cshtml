@@ -7,7 +7,7 @@
 
 
     <div class="container">
-        <h2 class="color-blue">Administrador de periodos de anuncios</h2>
+        <h3 class="color-blue3 margin-top2">Administrador de periodos de anuncios</h3>
         <div class="row">
             <div class=" col-md-4">
                 <div class="container">
@@ -21,7 +21,7 @@
 
             </div>
             <div class="card mb-4 col-md-12" style="padding:14px;margin:auto;">
-                <div class="card-header"><i class="fas fa-table mr-1"></i>Periodos activos</div>
+                <div class="card-header"><i class="fa fa-calendar mr-1"></i>Periodos activos</div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-bordered table table-striped" id="dataTable" width="100%" cellspacing="0">
@@ -81,6 +81,7 @@
     );
 
     function create() {
+        ActivarLoader();
         $.ajax({
             type: "POST",
             url: '@Url.Action("Create", "Periodos")',
@@ -97,6 +98,7 @@
         });
     }
     function ajaxControl(indx) {
+        ActivarLoader();
         $.ajax({
             type: "POST",
             url: '@Url.Action("Details", "Periodos")',

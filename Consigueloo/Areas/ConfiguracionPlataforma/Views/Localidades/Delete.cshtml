@@ -1,29 +1,30 @@
 ﻿@model Model.ViewModel.LocalidadesDTO
 
-<h3>Esta seguro de borrar esta información?</h3>
-<div>
-  <br/>
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.nombre)
-        </dt>
+<h3 class="col-md-12">Esta seguro de borrar esta información?</h3>
 
-        <dd>
-            @Html.DisplayFor(model => model.nombre)
-        </dd>
+<div class="row" style="padding:15px; margin-left:20px;">
+    <div class="col-md-4">
+        <dl class="dl-horizontal">
+            <dt style="margin-bottom:20px">
+                @Html.DisplayNameFor(model => model.nombre)
+            </dt>
 
-       
-    </dl>
+            <dd>
+                @Html.DisplayFor(model => model.nombre)
+            </dd>
 
-    
-        <div class="form-actions no-color">
-            <input type="button" value="Borrar" class="btn btn-default" onclick="DeleteConfirmed(@Model.id)" /> 
-           
-        </div>
-    
+
+        </dl>
 </div>
 
-<script>
+        <div class="form-actions no-color">
+            <input type="button" value="Borrar" class="btn btn-danger" onclick="DeleteConfirmed(@Model.id)" />
+
+        </div>
+
+    </div>
+
+    <script>
     $(document).ready(function () {
         $('[data-toggle="tooltip"]').tooltip();
     });
@@ -46,4 +47,4 @@
             }
         });
     }
-</script>
+    </script>

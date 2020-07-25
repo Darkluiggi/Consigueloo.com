@@ -241,7 +241,7 @@ namespace Consigueloo.Services
             }
         }
 
-        public UsuariosDTO Update(UsuariosDTO periodos)
+        public UsuariosDTO Update(UsuariosDTO periodos, string rol)
         {
             try
             {

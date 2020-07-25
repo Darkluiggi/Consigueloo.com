@@ -39,7 +39,7 @@
             </div>
             <div class="col-md-4">
 
-                @Html.DropDownList("categoriasInput", (SelectList)ViewBag.Categorias, new { @class = "form-control" })
+                @Html.DropDownList("categoriasInput", (SelectList)ViewBag.Categorias, new { @class = "form-control", onchange = "FilterByCategory()" })
 
             </div>
             <div class="col-md-4">
@@ -77,7 +77,6 @@
                 contentType: 'application/json',
                 data: JSON.stringify({ "id": id }),
                 success: function (res) {
-
                     $("#showSelected").html(res);
 
                 }
@@ -124,6 +123,27 @@
                     {
                         type: "POST",
                         url: '@Url.Action("FilterByLocalidad", "Anuncios", new { area = "Anuncios" })',
+                        datatype: "json",
+                        contentType: 'application/json',
+                        data: JSON.stringify({ "id": id }),
+                        success: function (res) {
+                            console.log(res);
+                            var newDoc = document.open("text/html", "replace");
+                            newDoc.write(res);
+                            newDoc.close();
+                        }
+                    });
+            }
+
+            function FilterByCategory() {
+                ActivarLoader();
+                var busquedaModel = document.getElementById("categoriasInput");
+                var id = busquedaModel.value;
+                console.log(id);
+                $.ajax(
+                    {
+                        type: "POST",
+                        url: '@Url.Action("FilterByCategory", "Anuncios", new { area = "Anuncios" })',
                         datatype: "json",
                         contentType: 'application/json',
                         data: JSON.stringify({ "id": id }),

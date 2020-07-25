@@ -1,7 +1,8 @@
 ﻿@model Model.ViewModel.NombreAnunciosDTO
     <div class="container">
-        <h4>Detalle de categoría de anuncios</h4>
-        <div class="row"  >
+        <h4>Detalle de nombre de anuncios</h4>
+        <hr />
+        <div class="row">
             <div class="col-md-4">
                 <dl class="dl-horizontal">
                     <dt style="margin-bottom:20px">
@@ -49,7 +50,7 @@
             </div>
 
         </div>
-        <div class="row">
+        <div class="row col-md-12">
             <div>
 
                 @using (Ajax.BeginForm("Edit", "NombreAnuncios", new { id = Model.id }, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "dvcontent", OnBegin = "ActivarLoader()", OnComplete = "DesactivarLoader()" }))
@@ -62,7 +63,7 @@
 
                 @using (Ajax.BeginForm("DeleteItem", "NombreAnuncios", new { id = Model.id }, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "dvcontent", OnBegin = "ActivarLoader()", OnComplete = "DesactivarLoader()" }))
                 {
-                    <input type="submit" value="Borrar" class="btn btn-primary" id="btnInactivar" width="200" />
+                    <input type="submit" value="Borrar" class="btn btn-danger" id="btnInactivar" width="200" />
                 }
             </div>
 

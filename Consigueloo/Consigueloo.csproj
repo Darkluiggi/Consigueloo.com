@@ -464,6 +464,7 @@
     <Content Include="Content\css\sb-admin-2.css" />
     <Content Include="Content\css\sb-admin-2.min.css" />
     <Content Include="Content\css\styles.css" />
+    <Content Include="Content\js\Chart.js" />
     <Content Include="Content\js\scripts.js" />
     <Content Include="Content\js\simpleBanner.js" />
     <Content Include="Content\Site.css" />
@@ -566,6 +567,9 @@
     <Content Include="Images\Webp.net-gifmaker.gif" />
     <Content Include="Scripts\bootstrap-multiselect-collapsible-groups.js" />
     <Content Include="Scripts\bootstrap-multiselect.js" />
+    <Content Include="Scripts\bootstrap-notify.js" />
+    <Content Include="Scripts\bootstrap-notify.min.js" />
+    <Content Include="Scripts\bootstrap-tooltip.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\classes.js" />
@@ -575,12 +579,11 @@
     <Content Include="Scripts\download.js" />
     <Content Include="Scripts\encoder.js" />
     <Content Include="Scripts\FileImageProcessor.js" />
-    <Content Include="Areas\Anuncios\Views\Anuncios\Pricing - Copia.cshtml" />
     <Content Include="Areas\Anuncios\Views\AnuncioTrabajo\Index.cshtml" />
     <Content Include="Areas\Anuncios\Views\AnuncioTrabajo\Create.cshtml" />
     <Content Include="Areas\Anuncios\Views\Anuncios\Pricing.cshtml" />
-    <Content Include="Areas\Anuncios\Views\Anuncios\Pricing - Copia %283%29.cshtml" />
     <Content Include="Areas\Anuncios\Views\Anuncios\_Terminos.cshtml" />
+    <Content Include="Areas\Anuncios\Views\Anuncios\Anuncio.cshtml" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile1.pubxml" />
     <None Include="Properties\PublishProfiles\IISProfile.pubxml" />

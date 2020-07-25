@@ -38,6 +38,7 @@ namespace Consigueloo.Areas.ConfiguracionPlataforma.Controllers
                     return View(response);
                 }
             }
+            ViewBag.errorMessage = "No tiene permisos para acceder a esta página.";
             return View("Error");
            
         }

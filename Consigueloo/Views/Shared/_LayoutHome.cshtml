@@ -8,6 +8,7 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>@ViewBag.Title - Consigueloo.com</title>
+
     <link href="~/Content/css/styles.css" rel="stylesheet" />
     <link href="~/Content/css/sb-admin-2.css" rel="stylesheet" />
     <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
@@ -23,7 +24,7 @@
     
     <nav class="sb-nav-fixed">        
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-light">
-            <button class="btn btn-link btn-xlg " id="sidebarToggle" href="#">
+            <button class="btn btn-link btn-xlg  order-lg-0" id="sidebarToggle" href="#">
                 <i class="fas fa-bars color-green"></i>
             </button>
             <a href="~/">
@@ -79,24 +80,24 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">Servicios</div>
-                            <a class="nav-link" onclick="ActivarLoader()" href="@Url.Action("FilterCategoriasByName", "Anuncios", new { nombre="Inmuebles", area = "Anuncios" })">
+                            <a class="nav-link" onclick="ActivarLoader()" href="@Url.Action("FilterCategoryByName", "Anuncios", new { nombre="Inmuebles", area = "Anuncios" })">
                                 <div class="sb-nav-link-icon"><img src="~/Content/assets/Iconos/Categorias/Inmuebles.png" /></div>
                                 Inmuebles
 
                             </a>
-                            <a class="nav-link" onclick="ActivarLoader()" href="@Url.Action("FilterCategoriasByName", "Anuncios", new { nombre="Vehiculos", area = "Anuncios" })">
+                            <a class="nav-link" onclick="ActivarLoader()" href="@Url.Action("FilterCategoryByName", "Anuncios", new { nombre="Vehiculos", area = "Anuncios" })">
                                 <div class="sb-nav-link-icon"><img src="~/Content/assets/Iconos/Categorias/Vehículos.png" /></i></div>
                                 Vehículos
                             </a>
-                            <a class="nav-link" onclick="ActivarLoader()" href="@Url.Action("FilterCategoriasByName", "Anuncios", new { nombre="Alimentos / Bebidas", area = "Anuncios" })">
+                            <a class="nav-link" onclick="ActivarLoader()" href="@Url.Action("FilterCategoryByName", "Anuncios", new { nombre="Alimentos / Bebidas", area = "Anuncios" })">
                                 <div class="sb-nav-link-icon"><img src="~/Content/assets/Iconos/Categorias/Alimentos y bebidas.png" /></div>
                                 Alimentos / Bebidas
                             </a>
-                            <a class="nav-link" onclick="ActivarLoader()" href="@Url.Action("FilterCategoriasByName", "Anuncios", new { nombre="Salud / Farmacia", area = "Anuncios" })">
+                            <a class="nav-link" onclick="ActivarLoader()" href="@Url.Action("FilterCategoryByName", "Anuncios", new { nombre="Salud / Farmacia", area = "Anuncios" })">
                                 <div class="sb-nav-link-icon"><img src="~/Content/assets/Iconos/Categorias/Salud y farmacia.png" /></div>
                                 Salud / Farmacia
                             </a>
-                            <a class="nav-link" onclick="ActivarLoader()" href="@Url.Action("FilterCategoriasByName", "Anuncios", new { nombre="Moda / Accesorios", area = "Anuncios" })">
+                            <a class="nav-link" onclick="ActivarLoader()" href="@Url.Action("FilterCategoryByName", "Anuncios", new { nombre="Moda / Accesorios", area = "Anuncios" })">
                                 <div class="sb-nav-link-icon"><img src="~/Content/assets/Iconos/Categorias/Moda y accesorios.png" /></div>
                                 Moda / Accesorios
                             </a>
@@ -111,16 +112,16 @@
                             <a class="nav-link" href="~/Anuncios/AnuncioTrabajo">
                                 Buscar empleo
                             </a>
-                            <a class="nav-link" href="index.html">
+                            <a class="nav-link" href="~/Home">
                                 Domicilios / Mensajería
                             </a>
-                            <a class="nav-link" href="index.html">
+                            <a class="nav-link" href="~/#destacados">
                                 Anuncios Destacados
                             </a>
-                            <a class="nav-link" href="index.html">
+                            <a class="nav-link" href="~/Home/About/">
                                 Hacer Crecer Mi Emprendimiento
                             </a>
-                            <a class="nav-link" href="index.html">
+                            <a class="nav-link" href="~/Home">
                                 Ayuda / PQR
                             </a>
 
@@ -234,7 +235,7 @@
              $.ajax(
             {
                 type: "POST",
-                url: '@Url.Action("FilterCategoriasByName", "Anuncios", new { area = "Anuncios" })',
+                url: '@Url.Action("FilterCategoryByName", "Anuncios", new { area = "Anuncios" })',
                 datatype: "json",
                      contentType: 'application/json',
                      data: JSON.stringify({ "nombre": nombre}),
