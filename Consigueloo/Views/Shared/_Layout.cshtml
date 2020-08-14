@@ -12,20 +12,19 @@
     <link href="~/Content/css/sb-admin-2.css" rel="stylesheet" />
 
     @*<link href="~/Content/css/pricing.css" rel="stylesheet" />*@
-    <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" crossorigin="anonymous"></script>
-
-    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" crossorigin="anonymous"></script>
 
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <link rel="icon" type="image/png" href="~/Images/binoculares-01.png" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <nav class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark linear-gradient">
 
-            <button class="btn btn-link btn-xlg " id="sidebarToggle" href="#">
+            <button class="btn2 btn-link btn-xlg " id="sidebarToggle" href="#">
                 <i class="fas fa-bars color-white"></i>
             </button>
 
@@ -46,10 +45,9 @@
                     <a class="color-white dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Servicios
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Anuncios</a>
-                        <a class="dropdown-item" href="#">Publica tu anuncio</a>
-                        <div class="dropdown-divider"></div>
+                    <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="~/Anuncios/Anuncios">Anuncios</a>
+                        <a class="dropdown-item" href="~/Anuncios/Anuncios/Pricing">Publica tu anuncio</a>
                         <a class="dropdown-item" href="#">Encuentra empleo</a>
                         <a class="dropdown-item" href="#">Busca talento</a>
                     </div>

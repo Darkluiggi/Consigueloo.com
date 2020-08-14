@@ -1,11 +1,17 @@
-﻿namespace Model.ViewModel
+﻿using System.Collections.Generic;
+
+namespace Model.ViewModel
 {
     public class CatalogoDTO
     {
+        public CatalogoDTO()
+        {
+            imagen = new List<CatalogoImagenDTO>();
+            paths = new List<string>();
+        }
         public int id { get; set; }
-        public string titulo { get; set; }
-        public string precio { get; set; }      
-        public string descripcion { get; set; }
-        public string imagen { get; set; }
+        public int anuncioId { get; set; }
+        public List<CatalogoImagenDTO> imagen { get; set; }
+        public List<string> paths { get; set; }
     }
 }

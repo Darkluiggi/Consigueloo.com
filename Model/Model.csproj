@@ -43,6 +43,7 @@
     <Compile Include="Anuncios\Anuncio.cs" />
     <Compile Include="Anuncios\AnuncioTrabajo.cs" />
     <Compile Include="Anuncios\Catalogo.cs" />
+    <Compile Include="Anuncios\CatalogoImagen.cs" />
     <Compile Include="Anuncios\Notificacion.cs" />
     <Compile Include="ConfiguracionPlataforma\Localidades.cs" />
     <Compile Include="ConfiguracionPlataforma\Caracteristicas.cs" />
@@ -54,6 +55,7 @@
     <Compile Include="Usuarios\Roles.cs" />
     <Compile Include="Usuarios\Usuarios.cs" />
     <Compile Include="ViewModel\AnuncioTrabajoDTO.cs" />
+    <Compile Include="ViewModel\CatalogoImagenDTO.cs" />
     <Compile Include="ViewModel\CategoriasDTO.cs" />
     <Compile Include="ViewModel\AnuncioDTO.cs" />
     <Compile Include="ViewModel\NotificacionDTO.cs" />

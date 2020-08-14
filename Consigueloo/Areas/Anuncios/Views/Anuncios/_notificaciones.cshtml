@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Model.ViewModel.NotificacionDTO>
+
+
+<ul class="nav navbar-nav navbar-left">
+    <li class="nav-item dropdown no-arrow mx-1">
+        <a class="nav-link dropdown-toggle" href="#" onclick="quitarNotificacion()" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-bell fa-fw color-blue"></i>
+            <!-- Counter - Alerts -->
+            @if (Model.Where(x => !x.check).Count() != 0)
+            {
+                <span class="badge badge-danger badge-counter" id="counter">@Model.Where(x=> !x.check).Count()</span>
+            }
+            </a>
+        <!-- Dropdown - Alerts -->
+
+        <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
+            <h6 class="dropdown-header">
+                Notificaciones
+            </h6>
+            @if (Model.Count() == 0)
+            {
+                <a class="dropdown-item d-flex align-items-center" href="#">
+
+                    <div>
+                        <div class="small text-gray-500">@DateTime.Today.ToString("dd/MM/yyyy")</div>
+                        <span class="font-weight-bold">No tienes notificaciones pendientes</span>
+                    </div>
+                </a>
+            }
+            else
+            {
+                foreach (var item in Model)
+                {
+                    <a class="dropdown-item d-flex align-items-center" href="~/User">
+                        <div>
+                            <div class="small text-gray-500">@item.fecha.ToString("dd/MM/yyyy")</div>
+                            <span class="font-weight-bold" id="notificacion"> @Html.DisplayFor(modelItem => item.notificacion)</span>
+                        </div>
+                    </a>
+                    }
+            }
+        </div>
+    </li>
+</ul>
+<script>
+    function quitarNotificacion() {
+
+        var notificacion = document.getElementById('counter');
+        notificacion.hidden = true;
+          $.ajax(
+            {
+                type: "POST",
+                url: '@Url.Action("checkNotificaciones", "Anuncios", new { area = "Anuncios" })',
+                datatype: "json",
+                contentType: 'application/json',
+                success: function (res) {
+
+                }
+
+            });
+    }
+</script>

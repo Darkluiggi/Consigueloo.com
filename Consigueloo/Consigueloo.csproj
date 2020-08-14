@@ -497,7 +497,7 @@
     <Content Include="Areas\Administrador\Views\Administrador\_AnunciosTable.cshtml" />
     <Content Include="Areas\Administrador\Views\Anuncios\Create.cshtml" />
     <Content Include="Areas\Administrador\Views\Anuncios\Delete.cshtml" />
-    <Content Include="Areas\Administrador\Views\Anuncios\Details.cshtml" />
+    <Content Include="Areas\Administrador\Views\Anuncios\Details_.cshtml" />
     <Content Include="Areas\Administrador\Views\Anuncios\Edit.cshtml" />
     <Content Include="Areas\Administrador\Views\Anuncios\Index.cshtml" />
     <Content Include="Areas\Administrador\Views\web.config" />
@@ -584,6 +584,10 @@
     <Content Include="Areas\Anuncios\Views\Anuncios\Pricing.cshtml" />
     <Content Include="Areas\Anuncios\Views\Anuncios\_Terminos.cshtml" />
     <Content Include="Areas\Anuncios\Views\Anuncios\Anuncio.cshtml" />
+    <Content Include="Areas\Anuncios\Views\Anuncios\_notificaciones.cshtml" />
+    <Content Include="Areas\Administrador\Views\Anuncios\Catalogo.cshtml" />
+    <Content Include="Areas\Anuncios\Views\Anuncios\Catalogo.cshtml" />
+    <Content Include="Areas\Administrador\Views\Anuncios\Details.cshtml" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile1.pubxml" />
     <None Include="Properties\PublishProfiles\IISProfile.pubxml" />

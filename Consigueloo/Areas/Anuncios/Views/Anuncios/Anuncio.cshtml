@@ -43,7 +43,7 @@
                 @if (Model.actCatalogo == true)
                 {
                     <div class="flex-end">
-                        <a href="#" class="navbar-link float-right  ">Catálogo</a>
+                        <a href="@Url.Action("Catalogo", "Anuncios", new { id=Model.id, area = "Anuncios" })" class="navbar-link float-right" onclick="ActivarLoader()">Catálogo</a>
                     </div>
                 }
             </div>

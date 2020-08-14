@@ -8,7 +8,7 @@
             {
                 <div class="col-lg-4 mb-4">
                     <div class="card-destacados  ">
-                            <a class="destacados" href="@Url.Action("Anuncio", "Anuncios", new { id= item.id, area = "Anuncios" })" style="background-image:url(@item.path)">
+                            <a class="destacados" href="@Url.Action("Anuncio", "Anuncios", new { id= item.id, area = "Anuncios" })" onclick="ActivarLoader()" style="background-image:url(@item.path)">
                                 <span class="fas fa-star color-gold"></span>
                             </a>
                     </div>                        

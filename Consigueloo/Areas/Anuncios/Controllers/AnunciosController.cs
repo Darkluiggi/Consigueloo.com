@@ -20,6 +20,7 @@ namespace Consigueloo.Areas.Anuncios.Controllers
         AnunciosDAO anunciosDAO;
         TipoAnunciosDAO tipoAnunciosDAO;
         CategoriasDAO categoriasDAO;
+        NotificacionesDAO notificacionDAO;
 
 
         public AnunciosController()
@@ -31,6 +32,7 @@ namespace Consigueloo.Areas.Anuncios.Controllers
             categoriasDAO = new CategoriasDAO(this);
             ViewBag.Categorias = (new DropDownDAO()).getCategoriasdd(null);
             ViewBag.Localidades = (new DropDownDAO()).getLocalidadesdd(null);
+            notificacionDAO = new NotificacionesDAO(this);
         }
         // GET: Anuncios/Anuncios
         public ActionResult Index()
@@ -113,8 +115,8 @@ namespace Consigueloo.Areas.Anuncios.Controllers
                         anuncio.actCatalogo = true;
                     }
                 }
-
-                anunciosDAO.GuardarAnuncio(anuncio, categoria, duracion, localidad);
+                string user = User.Identity.GetUserName();
+                anunciosDAO.GuardarAnuncio(user,anuncio, categoria, duracion, localidad);
 
             }
             catch (Exception ex)
@@ -156,10 +158,18 @@ namespace Consigueloo.Areas.Anuncios.Controllers
             List<AnuncioDTO> anuncios = anunciosDAO.buscar(busqueda);
             return View("Index", anuncios);
         }
-        
+        public ActionResult Filter(int idLocalidad, int idCategoria)
+        {
+            ViewBag.Localidades = (new DropDownDAO()).getLocalidadesdd(idLocalidad);
+            ViewBag.Categorias = (new DropDownDAO()).getCategoriasdd(idCategoria);
+            List<AnuncioDTO> anuncios = anunciosDAO.filter(idLocalidad,idCategoria);
+            ViewBag.Funcion = null;
+            ViewBag.Busqueda = null;
+            return View("Index", anuncios);
+        }
         public ActionResult FilterByLocalidad(int id)
         {
-            
+            ViewBag.Localidades = (new DropDownDAO()).getLocalidadesdd(id);
             List<AnuncioDTO> anuncios = anunciosDAO.filterByLocalidadId(id);
             ViewBag.Funcion = Helpers.Constants.Anuncios.localidades;
             ViewBag.Busqueda = (new LocalidadesDAO(this)).Find(id).nombre;
@@ -168,6 +178,7 @@ namespace Consigueloo.Areas.Anuncios.Controllers
         public ActionResult FilterByCategory(int id)
         {
 
+            ViewBag.Categorias = (new DropDownDAO()).getCategoriasdd(id);
             List<AnuncioDTO> anuncios = anunciosDAO.filterByCategoriaId(id);
             ViewBag.Funcion = Helpers.Constants.Anuncios.categoria;
             ViewBag.Busqueda = (new CategoriasDAO(this)).Find(id).nombre;
@@ -189,8 +200,19 @@ namespace Consigueloo.Areas.Anuncios.Controllers
         [HttpPost]
         public ActionResult verificarNotificaciones()
         {
-            string model = anunciosDAO.VerificarNofiticaciones();
-            return Json( model, JsonRequestBehavior.AllowGet);
+            string user = User.Identity.GetUserName();
+            notificacionDAO.crearNotificaciones(user);
+            List<NotificacionDTO> result = notificacionDAO.verificarNotificaciones(user);
+
+            return PartialView("_notificaciones", result);
+        }
+        public ActionResult checkNotificaciones()
+        {
+            string user = User.Identity.GetUserName();
+            notificacionDAO.checkNotificaciones(user);
+            List<NotificacionDTO> result = notificacionDAO.verificarNotificaciones(user);
+
+            return PartialView("_notificaciones", result);
         }
         public ActionResult chartAreaData()
         {
@@ -202,6 +224,13 @@ namespace Consigueloo.Areas.Anuncios.Controllers
         {
             ChartDataDTO model = anunciosDAO.chartBarData();
             return Json(model, JsonRequestBehavior.AllowGet);
+        }
+        
+        public ActionResult Catalogo(int id) 
+        {
+            var anuncio = anunciosDAO.getById(id);
+            return View(anuncio.catalogo);
+        
         }
     }
 

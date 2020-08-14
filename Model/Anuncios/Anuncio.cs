@@ -35,6 +35,5 @@ namespace Model.Anuncios
         public TipoAnuncios tipoAnuncio { get; set; }
         public bool actDestacado { get; set; }
         public bool actRedesSociales { get; set; }
-
     }
 }

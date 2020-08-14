@@ -1,43 +1,56 @@
-﻿@model Model.Anuncios.TipoAnuncio
+﻿@model Model.ViewModel.AnuncioDTO
 
-@{
-    ViewBag.Title = "Details";
-    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
-}
+<h4 class="col-md-12">Detalle de información del anuncio</h4>
+<hr />
+<div class="row" style="padding:15px; margin-left:10px;">
+    <div class="col-md-4">
+        <dl class="dl-horizontal">
+            <dt style="margin-bottom:20px">
+                @Html.DisplayNameFor(model => model.titulo)
+            </dt>
 
-<h2>Details</h2>
+            <dd>
+                @Html.DisplayFor(model => model.titulo)
+            </dd>
+            <dt style="margin-bottom:20px">
+                @Html.DisplayNameFor(model => model.nombreContacto)
+            </dt>
 
-<div>
-    <h4>TipoAnuncio</h4>
-    <hr />
+            <dd>
+                @Html.DisplayFor(model => model.nombreContacto)
+            </dd>
+            <dt style="margin-bottom:20px">
+                @Html.DisplayNameFor(model => model.tipoAnuncio.nombre)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.tipoAnuncio.nombre)
+            </dd>
+        </dl>
+    </div>
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.tipo)
+
+            @using (Ajax.BeginForm("Edit", "Anuncios", new { id = Model.id }, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "dvcontent", OnBegin = "ActivarLoader()", OnComplete = "DesactivarLoader()" }))
+            {
+                <input type="submit" value="Editar" class="btn btn-primary" id="btnEditar" width="200" />
+            }
+            <br />
         </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.tipo)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.periodo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.periodo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.precio)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.precio)
+            @using (Ajax.BeginForm("DeleteItem", "Anuncios", new { id = Model.id }, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "dvcontent", OnBegin = "ActivarLoader()", OnComplete = "DesactivarLoader()" }))
+            {
+                <input type="submit" value="Borrar" class="btn btn-danger" id="btnInactivar" width="200" />
+            }
         </dd>
 
     </dl>
+    <br />
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+<script>
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>

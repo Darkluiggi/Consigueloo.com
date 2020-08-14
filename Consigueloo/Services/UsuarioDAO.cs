@@ -119,17 +119,20 @@ namespace Consigueloo.Services
         {
             try
             {
-                List<Usuarios> periodosModel = db.Usuarios.Where(x => x.estado == true).ToList();
-                List<UsuariosDTO> responseList = new List<UsuariosDTO>(); ;
-                var config = new MapperConfiguration(cfg => {
-                    cfg.CreateMap<Usuarios, UsuariosDTO>();
-                });
-
-                IMapper mapper = config.CreateMapper();
+                List<Usuarios> periodosModel = db.Usuarios.Include(x=> x.rol).Where(x => x.estado == true).ToList();
+                List<UsuariosDTO> responseList = new List<UsuariosDTO>(); 
+               
                 //Mapeo de clase
                 periodosModel.ForEach(x =>
                 {
-                    UsuariosDTO response = mapper.Map<Usuarios, UsuariosDTO>(x);
+                    UsuariosDTO response = new UsuariosDTO();
+                    response.nombre = x.nombre;
+                    response.apellido = x.apellido;
+                    response.ciudad = x.ciudad;
+                    response.correo = x.correo;
+                    response.telefono = x.telefono;
+                    response.rol.nombre = x.rol.nombre;
+                    response.rol.id = x.rol.id;
                     responseList.Add(response);
                 });
                 return responseList;
@@ -186,7 +189,7 @@ namespace Consigueloo.Services
             try
             {
               
-                Usuarios model = db.Usuarios.Find(id);
+                Usuarios model = db.Usuarios.Include(x=> x.rol).FirstOrDefault(x=> x.id==id);
                 UsuariosDTO response = new UsuariosDTO();
                 response.id = model.id;
                 response.nombre = model.nombre;

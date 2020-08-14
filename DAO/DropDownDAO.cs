@@ -189,14 +189,13 @@ namespace DAO
 
                 periodosList = db.Localidades
                     .Where(x => x.estado).ToList();
-
+                periodosList.Insert(0, new Localidades { id = 0, nombre = "Seleccione una localidad" });
                 SelectList lista;
 
                 if (id != null)
                     lista = new SelectList(periodosList, "id", "nombre", id.Value);
                 else
                 {
-                    periodosList.Insert(0, new Localidades { id = 0, nombre = "Seleccione una localidad" });
                     lista = new SelectList(periodosList, "id", "nombre");
 
                 }
@@ -234,14 +233,15 @@ namespace DAO
 
                 nombresList = db.Categorias
                     .Where(x => x.estado).ToList();
-
+                nombresList.Insert(0, new Categorias { id = 0, nombre = "Seleccione una categoría de anuncio" });
                 SelectList lista;
 
                 if (id != null)
+
                     lista = new SelectList(nombresList, "id", "nombre", id.Value);
                 else
                 {
-                    nombresList.Insert(0, new Categorias { id = 0, nombre = "Seleccione una categoría de anuncio" });
+                    
                     lista = new SelectList(nombresList, "id", "nombre");
 
                 }

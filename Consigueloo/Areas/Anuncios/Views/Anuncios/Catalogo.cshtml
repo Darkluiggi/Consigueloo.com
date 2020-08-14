@@ -1,0 +1,27 @@
+﻿@model Model.ViewModel.CatalogoDTO
+
+@{
+    ViewBag.Title = "Catalogo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Catalogo</h2>
+<div class="container">
+    <div class="row2">
+        @foreach (var item in Model.paths)
+        {
+            <a href="@item" data-toggle="lightbox" data-gallery="gallery" class="col-md-4">
+                <img src="@item" class="img-fluid rounded">
+            </a>
+        }
+    </div>
+    
+</div>
+
+<script>
+    $(document).on("click", '[data-toggle="lightbox"]', function (event) {
+        console.log("hola");
+        event.preventDefault();
+        $(this).ekkoLightbox();
+    });
+</script>

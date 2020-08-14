@@ -8,6 +8,8 @@ using System.Linq;
 using Persistence;
 using System.Web.Mvc;
 using Helpers.Methods;
+using Model.Usuarios;
+using System.Security.Cryptography.X509Certificates;
 
 namespace DAO
 {
@@ -29,7 +31,7 @@ namespace DAO
             dateHelper = new DateHelper();
         }
 
-        public void GuardarAnuncio(AnuncioDTO anuncio, string categoria, string duracion, string localidad)
+        public void GuardarAnuncio(string user, AnuncioDTO anuncio, string categoria, string duracion, string localidad)
         {
             try
             {
@@ -54,11 +56,12 @@ namespace DAO
                 anuncioModel.fechaActivacion = anuncio.fechaActivacion;
                 anuncioModel.fechaCancelacion = anuncio.fechaCancelacion;
 
-                anuncioModel.actCatalogo = anuncio.actCatalogo;
                 anuncioModel.categoria = db.Categorias.Find(anuncio.categoria.id);
                 anuncioModel.localidad = db.Localidades.Find(anuncio.localidad.id);
-
-                db.Anuncios.Add(anuncioModel);
+                Usuarios usuario = db.Usuarios.FirstOrDefault(x => x.correo.Equals(user));
+                usuario.anuncios.Add(anuncioModel);
+                
+                db.Entry(usuario).State = EntityState.Modified;
                 db.SaveChanges();
 
                 }
@@ -117,7 +120,7 @@ namespace DAO
             {
                 
                 //Mapeo de clase
-                var anuncio = db.Anuncios.Where(x=> x.estado==true).ToList();
+                var anuncio = db.Anuncios.Include(x=> x.catalogo).Include(x=> x.tipoAnuncio).Where(x=> x.estado==true).ToList();
                 List<AnuncioDTO> anuncios=new List<AnuncioDTO>();
                 if (anuncio!=null)
                 {
@@ -135,6 +138,11 @@ namespace DAO
                         anuncioModel.path = imageHelper.GetImageFromByteArray(item.imagen);
                         anuncioModel.fechaActivacion = item.fechaActivacion;
                         anuncioModel.fechaCancelacion = item.fechaCancelacion;
+                        if (anuncioModel.catalogo!=null)
+                        {
+                            anuncioModel.categoria = categoriasDAO.Find(item.categoriaId);
+                        }
+
                         anuncioModel.categoria = categoriasDAO.Find(item.categoriaId);
                         anuncioModel.categoriaId = item.categoriaId;
                         anuncioModel.localidadId = item.localidadId;
@@ -153,11 +161,65 @@ namespace DAO
             }
         }
 
+        public List<AnuncioDTO> filter(int idLocalidad, int idcategoria)
+        {
+            try
+            {
+
+                List<AnuncioDTO> response = ListarAnuncios();
+                if(idLocalidad==0 || idcategoria == 0)
+                {
+                    if (idLocalidad == 0 && idcategoria==0)
+                    {
+                    }
+                    else
+                    {
+                        response = response.Where(x => x.categoriaId == idcategoria || x.localidadId == idLocalidad).ToList();
+                    }
+                    
+                }
+                else
+                {
+                    response = response.Where(x => x.categoriaId == idcategoria && x.localidadId == idLocalidad).ToList();
+                }
+                return response;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public void GuardarCatalogo(CatalogoDTO catalogo)
+        {
+            try
+            {
+                Catalogo catalogoModel = new Catalogo();
+                catalogo.imagen.ForEach(x =>
+                {
+                    CatalogoImagen modelImagen = new CatalogoImagen();
+                    modelImagen.imagen = x.imagen;
+                    catalogoModel.imagen.Add(modelImagen);
+
+                });
+                Anuncio model = db.Anuncios.FirstOrDefault(x => x.id==catalogo.anuncioId);
+                model.catalogo = catalogoModel;
+                db.Entry(model).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public AnuncioDTO getById(int id)
         {
             try
             {
-                Anuncio model = db.Anuncios.FirstOrDefault(x => x.id == id && x.estado == true);
+                Anuncio model = db.Anuncios.Include(x=> x.catalogo).Include(x=> x.catalogo.imagen).FirstOrDefault(x => x.id == id && x.estado == true);
                 AnuncioDTO anuncioModel = new AnuncioDTO();
                 anuncioModel.titulo = model.titulo;
                 anuncioModel.nombreContacto = model.nombreContacto;
@@ -172,6 +234,10 @@ namespace DAO
                 anuncioModel.fechaCancelacion = model.fechaCancelacion;
                 anuncioModel.categoriaId = model.categoriaId;
                 anuncioModel.categoria = categoriasDAO.Find(model.categoriaId);
+                if (model.catalogo!=null)
+                {
+                    anuncioModel.catalogo = GetCatalogo(model.catalogo);
+                }
                 return anuncioModel;
             }
             catch (Exception)
@@ -180,34 +246,6 @@ namespace DAO
                 throw;
             }
         }
-
-        public string VerificarNofiticaciones()
-        {
-            try
-            {
-                var anuncios = ListarAnuncios();
-                var today = DateTime.Today;
-                string result="";
-
-                anuncios.ForEach(x =>
-                {
-                    int fechaResultado = today.CompareTo(x.fechaCancelacion);
-
-                    if (fechaResultado < 10)
-                    {
-                        result ="Su anuncio vence en 3 días";
-                    }
-                });
-                return result;
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-
-
         public ChartDataDTO ChartAreaData()
         {
             try
@@ -371,6 +409,22 @@ namespace DAO
                 throw;
             }
         }
+
+        public CatalogoDTO GetCatalogo(Catalogo catalogo)
+        {
+            CatalogoDTO response = new CatalogoDTO();
+            response.id = catalogo.id;
+          
+            catalogo.imagen.ForEach(x =>
+            {
+                CatalogoImagenDTO model = new CatalogoImagenDTO();
+                var path = imageHelper.GetImageFromByteArray(x.imagen);
+                model.imagen = x.imagen;
+                response.imagen.Add(model);
+                response.paths.Add(path);
+            });
+            return response;
+        }
     }
 
     public class ChartDataDTO
@@ -382,6 +436,5 @@ namespace DAO
         }
         public List<string> periodos { get; set; }
         public List<string> datos { get; set; }
-        public string carne { get; set; }
     }
 }

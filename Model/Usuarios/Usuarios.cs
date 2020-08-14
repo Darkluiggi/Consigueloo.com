@@ -10,6 +10,12 @@ namespace Model.Usuarios
 {
     public class Usuarios : ModelBase
     {
+        public Usuarios()
+        {
+            anuncios = new List<Anuncio>();
+            notificaciones = new List<Notificacion>();
+        }
+
         public int id { get; set; }
         public string nombre { get; set; }
         public string correo { get; set; }
@@ -17,6 +23,8 @@ namespace Model.Usuarios
         public string telefono { get; set; }
         public string ciudad { get; set; }
         public string apellido { get; set; }
+        public List<Notificacion> notificaciones { get; set; }
+
         public List<Anuncio> anuncios { get; set; }
         [ForeignKey("rol")]
         public int? rolId { get; set; }

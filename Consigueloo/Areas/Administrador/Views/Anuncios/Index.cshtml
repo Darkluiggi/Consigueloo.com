@@ -1,46 +1,144 @@
-﻿@model IEnumerable<Model.ViewModel.TipoAnunciosDTO>
+﻿@model IEnumerable<Model.ViewModel.AnuncioDTO>
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
+<div class="container-fluid">
+    <h4>Anuncios Pendientes de Catálogo</h4>
 
-<h2>Index</h2>
+    <div class="card mb-4">
+        <div class="card-header"><i class="fas fa-table mr-1"></i>Anuncios activos</div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.titulo)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.nombreContacto)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.telefono)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.celularContacto)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.fechaActivacion)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.fechaCancelacion)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.categoria)
+                            </th>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.titulo)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.nombreContacto)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.telefono)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.celularContacto)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.fechaActivacion)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.fechaCancelacion)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.categoria)
+                            </th>
+                        </tr>
+                    </tfoot>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.tipo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.periodo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.precio)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.tipo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.periodo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.precio)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
-        </td>
-    </tr>
-}
+                    @foreach (var item in Model.Where(x => x.actCatalogo && x.actImagen))
+                    {
+                        <tr id="@Html.DisplayFor(modelItem => item.id)" data-toggle="modal" data-target="#mdlCtrl">
+                            <td>
+                                @Html.DisplayFor(modelItem => item.titulo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.nombreContacto)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.telefono)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.celularContacto)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.fechaActivacion)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.fechaCancelacion)
+                            </td>
+                            <th>
+                                @Html.DisplayFor(modelItem => item.categoria.nombre)
+                            </th>
+                        </tr>
+                    }
 
-</table>
+                </table>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="mdlCtrl" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog   modal-lg" role="document">
+        <div class="modal-content">
+            <div class="box box-warning" style="padding:14px">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <div id="dvcontent"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(
+        function () {
+            $('#dataTable tbody').on('click', 'tr', function () {
+                var data = $(this).attr('id');
+                ActivarLoader();
+                ajaxControl(data);
+            });
+        }
+    );
+
+   
+    function ajaxControl(indx) {
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("Details", "Anuncios")',
+            datatype: "json",
+            contentType: 'application/json',
+            data: JSON.stringify({ "id": indx }),
+            success: function (r) {
+                $("#dvcontent").html(r);
+                DesactivarLoader();
+            },
+            error: function (r) {
+                $("#dvcontent").html(r);
+                DesactivarLoader();
+            }
+        });
+    }
+
+</script>
