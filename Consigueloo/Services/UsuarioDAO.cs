@@ -350,6 +350,28 @@ namespace Consigueloo.Services
                 controller.ModelState.AddModelError("", error);
             }
         }
+
+        public void createCommonUser(ApplicationUser user)
+        {
+            try
+            {
+                Usuarios model = new Usuarios();
+                model.correo = user.Email;
+                model.password = user.PasswordHash;
+                model.nombre = user.Name;
+                model.apellido = user.LastName;
+                model.ciudad = user.HomeTown;
+                model.rol = db.Roles.FirstOrDefault(x => x.nombre.Equals("Usuario"));
+                
+                db.Usuarios.Add(model);
+                db.SaveChanges();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }
 

@@ -33,6 +33,7 @@ namespace Consigueloo.Areas.Anuncios.Controllers
             ViewBag.Categorias = (new DropDownDAO()).getCategoriasdd(null);
             ViewBag.Localidades = (new DropDownDAO()).getLocalidadesdd(null);
             notificacionDAO = new NotificacionesDAO(this);
+            ViewBag.busq = "Buscar...";
         }
         // GET: Anuncios/Anuncios
         public ActionResult Index()
@@ -154,15 +155,17 @@ namespace Consigueloo.Areas.Anuncios.Controllers
         public ActionResult Buscar(string busqueda)
         {
             ViewBag.Funcion = Helpers.Constants.Anuncios.resultados;
+            ViewBag.busq = busqueda;
             ViewBag.Busqueda = busqueda;
             List<AnuncioDTO> anuncios = anunciosDAO.buscar(busqueda);
             return View("Index", anuncios);
         }
-        public ActionResult Filter(int idLocalidad, int idCategoria)
+        public ActionResult Filter(string busqueda, int idLocalidad, int idCategoria)
         {
             ViewBag.Localidades = (new DropDownDAO()).getLocalidadesdd(idLocalidad);
             ViewBag.Categorias = (new DropDownDAO()).getCategoriasdd(idCategoria);
-            List<AnuncioDTO> anuncios = anunciosDAO.filter(idLocalidad,idCategoria);
+            ViewBag.busq = busqueda;
+            List<AnuncioDTO> anuncios = anunciosDAO.filter(busqueda, idLocalidad, idCategoria);
             ViewBag.Funcion = null;
             ViewBag.Busqueda = null;
             return View("Index", anuncios);

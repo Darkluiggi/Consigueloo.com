@@ -53,10 +53,10 @@ namespace Consigueloo
             //app.UseTwitterAuthentication(
             //   consumerKey: "",
             //   consumerSecret: "");
+            app.UseFacebookAuthentication(
+            appId: "223915415635389",
+            appSecret: "4d0e754ab397745a4d8fcb110e9c3b2c");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
 
             //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             //{

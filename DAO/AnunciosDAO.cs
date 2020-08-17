@@ -161,26 +161,38 @@ namespace DAO
             }
         }
 
-        public List<AnuncioDTO> filter(int idLocalidad, int idcategoria)
+        public List<AnuncioDTO> filter(string busqueda, int idLocalidad, int idcategoria)
         {
             try
             {
 
                 List<AnuncioDTO> response = ListarAnuncios();
-                if(idLocalidad==0 || idcategoria == 0)
+                if(idLocalidad==0 || idcategoria == 0 || string.IsNullOrEmpty(busqueda))
                 {
-                    if (idLocalidad == 0 && idcategoria==0)
+                    if (idLocalidad == 0 && idcategoria==0 && string.IsNullOrEmpty(busqueda))
                     {
+                    }
+                    else if ((idLocalidad == 0 || idcategoria == 0) && string.IsNullOrEmpty(busqueda))
+                    {
+                        response = response.Where(x => x.categoriaId == idcategoria || x.localidadId == idLocalidad).ToList();
+                                           
                     }
                     else
                     {
-                        response = response.Where(x => x.categoriaId == idcategoria || x.localidadId == idLocalidad).ToList();
+
+                        response = response.Where(x => (x.categoriaId == idcategoria || x.localidadId == idLocalidad) && (x.titulo.Trim().ToLower().Contains(busqueda.Trim().ToLower()) ||
+                        x.nombreContacto.Trim().ToLower().Contains(busqueda.Trim().ToLower()) ||
+                        x.categoria.nombre.Trim().ToLower().Contains(busqueda.Trim().ToLower()) ||
+                        x.descripcion.Trim().ToLower().Contains(busqueda.Trim().ToLower()))).ToList();
                     }
-                    
+
                 }
                 else
                 {
                     response = response.Where(x => x.categoriaId == idcategoria && x.localidadId == idLocalidad).ToList();
+                    response = response.Where(x => x.titulo.Trim().ToLower().Contains(busqueda.Trim().ToLower()) || x.nombreContacto.Trim().ToLower().Contains(busqueda.Trim().ToLower())
+                  || x.categoria.nombre.Trim().ToLower().Contains(busqueda.Trim().ToLower()) || x.descripcion.Trim().ToLower().Contains(busqueda.Trim().ToLower())).ToList();
+
                 }
                 return response;
             }

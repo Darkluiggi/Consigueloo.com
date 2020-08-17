@@ -8,9 +8,7 @@
    
         <div id="layoutAuthentication">
             <div id="layoutAuthentication_content">
-                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                {
-                    @Html.AntiForgeryToken()
+
                     <main class="margin-bot ">
                         <div class="container ">
                             <div class="row justify-content-center margin-bot  ">
@@ -18,6 +16,7 @@
                                     <div class="card shadow-lg border-0 rounded mt-5">
                                         <div class="card-body linear-gradientc rounded">
                                             <div class="card-title2 row color-white4 ">
+
                                                 <div class="col-md-4">
                                                     <img src="~/Images/binoculares-01.png" />
                                                 </div>
@@ -26,41 +25,51 @@
                                                 </div>
 
                                             </div>
-                                            @Html.ValidationSummary(true, "", new { @class = "text-error" })
-                                            <form>
-                                                <div class="form-group">
-                                                    <label class="small mb-1" for="inputEmailAddress">Email</label>
-                                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control py-4", placeholder = "Ingrese el email" })
-                                                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="small mb-1" for="inputPassword">Password</label>
-
-                                                    @Html.TextBoxFor(m => m.Password, new { @class = "form-control py-4", type="password", placeholder = "Ingrese su contraseña" })
-                                                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="custom-control custom-checkbox">
-                                                        @Html.CheckBoxFor(m => m.RememberMe)
-                                                        @Html.LabelFor(m => m.RememberMe)
+                                            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                                            {
+                                                @Html.AntiForgeryToken()
+                                                @Html.ValidationSummary(true, "", new { @class = "text-error" })
+                                                <form>
+                                                    <div class="form-group">
+                                                        <label class="small mb-1" for="inputEmailAddress">Email</label>
+                                                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control py-4", placeholder = "Ingrese el email" })
+                                                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                                                     </div>
-                                                </div>
+                                                    <div class="form-group">
+                                                        <label class="small mb-1" for="inputPassword">Password</label>
 
-                                                <div class="row  align-items-center justify-content-between mt-4 mb-0">
-                                                    <div class="col-md-12">
-                                                        <a href="~/Account/Register">
-                                                            <input type="button" value="Registrarse" class="btn bg-white color-blue shadow-button" onclick="ActivarLoader()" />
-                                                        </a>
-                                                        <input type="submit" value="Iniciar sesión" class="btn bg-white color-blue shadow-button" onclick="ActivarLoader()" />
+                                                        @Html.TextBoxFor(m => m.Password, new { @class = "form-control py-4", type = "password", placeholder = "Ingrese su contraseña" })
+                                                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
 
                                                     </div>
-                                                    <div class="col-md-12">
-                                                        <a class="small color-white" href="ForgotPassword">¿Ha olvidado su contraseña?</a>
-                                                    </div>                                                    
-                                                </div>
+                                                    <div class="form-group">
+                                                        <div class="custom-control custom-checkbox">
+                                                            @Html.CheckBoxFor(m => m.RememberMe)
+                                                            @Html.LabelFor(m => m.RememberMe)
+                                                        </div>
+                                                    </div>
 
-                                            </form>
+                                                    <div class="row  align-items-center justify-content-between mt-4 mb-0">
+                                                        <div class="col-md-12">
+                                                            <a href="~/Account/Register">
+                                                                <input type="button" value="Registrarse" class="btn bg-white color-blue shadow-button" onclick="ActivarLoader()" />
+                                                            </a>
+                                                            <input type="submit" value="Iniciar sesión" class="btn bg-white color-blue shadow-button" onclick="ActivarLoader()" />
+
+                                                        </div>
+
+                                                        <div class="col-md-12">
+                                                            <a class="small color-white" href="ForgotPassword">¿Ha olvidado su contraseña?</a>
+                                                        </div>
+                                                    </div>
+
+                                                </form>
+                                            }
+                                            <div class="col-md-12">
+                                                <section id="socialLoginForm">
+                                                    @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+                                                </section>
+                                            </div>
                                         </div>
 
                                     </div>
@@ -68,12 +77,8 @@
                             </div>
                         </div>
                     </main>
-                }
-                @*<div class="col-md-4">
-            <section id="socialLoginForm">
-                @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
-            </section>
-        </div>*@
+                
+               
             </div>
            
         </div>

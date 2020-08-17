@@ -28,9 +28,9 @@
             </div>
             <div class="col-md-4">
                 <div class="input-group">
-                    <input type="text" onkeyup="inputKeyUp(event)" id="searchField" class="form-control" placeholder="Búsqueda..." aria-label="Search" aria-describedby="basic-addon2">
+                    <input type="text" onkeyup="inputKeyUp(event)" id="searchField" class="form-control" placeholder="@ViewBag.busq" value="@ViewBag.busq" aria-label="Search" aria-describedby="basic-addon2">
                     <div class="input-group-append">
-                        <button class="btn btn-primary find-btn" type="button" id="srchButton" onclick="BuscarEnAnuncios()">
+                        <button class="btn btn-primary find-btn" type="button" id="srchButton" onclick="Filter()">
                             <i class="fas fa-search"></i>
                         </button>
                     </div>
@@ -119,13 +119,15 @@
                  var idLocalidad = localidadModel.value;
                  var categoriaModel = document.getElementById("categoriasInput");
                  var idcategoria = categoriaModel.value;
+                 var busquedaModel = document.getElementById("searchField");
+                 var busqueda = busquedaModel.value;
                 $.ajax(
                     {
                         type: "POST",
                         url: '@Url.Action("Filter", "Anuncios", new { area = "Anuncios" })',
                         datatype: "json",
                         contentType: 'application/json',
-                        data: JSON.stringify({ "idLocalidad": idLocalidad, "idcategoria": idcategoria }),
+                        data: JSON.stringify({"busqueda": busqueda, "idLocalidad": idLocalidad, "idcategoria": idcategoria }),
                         success: function (res) {
                             console.log(res);
                             var newDoc = document.open("text/html", "replace");

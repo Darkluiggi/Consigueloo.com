@@ -462,10 +462,16 @@ namespace Consigueloo.Controllers
                     Email = model.Email,
                     BirthDate = model.BirthDate,
                     HomeTown = model.HomeTown
+                    
                 };
+
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
+                    usuarioDAO.createCommonUser(user);
+                    string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    var result2 = await UserManager.ConfirmEmailAsync(user.Id, code);
+
                     result = await UserManager.AddLoginAsync(user.Id, info.Login);
                     if (result.Succeeded)
                     {

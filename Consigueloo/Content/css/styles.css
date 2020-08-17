@@ -12167,3 +12167,41 @@ body {
     font-weight: 600;
     font-size:80%;
 }
+
+.btn-facebook {
+    width: 80px;
+    height: 35.5px;
+    color: #fff;
+    background-size: cover;
+    background-image: url('../../Content/assets/img-btn/boton fb-01.png');
+    border-color: #007bff;
+}
+
+    .btn-facebook:hover {
+        color: #fff;
+        background-color: #0069d9;
+        border-color: #0062cc;
+    }
+
+    .btn-facebook:focus, .btn-facebook.focus {
+        color: #fff;
+        background-color: #0069d9;
+        border-color: #0062cc;
+        box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
+    }
+
+    .btn-facebook.disabled, .btn-facebook:disabled {
+        color: #fff;
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+    .btn-facebook:not(:disabled):not(.disabled):active, .btn-facebook:not(:disabled):not(.disabled).active, .show > .btn-facebook.dropdown-toggle {
+        color: #fff;
+        background-color: #0062cc;
+        border-color: #005cbf;
+    }
+
+        .btn-facebook:not(:disabled):not(.disabled):active:focus, .btn-facebook:not(:disabled):not(.disabled).active:focus, .show > .btn-facebook.dropdown-toggle:focus {
+            box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
+        }
