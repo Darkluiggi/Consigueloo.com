@@ -227,6 +227,24 @@ namespace DAO
             }
         }
 
+        public bool RegisterPayment(PaymentData paymentData, string user)
+        {
+            bool result = false;
+            Usuarios usuario = db.Usuarios.FirstOrDefault(x => x.correo.Equals(user));
+            try
+            {
+                paymentData.merchant = db.datosComercio.Find(paymentData.merchant.legal_id);
+                usuario.pagosAnuncios.Add(paymentData);
+                db.SaveChanges();
+                result = true;
+            }
+            catch (Exception ex)
+            {
+                result = false;
+            }
+            return result;
+        }
+
         public AnuncioDTO getById(int id)
         {
             try

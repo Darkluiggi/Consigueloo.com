@@ -14,6 +14,8 @@ namespace Model.Usuarios
         {
             anuncios = new List<Anuncio>();
             notificaciones = new List<Notificacion>();
+            anuncios = new List<Anuncio>();
+            pagosAnuncios = new List<PaymentData>();
         }
 
         public int id { get; set; }
@@ -26,6 +28,7 @@ namespace Model.Usuarios
         public List<Notificacion> notificaciones { get; set; }
 
         public List<Anuncio> anuncios { get; set; }
+        public List<PaymentData> pagosAnuncios { get; set; }
         [ForeignKey("rol")]
         public int? rolId { get; set; }
         public Roles rol { get; set; }

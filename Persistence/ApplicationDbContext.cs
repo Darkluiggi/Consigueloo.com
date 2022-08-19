@@ -35,6 +35,14 @@ namespace Persistence
         public DbSet<NombreAnuncios> NombreAnuncios { get; set; }
         public DbSet<Categorias> Categorias { get; set; }
         public DbSet<AnuncioTrabajo> AnuncioTrabajo { get; set; }
+
+        public DbSet<PaymentData> pagosAnuncios { get; set; }
+        public DbSet<PaymentMethod> metodosDePago { get; set; }
+
+        public DbSet<Merchant> datosComercio { get; set; }
+        public DbSet<Extra> datosTarjeta { get; set; }
+
+
     }
 
 }

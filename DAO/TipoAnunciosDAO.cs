@@ -115,7 +115,29 @@ namespace DAO
                 throw;
             }
         }
+        public TipoAnunciosDTO FindInCents(int? id)
+        {
+            try
+            {
+                int id_ = (int)id;
+                //Mapeo de clase
+                TipoAnuncios model = new TipoAnuncios();
+                model = db.TiposAnuncio.Include(x => x.nombre).FirstOrDefault(x => x.id == id_);
+                TipoAnunciosDTO response = new TipoAnunciosDTO();
+                response.id = model.id;
+                response.duracion = model.duracion;
+                response.nombre = nombreAnunciosDAO.Find(model.nombreId);
+                response.precio = (Int32.Parse(model.precio)*100).ToString();
+                response.nombreId = model.nombreId;
+                response.reference = Guid.NewGuid().ToString();
+                return response;
+            }
+            catch (Exception)
+            {
 
+                throw;
+            }
+        }
         public TipoAnunciosDTO Update(TipoAnunciosDTO tipoAnuncio)
         {
             try

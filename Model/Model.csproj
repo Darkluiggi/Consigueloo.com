@@ -45,6 +45,7 @@
     <Compile Include="Anuncios\Catalogo.cs" />
     <Compile Include="Anuncios\CatalogoImagen.cs" />
     <Compile Include="Anuncios\Notificacion.cs" />
+    <Compile Include="Anuncios\PaymentData.cs" />
     <Compile Include="ConfiguracionPlataforma\Localidades.cs" />
     <Compile Include="ConfiguracionPlataforma\Caracteristicas.cs" />
     <Compile Include="ConfiguracionPlataforma\NombreAnuncios.cs" />

@@ -19,6 +19,7 @@ namespace Consigueloo.Areas.Anuncios.Controllers
         // GET: Anuncios/AnuncioTrabajo
         public ActionResult Index()
         {
+            ViewBag.Funcion = "Anuncios de trabajo";
             List<AnuncioTrabajoDTO> anuncios = anuncioTrabajoDAO.getList();
 
             return View(anuncios);

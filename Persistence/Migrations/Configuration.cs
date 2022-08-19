@@ -72,6 +72,11 @@ namespace Persistence.Migrations
               new Periodos() { id = 2, nombre = "Trimestral", estado = true },
               new Periodos() { id = 3, nombre = "Anual", estado = true }
               );
+            context.Roles.AddOrUpdate(
+             x => x.id,
+              new Model.Usuarios.Roles() { id = 1, nombre = "Administrador", estado = true },
+              new Model.Usuarios.Roles() { id = 2, nombre = "Cliente", estado = true }
+              );
 
             SaveChanges(context);
         }

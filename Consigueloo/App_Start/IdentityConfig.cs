@@ -34,7 +34,7 @@ namespace Consigueloo
         {
             var myMessage = new MailMessage();
             myMessage.To.Add(message.Destination);
-            myMessage.From = new MailAddress ("Administracion@consigueloo.com", "Consigueloo.com");
+            myMessage.From = new MailAddress ("Administracion@consigueloo.co", "Consigueloo.co");
             myMessage.Subject = message.Subject;
             string text = message.Body;
             string html = message.Body;
@@ -50,14 +50,14 @@ namespace Consigueloo
             // Create a Web transport for sending email.
             using (SmtpClient smtpClient = new SmtpClient())
             {
-                smtpClient.Host = "mail.consigueloo.com";
+                smtpClient.Host = "mail.consigueloo.co";
                 smtpClient.Port = 587;
                 smtpClient.EnableSsl = true;
                 // The server requires user's credentials
                 // not the default credentials
                 smtpClient.UseDefaultCredentials = false;
 
-                System.Net.NetworkCredential credentials = new System.Net.NetworkCredential("Administracion@consigueloo.com", "s*qW3k62");
+                System.Net.NetworkCredential credentials = new System.Net.NetworkCredential("Administracion@consigueloo.co", "Consigueloo.2022");
                 smtpClient.Credentials = credentials;
                 smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
 

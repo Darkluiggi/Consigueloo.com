@@ -70,13 +70,14 @@ namespace Consigueloo.Services
                 model.nombre = user.Name;
                 model.apellido = user.LastName;
                 model.ciudad = user.HomeTown;
+                model.rol = db.Roles.Where(r => r.nombre.ToLower() == "Cliente").FirstOrDefault();
                 db.Usuarios.Add(model);
                 db.SaveChanges();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                throw ex;
             }
         }
 

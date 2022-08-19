@@ -19,5 +19,6 @@ namespace Model.ViewModel
         public string duracion { get; set; }
         [DisplayName("Precio")]
         public string precio { get; set; }
+        public string reference { get; set; }
     }
 }

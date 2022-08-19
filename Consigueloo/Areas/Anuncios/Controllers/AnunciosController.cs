@@ -11,6 +11,10 @@ using System.IO;
 using Consigueloo.Models;
 using Microsoft.AspNet.Identity;
 using System.Net;
+using RestSharp;
+using Model.Anuncios;
+using System.Text.Json;
+using Newtonsoft.Json;
 
 namespace Consigueloo.Areas.Anuncios.Controllers
 {
@@ -58,8 +62,6 @@ namespace Consigueloo.Areas.Anuncios.Controllers
             anuncio = tipoAnunciosDAO.Find(id);
             if (Request.IsAuthenticated)
             {
-                
-               
                 List<String> list = new List<string>();
                 anuncio.nombre.caracteristicas.ForEach(x =>
                 {
@@ -197,7 +199,8 @@ namespace Consigueloo.Areas.Anuncios.Controllers
         [HttpPost]
         public ActionResult CargarTerminos(int? id)
         {
-            TipoAnunciosDTO model = tipoAnunciosDAO.Find(id);
+            TipoAnunciosDTO model = tipoAnunciosDAO.FindInCents(id);
+            Session.Add("TipoAnuncio", model);
             return PartialView("_Terminos", model);
         }
         [HttpPost]
@@ -235,6 +238,49 @@ namespace Consigueloo.Areas.Anuncios.Controllers
             return View(anuncio.catalogo);
         
         }
+
+        public ActionResult CheckPayment(string id)
+        {
+            bool result = false;
+            string user = User.Identity.GetUserName();
+            var client = new RestClient("https://sandbox.wompi.co");
+            var request = new RestRequest($"/v1/transactions/{id}");
+            var response = client.Get(request);
+            Root paymentData = JsonConvert.DeserializeObject<Root>(response.Content);
+            if (paymentData.data.status == "APPROVED")
+            {
+                result = anunciosDAO.RegisterPayment(paymentData.data, user);
+            }
+            if (result)
+            {
+                //var tipoAnuncio = (TipoAnunciosDTO)Session["TipoAnuncio"];
+                //return RedirectToAction("Create", new { id = tipoAnuncio.id });
+                if (paymentData.data.status == "APPROVED")
+                {
+                    ViewBag.statusMessage = "Su pago ha sido aprobado";
+                }
+                if (paymentData.data.status == "DECLINED")
+                {
+                    ViewBag.statusMessage = "Su pago ha sido rechazado";
+                }
+                if (paymentData.data.status == "VOIDED")
+                {
+                    ViewBag.statusMessage = "La transacción ha sido anulada";
+                }
+                if (paymentData.data.status == "Error")
+                {
+                    ViewBag.errorMessage = "Ocurrió un error al recibir su pago";
+                    return View("Error");
+                }
+                return View();
+            }
+            else
+            {
+                ViewBag.errorMessage = "Ocurrió un error al recibir su pago";
+                return View("Error");
+            }
+        }
+
     }
 
 }
