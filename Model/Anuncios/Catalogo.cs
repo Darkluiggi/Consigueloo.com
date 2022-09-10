@@ -11,6 +11,6 @@ namespace Model.Anuncios
         public int id { get; set; }
         public int anuncioId { get; set; }
         
-        public List<CatalogoImagen> imagen { get; set; }
+        public virtual List<CatalogoImagen> imagen { get; set; }
     }
 }

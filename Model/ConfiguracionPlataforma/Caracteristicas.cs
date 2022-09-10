@@ -5,11 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Model.ConfiguraciónPlataforma
+namespace Model.ConfiguracionPlataforma
 {
     public class Caracteristicas : ModelBase
     {
         public int id { get; set; }
         public string nombre { get; set; }
+
+
     }
 }

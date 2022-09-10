@@ -40,6 +40,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Anuncios\InfoImagen.cs" />
     <Compile Include="Anuncios\Anuncio.cs" />
     <Compile Include="Anuncios\AnuncioTrabajo.cs" />
     <Compile Include="Anuncios\Catalogo.cs" />
@@ -66,6 +67,7 @@
     <Compile Include="ViewModel\LocalidadesDTO.cs" />
     <Compile Include="ViewModel\NombreAnunciosDTO.cs" />
     <Compile Include="ViewModel\PeriodosDTO.cs" />
+    <Compile Include="ViewModel\PaymentDataDTO.cs" />
     <Compile Include="ViewModel\TipoAnunciosDTO.cs" />
     <Compile Include="ViewModel\UsuariosDTO.cs" />
   </ItemGroup>

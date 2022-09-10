@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Consigueloo.Models;
+using System.Data.Entity;
 
 namespace Consigueloo.Controllers
 {
@@ -15,15 +16,18 @@ namespace Consigueloo.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private Persistence.ApplicationDbContext db;
 
         public ManageController()
         {
+            db = new Persistence.ApplicationDbContext();
         }
 
         public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            db = new Persistence.ApplicationDbContext();
         }
 
         public ApplicationSignInManager SignInManager
@@ -64,14 +68,19 @@ namespace Consigueloo.Controllers
                 : "";
 
             var userId = User.Identity.GetUserId();
+            var userEmail = User.Identity.GetUserName();
             var model = new IndexViewModel
             {
                 HasPassword = HasPassword(),
                 PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
                 Logins = await UserManager.GetLoginsAsync(userId),
-                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
+                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId),
+                anunciosPendientes = db.Usuarios.Include(u => u.anuncios).FirstOrDefault(u => u.correo.Equals(userEmail)).anuncios.Where(a => !a.estado).ToList(),
+                anuncios = db.Usuarios.Include(u => u.anuncios).FirstOrDefault(u => u.correo.Equals(userEmail)).anuncios.Where(a => a.estado).ToList()
+
             };
+
             return View(model);
         }
 

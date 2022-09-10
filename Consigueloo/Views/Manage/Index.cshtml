@@ -3,85 +3,190 @@
     ViewBag.Title = "Administrar";
 }
 
-<h2>@ViewBag.Title.</h2>
 
-<p class="text-success">@ViewBag.StatusMessage</p>
-<div>
-    <h4>Cambiar la configuración de la cuenta</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>Contraseña:</dt>
-        <dd>
-            [
-            @if (Model.HasPassword)
-            {
-                @Html.ActionLink("Cambiar la contraseña", "ChangePassword")
-            }
-            else
-            {
-                @Html.ActionLink("Crear", "SetPassword")
-            }
-            ]
-        </dd>
-        <dt>Inicios de sesión externos:</dt>
-        <dd>
-            @Model.Logins.Count [
-            @Html.ActionLink("Administrar", "ManageLogins") ]
-        </dd>
-        @*
-            Los números de teléfono se pueden usar como una segunda fase de comprobación en un sistema de autenticación en dos fases.
-             
-             Consulte <a href="https://go.microsoft.com/fwlink/?LinkId=403804">este artículo</a>
-                para obtener detalles sobre cómo configurar esta aplicación ASP.NET para que sea compatible con la autenticación en dos fases mediante SMS.
-             
-             Quite la marca de comentario del bloque siguiente después de configurar la autenticación en dos fases
-        *@
-        @*  
-            <dt>Número de teléfono:</dt>
-            <dd>
-                @(Model.PhoneNumber ?? "None")
-                @if (Model.PhoneNumber != null)
-                {
-                    <br />
-                    <text>[&nbsp;&nbsp;@Html.ActionLink("Change", "AddPhoneNumber")&nbsp;&nbsp;]</text>
-                    using (Html.BeginForm("RemovePhoneNumber", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                    {
-                        @Html.AntiForgeryToken()
-                        <text>[<input type="submit" value="Quitar" class="btn-link" />]</text>
-                    }
-                }
-                else
-                {
-                    <text>[&nbsp;&nbsp;@Html.ActionLink("Add", "AddPhoneNumber")
-                }
-            </dd>
-        *@
-        <dt>Autenticación de dos factores:</dt>
-        <dd>
-            <p>
-                No hay ningún proveedor de autenticación en dos fases configurado. Consulte <a href="https://go.microsoft.com/fwlink/?LinkId=403804">este artículo</a>
-                para obtener detalles sobre cómo configurar esta aplicación ASP.NET para que sea compatible con la autenticación en dos fases.
-            </p>
-            @*@if (Model.TwoFactor)
-                {
-                    using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                    {
-                        @Html.AntiForgeryToken()
-                        <text>Habilitado
-                        <input type="submit" value="Deshabilitar" class="btn btn-link" />
-                        </text>
-                    }
-                }
-                else
-                {
-                    using (Html.BeginForm("EnableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                    {
-                        @Html.AntiForgeryToken()
-                        <text>Deshabilitada
-                        <input type="submit" value="Habilitar" class="btn btn-link" />
-                        </text>
-                    }
-                }*@
-        </dd>
-    </dl>
+
+<div class="container" style="padding-top:50px">
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <h5>Administrar.</h5>
+
+            <p class="text-success"></p>
+
+
+            <div class="card-header color-blue3"><svg class="svg-inline--fa fa-user fa-w-14 mr-1 color-green" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z"></path></svg><!-- <i class="fas fa-user mr-1 color-green"></i> --><strong>Cambiar la configuración de la cuenta</strong></div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <strong>Contraseña:</strong>
+                    <br>
+                    <hr>
+                    <button class="btn bg-white color-blue shadow-button">
+                        <a href="/Manage/ChangePassword">Cambiar la contraseña</a>
+                    </button>
+                </div>
+            </div>
+
+            <div class="row" style="margin-top:20px">
+                <div class="col-md-12">
+                    <h5>Administrar anuncios.</h5>
+                    <br>
+                    <div id="anunciosPendientesdiv">
+
+                        <div class="card-header color-blue3"><svg class="svg-inline--fa fa-table fa-w-16 mr-1 color-green" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="table" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M464 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V80c0-26.51-21.49-48-48-48zM224 416H64v-96h160v96zm0-160H64v-96h160v96zm224 160H288v-96h160v96zm0-160H288v-96h160v96z"></path></svg><!-- <i class="fas fa-table mr-1 color-green"></i> --><strong>Anuncios pendientes por crear</strong></div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table table-striped" id="dataTable" width="100%" cellspacing="0">
+                                    <tbody>
+                                        <tr class="color-blue3">
+                                            <th>
+                                                Nombre de anuncio
+                                            </th>
+
+                                            <th>
+                                                Referencia de pago
+                                            </th>
+                                            <th>
+                                                Núm. de transacción
+                                            </th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                        @if (Model.anunciosPendientes.Count == 0)
+                                        {
+                                            <tr>
+                                                <td colspan="4">No hay elementos para mostrar</td>
+                                            </tr>
+                                        }
+                                        else
+                                        {
+                                            foreach (var item in Model.anunciosPendientes)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.tipoAnuncio.nombre.nombre)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.pago.reference)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.pago.id)
+                                                    </td>
+                                                    <td>
+                                                        <a class="btn btn-primary" href="/Anuncios/Anuncios/Create/@item.id?PayReference=@item.pago.reference">
+                                                            Crear
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="col-md-12">
+                    <div id="anunciosActivosdiv">
+
+                        <div class="card-header color-blue3"><svg class="svg-inline--fa fa-table fa-w-16 mr-1 color-green" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="table" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M464 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V80c0-26.51-21.49-48-48-48zM224 416H64v-96h160v96zm0-160H64v-96h160v96zm224 160H288v-96h160v96zm0-160H288v-96h160v96z"></path></svg><!-- <i class="fas fa-table mr-1 color-green"></i> --><strong>Tus Anuncios en Consigueloo</strong></div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table table-striped" id="dataTable" width="100%" cellspacing="0">
+                                    <tbody>
+                                        <tr class="color-blue3">
+                                            <th>
+                                                Título
+                                            </th>
+
+                                            <th>
+                                                Fecha cancelación
+                                            </th>
+                                            <th>
+                                                Nombre
+                                            </th>
+                                            <th>Acciones</th>
+                                        </tr>
+
+                                        @if (Model.anuncios.Count == 0)
+                                        {
+                                            <tr>
+                                                <td colspan="4">No hay elementos para mostrar</td>
+                                            </tr>
+                                        }
+                                        else
+                                        {
+                                            foreach (var item in Model.anuncios)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.titulo)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.fechaCancelacion)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.nombreContacto)
+                                                    </td>
+                                                    <td>
+                                                        <a class="btn btn-primary" href="">
+                                                            Borrar
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        }
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
 </div>
+<script>
+    function Borrar(id) {
+        ActivarLoader();
+
+        $.ajax({
+            type: "POST",
+            url: '/Usuarios/Usuarios/Delete',
+            datatype: "json",
+            contentType: 'application/json',
+            data: JSON.stringify({ "id": id }),
+            success: function (r) {
+                $("#dvcontent").html(r);
+                DesactivarLoader();
+            },
+            error: function (r) {
+                $("#dvcontent").html(r);
+                DesactivarLoader();
+            }
+        });
+    }
+    function saveId(id) {
+        ActivarLoader();
+        console.log(id);
+        $.ajax({
+            type: "POST",
+            url: '/Usuarios/Usuarios/SaveId',
+            datatype: "json",
+            contentType: 'application/json',
+            data: JSON.stringify({ "id": id }),
+            success: function (r) {
+
+            },
+            error: function (r) {
+
+            }
+        });
+    }
+</script>

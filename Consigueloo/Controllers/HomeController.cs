@@ -12,6 +12,7 @@ using Consigueloo.Models;
 using Model.ViewModel;
 using DAO;
 using Consigueloo.Services;
+using System.Web.Helpers;
 
 namespace Consigueloo.Controllers
 {
@@ -29,16 +30,7 @@ namespace Consigueloo.Controllers
         }
         public  ActionResult Index()
         {
-            if (User.Identity.IsAuthenticated)
-            {
-                var isAdmin = perfilValidator.isAdministrator(User.Identity.GetUserName());
-                if (isAdmin)
-                {
-                    ViewBag.PerfilValidator = "Administrador";
-                }
-            }
-            return View();
-           
+            return View();          
            
         }
 
@@ -51,7 +43,7 @@ namespace Consigueloo.Controllers
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Tus inquietudes las resolvemos en los siguientes canales:.";
 
             return View();
         }
@@ -62,5 +54,19 @@ namespace Consigueloo.Controllers
             return PartialView("_Display", anuncios);
         }
 
+        [HttpGet]
+        public ActionResult CheckUserAdmin()
+        {
+            var result = "usuario";
+            if (User.Identity.IsAuthenticated)
+            {
+                var isAdmin = perfilValidator.isAdministrator(User.Identity.GetUserName());
+                if (isAdmin)
+                {
+                    result = "Administrador";
+                }
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
     }
 }

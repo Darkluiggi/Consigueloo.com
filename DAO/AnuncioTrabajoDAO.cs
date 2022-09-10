@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Helpers.InfoMensajes;
 using Model.Anuncios;
-using Model.ConfiguraciónPlataforma;
+using Model.ConfiguracionPlataforma;
 using Model.ViewModel;
 using Persistence;
 using System;

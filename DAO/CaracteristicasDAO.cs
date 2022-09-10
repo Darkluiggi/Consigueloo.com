@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Helpers.InfoMensajes;
-using Model.ConfiguraciónPlataforma;
+using Model.ConfiguracionPlataforma;
 using Model.ViewModel;
 using Persistence;
 using System;

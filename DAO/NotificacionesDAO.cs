@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Helpers.InfoMensajes;
 using Model.Anuncios;
-using Model.ConfiguraciónPlataforma;
+using Model.ConfiguracionPlataforma;
 using Model.Usuarios;
 using Model.ViewModel;
 using Persistence;
@@ -222,7 +222,7 @@ namespace DAO
                     }
                 });
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;
@@ -315,7 +315,7 @@ namespace DAO
                         anuncioModel.celularContacto = item.celularContacto;
                         anuncioModel.descripcion = item.descripcion;
                         anuncioModel.id = item.id;
-                        anuncioModel.path = imageHelper.GetImageFromByteArray(item.imagen);
+                        anuncioModel.path = item.imagen != null ? imageHelper.GetImageFromByteArray(item.imagen) : null;
                         anuncioModel.fechaActivacion = item.fechaActivacion;
                         anuncioModel.fechaCancelacion = item.fechaCancelacion;
                         anuncioModel.categoria = categoriasDAO.Find(item.categoriaId);

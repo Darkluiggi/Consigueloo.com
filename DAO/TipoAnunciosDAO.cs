@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Helpers.InfoMensajes;
-using Model.ConfiguraciónPlataforma;
+using Model.ConfiguracionPlataforma;
 using Model.ViewModel;
 using Persistence;
 using System;
@@ -43,12 +43,8 @@ namespace DAO
 
                 tipoAnuncio.ForEach(x =>
                 {
-                    TipoAnunciosDTO response = new TipoAnunciosDTO();
-                    response.id = x.id;
-                    response.duracion = x.duracion;
+                    TipoAnunciosDTO response = new TipoAnunciosDTO(x);
                     response.nombre = nombreAnunciosDAO.Find(x.nombreId);
-                    response.precio = x.precio;
-                    response.nombreId = x.nombreId;
                     responseList.Add(response);
                 });
                 return responseList;
@@ -67,26 +63,21 @@ namespace DAO
             {
                 int? idnombre = Int32.Parse(nombre);
                 int? idduracion = Int32.Parse(duracion);
-                TipoAnunciosDTO tipoAnuncio = new TipoAnunciosDTO();
-                tipoAnuncio.nombre = nombreAnunciosDAO.Find(idnombre);
+                NombreAnuncios nombreAnuncio = db.NombreAnuncios.Find(idnombre);
                 var periodo = periodosDAO.Find(idduracion);
-                tipoAnuncio.duracion = periodo.nombre;
-                tipoAnuncio.precio = precio;
 
                 TipoAnuncios response = new TipoAnuncios();
-                response.nombre = new NombreAnuncios();
-                response.nombre.nombre=tipoAnuncio.nombre.nombre;
-                response.precio = tipoAnuncio.precio;
-                response.duracion = tipoAnuncio.duracion;
-                response.nombre = db.NombreAnuncios.Include(x=> x.caracteristicas)
-                    .Include(x=>x.noIncluidas).FirstOrDefault(x=>x.id==tipoAnuncio.nombre.id);
-                db.TiposAnuncio.Add(response);
+                response.nombreId = Int32.Parse(nombre);
+                response.precio = precio;
+                response.duracion = periodo.nombre;
+                response = db.TiposAnuncio.Add(response);
                 db.SaveChanges();
+                TipoAnunciosDTO tipoAnuncio = new TipoAnunciosDTO(response);
                 ViewInfoMensaje.setMensaje(controller, MensajeBuilder.CrearMsgSuccess(entidad), Helpers.InfoMensajes.ConstantsLevels.SUCCESS);
                 return tipoAnuncio;
             }
 
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;
@@ -101,12 +92,8 @@ namespace DAO
                 //Mapeo de clase
                 TipoAnuncios model = new TipoAnuncios();
                 model= db.TiposAnuncio.Include(x=> x.nombre).FirstOrDefault(x=> x.id==id_);
-                TipoAnunciosDTO response = new TipoAnunciosDTO();
-                response.id = model.id;
-                response.duracion = model.duracion;
+                TipoAnunciosDTO response = new TipoAnunciosDTO(model);
                 response.nombre = nombreAnunciosDAO.Find(model.nombreId);
-                response.precio = model.precio;
-                response.nombreId = model.nombreId;
                 return response;
             }
             catch (Exception)

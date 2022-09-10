@@ -5734,7 +5734,28 @@ a.badge-dark:focus, a.badge-dark.focus {
 .close:not(:disabled):not(.disabled):hover, .close:not(:disabled):not(.disabled):focus {
   opacity: 0.75;
 }
+.returnB {
+    float: left;
+    font-size: 21px;
+    font-weight: bold;
+    line-height: 1;
+    color: #c5e23b;
+    text-shadow: 0 1px 0 #fff;
+    filter: alpha(opacity=50);
+    opacity: 0.6;
+}
 
+    .returnB:hover,
+    .returnB:focus {
+        color: #2a7ff3;
+        text-decoration: none;
+        cursor: pointer;
+        filter: alpha(opacity=50);
+        opacity: 0.5;
+    }
+    .returnB:not(:disabled):not(.disabled):hover, .returnB:not(:disabled):not(.disabled):focus {
+        opacity: 0.75;
+    }
 button.close {
   padding: 0;
   background-color: transparent;
@@ -5743,7 +5764,15 @@ button.close {
      -moz-appearance: none;
           appearance: none;
 }
-
+button.returnB {
+    padding: 0;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
 a.close.disabled {
   pointer-events: none;
 }
@@ -12157,6 +12186,11 @@ body {
     animation-timing-function: transform cubic-bezier(0.18, 1.25, 0.4, 1), opacity cubic-bezier(0, 1, 0.4, 1);
 }
 
+.containler-messaging {
+    height: 600px;
+    position: relative;
+}
+
 .row2 {
     margin: 15px;
 }
@@ -12205,3 +12239,4 @@ body {
         .btn-facebook:not(:disabled):not(.disabled):active:focus, .btn-facebook:not(:disabled):not(.disabled).active:focus, .show > .btn-facebook.dropdown-toggle:focus {
             box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
         }
+

@@ -1,4 +1,4 @@
-﻿using Model.ConfiguraciónPlataforma;
+﻿using Model.ConfiguracionPlataforma;
 using Model.Usuarios;
 using Model.ViewModel;
 using Persistence;

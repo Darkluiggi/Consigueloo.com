@@ -11,7 +11,7 @@ using Consigueloo.Services;
 using DAO;
 using Microsoft.AspNet.Identity;
 using Model.Anuncios;
-using Model.ConfiguraciónPlataforma;
+using Model.ConfiguracionPlataforma;
 using Model.ViewModel;
 using Persistence;
 

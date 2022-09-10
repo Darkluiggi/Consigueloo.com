@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Helpers.InfoMensajes;
-using Model.ConfiguraciónPlataforma;
+using Model.ConfiguracionPlataforma;
 using Model.ViewModel;
 using Persistence;
 using System;
@@ -41,17 +41,12 @@ namespace DAO
                     response.nombre = x.nombre;
                     x.caracteristicas.ForEach(y =>
                     {
-                        CaracteristicasDTO item = new CaracteristicasDTO();
-                        item.nombre = x.nombre;
-                        item.id = x.id;
+                        CaracteristicasDTO item = new CaracteristicasDTO(y);
                         response.caracteristicas.Add(item);
                     });
                     x.noIncluidas.ForEach(y =>
                     {
-                        CaracteristicasDTO item = new CaracteristicasDTO();
-                        item.nombre = x.nombre;
-                        item.id = x.id;
-
+                        CaracteristicasDTO item = new CaracteristicasDTO(y);
                         response.noIncluidas.Add(item);
                     });
                     responseList.Add(response);
@@ -129,17 +124,12 @@ namespace DAO
                 response.nombre = model.nombre;
                 model.caracteristicas.ForEach(x =>
                 {
-                    CaracteristicasDTO item = new CaracteristicasDTO();
-                    item.nombre = x.nombre;
-                    item.id = x.id;
+                    CaracteristicasDTO item = new CaracteristicasDTO(x);
                     response.caracteristicas.Add(item);
                 });
                 model.noIncluidas.ForEach(x =>
                 {
-                    CaracteristicasDTO item = new CaracteristicasDTO();
-                    item.nombre = x.nombre;
-                    item.id = x.id;
-
+                    CaracteristicasDTO item = new CaracteristicasDTO(x);
                     response.noIncluidas.Add(item);
                 });
 

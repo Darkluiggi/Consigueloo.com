@@ -4,9 +4,56 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="container">
-
-    <h2>CheckPayment</h2>
-    <p>@ViewBag.statusMessage</p>
+<div class="container containler-messaging">
+    <div class="row">
+        <div class="col-12 center">
+            <h3 style="margin-top:20px">Comprobando pago</h3>
+        </div>
+        @if (ViewBag.status.ToString().Contains("APPROVED"))
+        {
+            <div class="col-12 center">
+                <h3 style="color:limegreen">@ViewBag.statusMessage</h3>
+            </div>
+            <div class="col-12 center">
+                <h5>Gracias por adquirir tu servicio  en consigueloo.co</h5>
+            </div>
+            <div class="col-12 center">
+                <a href="~/Manage" target="_self">Haz clic aquí para ir a tu configuración y ver tu compra</a>
+            </div>
+        }
+        <div class="col-12 center">
+            @if (ViewBag.status.ToString().Contains("DECLINED "))
+            {
+                <div class="col-12 center">
+                    <h5>Tu pago ha sido rechazado</h5>
+                </div>
+                <div class="col-12 center">
+                    <a>Haz clic aquí para intentarlo nuevamente</a>
+                </div>
+            }
+        </div>
+        <div class="col-12 center">
+            @if (ViewBag.status.ToString().Contains("VOIDED"))
+            {
+                <div class="col-12 center">
+                    <h5>Tu pago ha sido anulado</h5>
+                </div>
+                <div class="col-12 center">
+                    <a>Haz clic aquí para intentarlo nuevamente</a>
+                </div>
+            }
+        </div>
+        <div class="col-12 center">
+            @if (ViewBag.status.ToString().Contains("ERROR"))
+            {
+                <div class="col-12 center">
+                    <h5>Hubo un error al realizar tu pago</h5>
+                </div>
+                <div class="col-12 center">
+                    <a>Haz clic aquí para intentarlo nuevamente</a>
+                </div>
+            }
+        </div>
+    </div>
 </div>
 

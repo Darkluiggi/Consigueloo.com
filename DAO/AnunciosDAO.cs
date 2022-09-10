@@ -35,6 +35,7 @@ namespace DAO
         {
             try
             {
+                Anuncio anuncioInDB = db.Anuncios.Find(anuncio.id);
                 int categoriaId = Int32.Parse(categoria);
                 CategoriasDTO cat = categoriasDAO.Find(categoriaId);
                 anuncio.categoria = cat;
@@ -42,26 +43,35 @@ namespace DAO
                 int localidadId = Int32.Parse(localidad);
                 LocalidadesDTO loc = localidadesDAO.Find(localidadId);
                 anuncio.localidad=loc;
-                anuncio.fechaCancelacion = anuncio.fechaActivacion.AddDays(60);
-                
-                Anuncio anuncioModel = new Anuncio();
-                anuncioModel.titulo = anuncio.titulo;
-                anuncioModel.imagen = anuncio.imagen;
-                anuncioModel.descripcion = anuncio.descripcion;
-                anuncioModel.actImagen = anuncio.actImagen;
-                anuncioModel.nombreContacto = anuncio.nombreContacto;
-                anuncioModel.telefono = anuncio.telefono;
-                anuncioModel.celularContacto = anuncio.celularContacto;
-                anuncioModel.actCatalogo = anuncio.actCatalogo;
-                anuncioModel.fechaActivacion = anuncio.fechaActivacion;
-                anuncioModel.fechaCancelacion = anuncio.fechaCancelacion;
+                if (duracion.Contains("Mensual"))
+                {
+                    anuncio.fechaCancelacion = anuncio.fechaActivacion.AddDays(30);
+                }
+                if (duracion.Contains("Trimestral"))
+                {
+                    anuncio.fechaCancelacion = anuncio.fechaActivacion.AddDays(90);
+                }
+                if (duracion.Contains("Anual"))
+                {
+                    anuncio.fechaCancelacion = anuncio.fechaActivacion.AddDays(360);
+                }
 
-                anuncioModel.categoria = db.Categorias.Find(anuncio.categoria.id);
-                anuncioModel.localidad = db.Localidades.Find(anuncio.localidad.id);
-                Usuarios usuario = db.Usuarios.FirstOrDefault(x => x.correo.Equals(user));
-                usuario.anuncios.Add(anuncioModel);
+                anuncioInDB.titulo = anuncio.titulo;
+                anuncioInDB.imagen = anuncio.imagen;
+                anuncioInDB.descripcion = anuncio.descripcion;
+                anuncioInDB.actImagen = anuncio.actImagen;
+                anuncioInDB.nombreContacto = anuncio.nombreContacto;
+                anuncioInDB.telefono = anuncio.telefono;
+                anuncioInDB.celularContacto = anuncio.celularContacto;
+                anuncioInDB.actCatalogo = anuncio.actCatalogo;
+                anuncioInDB.fechaActivacion = anuncio.fechaActivacion;
+                anuncioInDB.fechaCancelacion = anuncio.fechaCancelacion;
+                anuncioInDB.estado = true;
+
+                anuncioInDB.categoria = db.Categorias.Find(anuncio.categoria.id);
+                anuncioInDB.localidad = db.Localidades.Find(anuncio.localidad.id);
                 
-                db.Entry(usuario).State = EntityState.Modified;
+                db.Entry(anuncioInDB).State = EntityState.Modified;
                 db.SaveChanges();
 
                 }
@@ -227,14 +237,35 @@ namespace DAO
             }
         }
 
-        public bool RegisterPayment(PaymentData paymentData, string user)
+        public bool RegisterPayment(PaymentData paymentData, string user, TipoAnunciosDTO tipoAnuncio)
         {
             bool result = false;
-            Usuarios usuario = db.Usuarios.FirstOrDefault(x => x.correo.Equals(user));
+            var payment = db.pagosAnuncios.Find(paymentData.id);
+            if (payment != null)
+            {
+                return result = true;
+            }
+            
             try
             {
-                paymentData.merchant = db.datosComercio.Find(paymentData.merchant.legal_id);
-                usuario.pagosAnuncios.Add(paymentData);
+                Anuncio anuncio = new Anuncio();
+                anuncio.estado = false;
+                anuncio.tipoAnuncioId = tipoAnuncio.id;
+                anuncio.pago = paymentData;
+                anuncio.fechaActivacion = DateTime.Now;
+                anuncio.fechaCancelacion = DateTime.Now.AddDays(30);
+                Usuarios usuario = db.Usuarios.FirstOrDefault(x => x.correo.Equals(user));
+                if (usuario == null)
+                {
+                    db.pagosAnuncios.Add(paymentData);
+                    db.Anuncios.Add(anuncio);
+                }
+                else
+                {
+                    paymentData.merchant = db.datosComercio.Find(paymentData.merchant.legal_id);
+                    usuario.pagosAnuncios.Add(paymentData);
+                    usuario.anuncios.Add(anuncio);
+                }
                 db.SaveChanges();
                 result = true;
             }
@@ -249,7 +280,7 @@ namespace DAO
         {
             try
             {
-                Anuncio model = db.Anuncios.Include(x=> x.catalogo).Include(x=> x.catalogo.imagen).FirstOrDefault(x => x.id == id && x.estado == true);
+                Anuncio model = db.Anuncios.Include(x => x.catalogo).Include(x => x.catalogo.imagen).FirstOrDefault(x => x.id == id);
                 AnuncioDTO anuncioModel = new AnuncioDTO();
                 anuncioModel.titulo = model.titulo;
                 anuncioModel.nombreContacto = model.nombreContacto;
@@ -259,15 +290,24 @@ namespace DAO
                 anuncioModel.celularContacto = model.celularContacto;
                 anuncioModel.descripcion = model.descripcion;
                 anuncioModel.id = model.id;
-                anuncioModel.path = imageHelper.GetImageFromByteArray(model.imagen);
+                if (model.imagen != null)
+                {
+                    anuncioModel.path = imageHelper.GetImageFromByteArray(model.imagen);
+                }
                 anuncioModel.fechaActivacion = model.fechaActivacion;
                 anuncioModel.fechaCancelacion = model.fechaCancelacion;
                 anuncioModel.categoriaId = model.categoriaId;
                 anuncioModel.categoria = categoriasDAO.Find(model.categoriaId);
-                if (model.catalogo!=null)
+                if (model.catalogo != null)
                 {
                     anuncioModel.catalogo = GetCatalogo(model.catalogo);
                 }
+                if(model.pago != null)
+                {
+                    anuncioModel.pago = new PaymentDataDTO(model.pago);
+                }
+                anuncioModel.tipoAnuncioId = model.tipoAnuncioId;
+                anuncioModel.tipoAnuncio = new TipoAnunciosDTO(model.tipoAnuncio);
                 return anuncioModel;
             }
             catch (Exception)

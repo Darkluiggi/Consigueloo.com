@@ -1,5 +1,5 @@
 ﻿using DAO;
-using Model.ConfiguraciónPlataforma;
+using Model.ConfiguracionPlataforma;
 using Model.ViewModel;
 using System;
 using System.Collections.Generic;

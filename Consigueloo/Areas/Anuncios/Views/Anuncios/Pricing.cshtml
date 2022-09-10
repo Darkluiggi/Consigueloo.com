@@ -649,16 +649,13 @@
     <div class="modal-dialog modal-lg linear-gradientc" role="document">
         <div class="modal-content linear-gradientc">
             <div class="modal-header ">
-                <h1 class="modal-title color-white4 " id="exampleModalLabel">Términos y condiciones</h1>
+                <h1 class="modal-title color-white4 " id="exampleModalLabel">Características del plan</h1>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <div class="modal-body" id="divterminos">
-               
-            </div>
-            
-
+            <div class="modal-body" id="divterminos">               
+            </div>      
         </div>
     </div>
 </div>
@@ -817,8 +814,15 @@
             contentType: 'application/json',
             data: JSON.stringify({ "id": id }),
             success: function (r) {
-                $("#divterminos").html(r);
-                DesactivarLoader();
+                if (r == "Debes loguearte para poder comprar un anuncio") {
+                    if (confirm(r)) {
+                    window.location = "@Url.Action("Login", "Account" , new { area = "" })"
+                    }
+                }
+                else {
+                    $("#divterminos").html(r);
+                    DesactivarLoader();
+                }
             },
             error: function (r) {
                 $("#divterminos").html(r);

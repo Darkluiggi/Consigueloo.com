@@ -18,13 +18,13 @@ namespace Model.Anuncios
         public string payment_method_type { get; set; }
         [ForeignKey("payment_method")]
         public int? payment_methodId { get; set; }
-        public PaymentMethod payment_method { get; set; }
+        public virtual PaymentMethod payment_method { get; set; }
         public string redirect_url { get; set; }
         public string status { get; set; }
         public object status_message { get; set; }
         [ForeignKey("merchant")]
         public string merchantId { get; set; }
-        public Merchant merchant { get; set; }
+        public virtual Merchant merchant { get; set; }
         public List<object> taxes { get; set; }
     }
 
@@ -62,13 +62,13 @@ namespace Model.Anuncios
         public string type { get; set; }
         [ForeignKey("extra")]
         public int? extraId { get; set; }
-        public Extra extra { get; set; }
+        public virtual Extra extra { get; set; }
         public int installments { get; set; }
     }
 
     public class Root
     {
-        public PaymentData data { get; set; }
+        public virtual PaymentData data { get; set; }
         public Meta meta { get; set; }
     }
 }

@@ -4,7 +4,7 @@ using Consigueloo.Models;
 using DAO;
 using Helpers.InfoMensajes;
 using Microsoft.AspNet.Identity;
-using Model.ConfiguraciónPlataforma;
+using Model.ConfiguracionPlataforma;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Model.Usuarios;

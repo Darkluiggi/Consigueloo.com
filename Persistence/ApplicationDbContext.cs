@@ -1,4 +1,4 @@
-﻿using Model.ConfiguraciónPlataforma;
+﻿using Model.ConfiguracionPlataforma;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -41,6 +41,7 @@ namespace Persistence
 
         public DbSet<Merchant> datosComercio { get; set; }
         public DbSet<Extra> datosTarjeta { get; set; }
+        public DbSet<InfoImagen> InfoImagenes { get; set; }
 
 
     }

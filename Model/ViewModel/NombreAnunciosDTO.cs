@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Model.ConfiguracionPlataforma;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -14,6 +15,23 @@ namespace Model.ViewModel
             caracteristicas = new List<CaracteristicasDTO>();
             noIncluidas = new List<CaracteristicasDTO>();
         }
+
+        public NombreAnunciosDTO(NombreAnuncios model)
+        {
+            id = model.id;
+            nombre = model.nombre;
+            caracteristicas = new List<CaracteristicasDTO>();
+            model.caracteristicas.ForEach(caracteristic =>
+            {
+                caracteristicas.Add(new CaracteristicasDTO(caracteristic));
+            });
+            noIncluidas = new List<CaracteristicasDTO>();
+            model.noIncluidas.ForEach(caracteristic =>
+            {
+                noIncluidas.Add(new CaracteristicasDTO(caracteristic));
+            });
+        }
+
 
         public int id { get; set; }
         [DisplayName("Nombre")]

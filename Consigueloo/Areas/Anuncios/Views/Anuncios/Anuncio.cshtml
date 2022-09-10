@@ -5,48 +5,76 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
     <div class="container-fluid">
-        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
+
+        <button class="returnB" type="button" data-dismiss="modal" aria-label="Return" onclick="location.href='@Url.Action("Index","Anuncios")'">
+            <span aria-hidden="true"  style="font-size:50px"><i class="fas fa-arrow-left"></i></span>
         </button>
-        <!-- Portfolio Item Heading -->
-        <h1 class="my-4 color-blue3">
-            @Model.titulo
-            @*<small>Secondary Text</small>*@
-        </h1>
+        <div class="container" style="width:50%">
+            <!-- Portfolio Item Heading -->
+            <h1 class="my-4 color-blue3">
+                @Model.titulo
+                @*<small>Secondary Text</small>*@
+            </h1>
 
 
-        <!-- Portfolio Item Row -->
-        <div class="row margin-bot">
+            <!-- Portfolio Item Row -->
+            <div class="row margin-bot">
 
-            <div class="col-image-12 anuncio-image ">
-                <img src="@Model.path" alt="">
-            </div>
-
-            <div class="col-md-6">
-                <h3 class="my-3 color-blue3">Descripción</h3>
-
-                <p>@Model.descripcion</p>
-            </div>
-
-            <div class="col-md-6">
-                <h3 class="my-3 color-blue3">Contacto</h3>
-                <div class="row">
-                    <div class="icon-card3 "><img src="~/Content/assets/Iconos/llamadas.png" /> </div>
-                    <p class="card-text">@Model.telefono</p>
-                </div>
-                <br />
-                <div class="row">
-                    <div class="icon-card3 "><img src="~/Content/assets/Iconos/whatsapp.png" /> </div>
-                    <p class="card-text">@Model.celularContacto</p>
-                </div>  <br />
-                <p class="card-text">@Model.nombreContacto</p>
-                @if (Model.actCatalogo == true)
-                {
-                    <div class="flex-end">
-                        <a href="@Url.Action("Catalogo", "Anuncios", new { id=Model.id, area = "Anuncios" })" class="navbar-link float-right" onclick="ActivarLoader()">Catálogo</a>
+                <div class="col-md-12 anuncio-image ">
+                    <div class="col-image-12">
+                        <img src="@Model.path" alt="">
                     </div>
-                }
-            </div>
+                </div>
 
+                <div class="col-md-6">
+                    <h3 class="my-3 color-blue3">Descripción</h3>
+
+                    <p>@Model.descripcion</p>
+                </div>
+
+                <div class="col-md-6">
+                    <h3 class="my-3 color-blue3">Contacto</h3>
+                    <div class="row">
+                        <div class="icon-card3 "><img src="~/Content/assets/Iconos/llamadas.png" /> </div>
+                        <p class="card-text">@Model.telefono</p>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="icon-card3 "><img src="~/Content/assets/Iconos/whatsapp.png" /> </div>
+                        <p class="card-text">@Model.celularContacto</p>
+                    </div>  <br />
+                    <p class="card-text">@Model.nombreContacto</p>
+                    @if (Model.actCatalogo == true)
+                    {
+                        <div class="flex-end">
+                            <a href="@Url.Action("Catalogo", "Anuncios", new { id=Model.id, area = "Anuncios" })" class="navbar-link float-right" onclick="ActivarLoader()">Catálogo</a>
+                        </div>
+                    }
+                </div>
+
+            </div>
         </div>
     </div>
+
+<script>
+    function goToAnuncios() {
+        ActivarLoader();
+
+        $.ajax({
+            type: "GET",
+            url: '/Anuncios/Anuncios',
+            datatype: "json",
+            contentType: 'application/json',
+            success: function (res) {
+                var newDoc = document.open("text/html", "replace");
+                newDoc.write(res);
+                newDoc.close();
+                DesactivarLoader();
+            },
+            error: function (r) {
+                $("#dvcontent").html(r);
+                DesactivarLoader();
+            }
+        });
+    }
+</script>

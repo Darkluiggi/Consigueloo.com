@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,9 @@ namespace Model.Anuncios
         public DateTime fecha { get; set; }
         public bool check { get; set; }
         public string notificacion { get; set; }
-        public Anuncio anuncio { get; set; }
+
+        [ForeignKey("anuncio")]
+        public int? anuncioId { get; set; }
+        public virtual Anuncio anuncio { get; set; }
     }
 }

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Model.ConfiguraciónPlataforma
+namespace Model.ConfiguracionPlataforma
 {
     public class NombreAnuncios: ModelBase
     {
@@ -17,7 +17,7 @@ namespace Model.ConfiguraciónPlataforma
 
         public int id { get; set; }
         public string nombre { get; set; }
-        public List<Caracteristicas> caracteristicas { get; set; }
-        public List<Caracteristicas> noIncluidas { get; set; }
+        public virtual List<Caracteristicas> caracteristicas { get; set; }
+        public virtual List<Caracteristicas> noIncluidas { get; set; }
     }
 }

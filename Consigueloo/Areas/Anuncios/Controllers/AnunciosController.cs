@@ -15,6 +15,7 @@ using RestSharp;
 using Model.Anuncios;
 using System.Text.Json;
 using Newtonsoft.Json;
+using System.IdentityModel;
 
 namespace Consigueloo.Areas.Anuncios.Controllers
 {
@@ -56,19 +57,20 @@ namespace Consigueloo.Areas.Anuncios.Controllers
 
         // GET: Anuncios/Anuncios/Create
       
-        public ActionResult Create(int? id)
+        public ActionResult Create(int? id, string PayReference)
         {
-            TipoAnunciosDTO anuncio = new TipoAnunciosDTO();
-            anuncio = tipoAnunciosDAO.Find(id);
+            AnuncioDTO anuncio = new AnuncioDTO();
+            anuncio = anunciosDAO.getById(id.Value);
             if (Request.IsAuthenticated)
             {
                 List<String> list = new List<string>();
-                anuncio.nombre.caracteristicas.ForEach(x =>
+                anuncio.tipoAnuncio.nombre.caracteristicas.ForEach(x =>
                 {
                     list.Add(x.nombre);
                 });
-                ViewBag.Duracion = anuncio.duracion;
+                ViewBag.Duracion = anuncio.tipoAnuncio.duracion;
                 ViewBag.Caracteristicas = list;
+                ViewBag.anuncioId = anuncio.id;
                 return View();
             }
             else
@@ -91,6 +93,7 @@ namespace Consigueloo.Areas.Anuncios.Controllers
                 AnuncioDTO anuncio = new AnuncioDTO();
 
                 var categoria = Request.Form["categoriaInput"];
+                anuncio.id = Int32.Parse(Request.Form["anuncioId"]);
                 anuncio.titulo = Request.Form["titulo"];
                 anuncio.nombreContacto = Request.Form["nombreContacto"];
                 anuncio.telefono = Request.Form["telefono"];
@@ -199,9 +202,16 @@ namespace Consigueloo.Areas.Anuncios.Controllers
         [HttpPost]
         public ActionResult CargarTerminos(int? id)
         {
-            TipoAnunciosDTO model = tipoAnunciosDAO.FindInCents(id);
-            Session.Add("TipoAnuncio", model);
-            return PartialView("_Terminos", model);
+            if (User.Identity.IsAuthenticated)
+            {
+                TipoAnunciosDTO model = tipoAnunciosDAO.FindInCents(id);
+                Session.Add("TipoAnuncio", model);
+                return PartialView("_Terminos", model);
+            }
+            else
+            {
+                return Json("Debes loguearte para poder comprar un anuncio", JsonRequestBehavior.AllowGet);
+            }
         }
         [HttpPost]
         public ActionResult verificarNotificaciones()
@@ -249,7 +259,8 @@ namespace Consigueloo.Areas.Anuncios.Controllers
             Root paymentData = JsonConvert.DeserializeObject<Root>(response.Content);
             if (paymentData.data.status == "APPROVED")
             {
-                result = anunciosDAO.RegisterPayment(paymentData.data, user);
+                var tipoAnuncio = (TipoAnunciosDTO)Session["TipoAnuncio"];
+                result = anunciosDAO.RegisterPayment(paymentData.data, user, tipoAnuncio);
             }
             if (result)
             {
@@ -267,11 +278,12 @@ namespace Consigueloo.Areas.Anuncios.Controllers
                 {
                     ViewBag.statusMessage = "La transacción ha sido anulada";
                 }
-                if (paymentData.data.status == "Error")
+                if (paymentData.data.status == "ERROR")
                 {
                     ViewBag.errorMessage = "Ocurrió un error al recibir su pago";
                     return View("Error");
                 }
+                ViewBag.status = paymentData.data.status;
                 return View();
             }
             else

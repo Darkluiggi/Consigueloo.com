@@ -1,54 +1,87 @@
 ﻿@using Microsoft.AspNet.Identity
-@if (Request.IsAuthenticated)
-{
-    using (Html.BeginForm("LogOff", "Usuarios", FormMethod.Post, new { area="", id = "logoutForm", @class = "navbar-right" }))
+
+<div id="loginPartialVue">
+    @if (Request.IsAuthenticated)
     {
-        @Html.AntiForgeryToken()
-    <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-user fa-fw color-blue"></i>
-        </a>
-        @*<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">*@
-        @*<i class="fas fa-user-circle fa-fw"></i>*@
-        @*</a>*@
-    <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-        <a class="dropdown-item d-flex align-items-center" href="#">@User.Identity.GetUserName()</a>
-        <a class="dropdown-item d-flex align-items-center" href="~/Manage">Settings</a>
-
-        @if (!string.IsNullOrEmpty(ViewBag.PerfilValidator))
+        using (Html.BeginForm("LogOff", "Usuarios", FormMethod.Post, new { area = "", id = "logoutForm", @class = "navbar-right" }))
         {
-            if (ViewBag.PerfilValidator.Equals("Administrador"))
-            {
-                <a class="dropdown-item d-flex align-items-center" href="~/Administrador/Administrador">Panel de administrador</a>
+            @Html.AntiForgeryToken()
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-user fa-fw color-blue"></i>
+                </a>
+                @*<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">*@
+                @*<i class="fas fa-user-circle fa-fw"></i>*@
+                @*</a>*@
+                <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                    <a class="dropdown-item d-flex align-items-center" href="#">@User.Identity.GetUserName()</a>
+                    <a class="dropdown-item d-flex align-items-center" href="~/Manage">Settings</a>
+                   
+                    <a v-if="isAdmin" class="dropdown-item d-flex align-items-center" href="~/Administrador/Administrador">Panel de administrador</a>
 
-            }
+                    <a class="dropdown-item d-flex align-items-center" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a>
+                </div>
+            </li>
+
+
+
         }
-
-
-        <a class="dropdown-item d-flex align-items-center" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a>
-    </div>
-    </li>
-
-
-     
     }
-}
-else
-{
-<ul class="nav navbar-nav navbar-left">
-    <li class="nav-item dropdown no-arrow">
-        <a class="nav-link dropdown-toggle " href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-user fa-fw color-blue"></i>
-        </a>
-        <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+    else
+    {
+        <ul class="nav navbar-nav navbar-left">
+            <li class="nav-item dropdown no-arrow">
+                <a class="nav-link dropdown-toggle " href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-user fa-fw color-blue"></i>
+                </a>
+                <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
 
-            <a class="dropdown-item d-flex align-items-center" href="~/Account/Register">Registrarse</a>
-            <a class="dropdown-item d-flex align-items-center" href="~/Account/Login">Iniciar sesión</a>
-            
-        </div>
+                    <a class="dropdown-item d-flex align-items-center" href="~/Account/Register">Registrarse</a>
+                    <a class="dropdown-item d-flex align-items-center" href="~/Account/Login">Iniciar sesión</a>
 
-    </li>
-</ul>
+                </div>
 
-           
-        }
+            </li>
+        </ul>
+
+
+    }
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/luxon@2.3.0/build/global/luxon.min.js"></script>
+<script>
+
+
+    var loginPartialVue = new Vue({
+
+        el: '#loginPartialVue',
+            data: {
+               isAdmin: false,
+            },
+            mounted: function () {
+                this.CheckUserAdmin();
+            },
+            methods: {
+                configurationInit: function () {
+                    console.log('iniciando')
+                },
+
+                CheckUserAdmin() {
+                    var url = '@Url.Action("CheckUserAdmin", "Home",  new { area = "" })'
+                    axios.get(url)
+                        .then(function (response) {
+                            if (response.data === "Administrador") {
+                                loginPartialVue.$data.isAdmin = true;
+                            }
+
+                        })
+                        .catch(function (error) {
+                            console.error(error)
+                        })
+                }
+            }
+        })
+</script>

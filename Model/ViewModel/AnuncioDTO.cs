@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Model.Anuncios;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -53,6 +54,8 @@ namespace Model.ViewModel
         public int? tipoAnuncioId { get; set; }
         public bool actDestacado { get; set; }
         public bool actRedesSociales { get; set; }
+
+        public PaymentDataDTO pago { get; set; }
     }
 
 }

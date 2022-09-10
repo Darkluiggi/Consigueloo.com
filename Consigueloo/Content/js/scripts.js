@@ -20,9 +20,10 @@
         $("body").toggleClass("sb-sidenav-toggled");
     });
 
-        
-
-       
+        $("#layoutSidenav_content").on("click", function (e) {
+            e.preventDefault();
+            $("body").removeClass("sb-sidenav-toggled");
+        });       
 
         $("#scrollToTop").on("click", function (e) {
             document.body.scrollTop = 0; // For Safari
