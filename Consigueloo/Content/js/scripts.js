@@ -15,13 +15,11 @@
         });
 
     // Toggle the side navigation
-    $("#sidebarToggle").on("click", function(e) {
-        e.preventDefault();
+    $("#sidebarToggle").on("click", function() {
         $("body").toggleClass("sb-sidenav-toggled");
     });
 
-        $("#layoutSidenav_content").on("click", function (e) {
-            e.preventDefault();
+        $("#layoutSidenav_content").on("click", function () {
             $("body").removeClass("sb-sidenav-toggled");
         });       
 
