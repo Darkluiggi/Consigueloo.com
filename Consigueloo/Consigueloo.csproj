@@ -50,6 +50,12 @@
     <Reference Include="AutoMapper, Version=9.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <HintPath>..\packages\AutoMapper.9.0.0\lib\net461\AutoMapper.dll</HintPath>
     </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AspNetCore.Antiforgery, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNetCore.Antiforgery.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Antiforgery.dll</HintPath>
     </Reference>
@@ -312,12 +318,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.3\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
     </Reference>
@@ -367,9 +367,12 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Catalogo\CatalogoAreaRegistration.cs" />
+    <Compile Include="Areas\Catalogo\Controllers\ProductosController.cs" />
     <Compile Include="Areas\Administrador\AdministradorAreaRegistration.cs" />
     <Compile Include="Areas\Administrador\Controllers\AdministradorController.cs" />
     <Compile Include="Areas\Administrador\Controllers\AnunciosController.cs" />
+    <Compile Include="Areas\Administrador\Controllers\CatalogoEmpresasController.cs" />
     <Compile Include="Areas\Administrador\Controllers\RolesController.cs" />
     <Compile Include="Areas\Administrador\Controllers\UsuariosController.cs" />
     <Compile Include="Areas\Anuncios\AnunciosAreaRegistration.cs" />
@@ -478,6 +481,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\catalogoStyle.css" />
     <Content Include="Content\css\pricing.css" />
     <Content Include="Content\css\sb-admin-2.css" />
     <Content Include="Content\css\sb-admin-2.min.css" />
@@ -607,6 +611,12 @@
     <Content Include="Areas\Anuncios\Views\Anuncios\Catalogo.cshtml" />
     <Content Include="Areas\Administrador\Views\Anuncios\Details.cshtml" />
     <Content Include="Areas\Anuncios\Views\Anuncios\CheckPayment.cshtml" />
+    <Content Include="Areas\Administrador\Views\CatalogoEmpresas\CreateOrUpdate.cshtml" />
+    <Content Include="Areas\Administrador\Views\CatalogoEmpresas\Delete.cshtml" />
+    <Content Include="Areas\Administrador\Views\CatalogoEmpresas\Index.cshtml" />
+    <Content Include="Areas\Catalogo\Views\Productos\Index.cshtml" />
+    <Content Include="Areas\Catalogo\Views\web.config" />
+    <Content Include="Areas\Catalogo\Views\Productos\_thumbs.cshtml" />
     <None Include="Properties\PublishProfiles\consigueloo.com - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile1.pubxml" />
@@ -691,11 +701,13 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
+    <Content Include="Views\Shared\_LayoutCatalogo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Administrador\Views\Shared\" />
     <Folder Include="Areas\Anuncios\Data\" />
+    <Folder Include="Areas\Catalogo\Views\Shared\" />
     <Folder Include="Areas\ConfiguracionPlataforma\Data\" />
     <Folder Include="Views\Error\" />
   </ItemGroup>

@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using Model;
 using Model.Anuncios;
+using Model.CatalogoEmpresa;
 
 namespace Persistence
 {
@@ -42,6 +43,7 @@ namespace Persistence
         public DbSet<Merchant> datosComercio { get; set; }
         public DbSet<Extra> datosTarjeta { get; set; }
         public DbSet<InfoImagen> InfoImagenes { get; set; }
+        public DbSet<CatalogoEmpresa> CatalogoEmpresas { get; set; }
 
 
     }

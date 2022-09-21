@@ -1,0 +1,63 @@
+﻿@model Model.CatalogoEmpresa.CatalogoEmpresa
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <h2>Borrar</h2>
+
+    <h3>¿Confirma que desea borrar esta página?</h3>
+    <div>
+        <h4>Catalogo Consigueloo</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.nombreProducto)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.nombreProducto)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.imagePath)
+            </dt>
+
+            <dd>
+                <img src="../@Model.imagePath" class="img-preview" />
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.whatsappLink)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.whatsappLink)
+            </dd>
+
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Borrar" class="btn btn-danger" /> 
+                <input type="button" value="Cancelar" class="btn btn-default" onclick="location.href='@Url.Action("Index","CatalogoEmpresas")'" />
+            </div>
+        }
+    </div>
+
+</div>
+<style>
+
+    .img-preview{
+        position:relative;
+        width:35%;
+        height:auto;
+        top:0;
+        border-radius:15px;
+    }
+</style>

@@ -1,0 +1,200 @@
+﻿:root {
+    /* Set fade in duration */
+    --fade-time: 0.5s;
+}
+
+    
+
+.main-img img,
+.imgs img {
+    width: 100%;
+    height: auto;
+}
+
+.imgs {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 5px;
+    overflow-y: auto;
+    height: 680px;
+    justify-content: space-between;
+    padding-right:10px;
+}
+
+    .imgs img {
+        cursor: pointer;
+        border-radius: 15px;        
+    }
+
+    .imgs::-webkit-scrollbar-track {
+        border: 1px solid #000;
+        border-radius:15px;
+        padding: 2px 2px;
+        background-color: rgb(72 63 63 / 0.25);
+    }
+
+    .imgs::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    .imgs::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+        background-color: #737272;
+        border: 1px solid #000;
+    }
+
+/* Fade in animation */
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+.fade-in {
+    opacity: 0;
+    animation: fadeIn var(--fade-time) ease-in 1 forwards;
+}
+
+
+
+
+.modalCatalogo {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.modalCatalogo-content {
+    background-color: #fefefe;
+    margin: 4% auto; /* 15% from the top and centered */
+    padding: 10px 10px 10px 10px;
+    border: 1px solid #888;
+    width: 58%; /* Could be more or less, depending on screen size */
+    border-radius: 15px;
+    position: absolute;
+    left: 20%;
+}
+
+    .modalCatalogo-content img {
+        border-radius: 15px;
+        border: 4px solid black;
+    }
+/* The Close Button */
+.closeCatalog {
+    color: white;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    left: 95%;
+}
+
+    .closeCatalog:hover,
+    .closeCatalog:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+.wa-link {
+    width: 150px;
+    height: 50px;
+    background-color: rgb(37, 211, 102);
+    border-radius: 18px;
+    border: 5px solid white;
+    padding-left: 15px;
+    color: white;
+    font-size: 23px;
+    position: absolute;
+    top: 3%;
+    left: 2%;
+    cursor: pointer;
+}
+.wa-link  a{
+    color: white;
+}
+
+/* Media Queries */
+
+@media(max-width: 1400px) {
+    .imgs {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .modalCatalogo {
+        width: 100%;
+    }
+
+    .modalCatalogo-content {
+        margin: 5% auto; /* 15% from the top and centered */
+        width: 65%; /* Could be more or less, depending on screen size */
+        left:17.5%;
+    }
+
+}
+@media(max-width: 1280px) {
+    .imgs {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .modalCatalogo {
+        width: 100%;
+    }
+
+    .modalCatalogo-content {
+        margin: 5% auto; /* 15% from the top and centered */
+        width: 70%; /* Could be more or less, depending on screen size */
+        left: 15%;
+    }
+}
+@media(max-width: 968px) {
+    .imgs {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .modalCatalogo {
+        width: 100%;
+    }
+
+    .modalCatalogo-content {
+        margin: 8% auto; /* 15% from the top and centered */
+        width: 90%; /* Could be more or less, depending on screen size */
+        left: 5%;
+    }
+}
+@media(max-width: 720px) {
+    .imgs {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .modalCatalogo {
+        width: 100%;
+    }
+
+    .modalCatalogo-content {
+        margin: 20% auto; /* 15% from the top and centered */
+        width: 90%; /* Could be more or less, depending on screen size */
+        left: 5%;
+    }
+
+    .wa-link {
+        top:5%;
+        left:3%;
+        width: 100px;
+        height: 40px;
+        padding-left: 5px;
+        font-size: 14px;
+        border-radius: 12px;
+    }
+        .wa-link span {
+            position: absolute;
+            font-size: 16px;
+            top: 10%
+        }
+}

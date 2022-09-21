@@ -8,44 +8,44 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>@ViewBag.Title - Consigueloo.com</title>
-
     <link href="~/Content/css/styles.css" rel="stylesheet" />
     <link href="~/Content/css/sb-admin-2.css" rel="stylesheet" />
-    <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
-    <script src="~/Content/js/simpleBanner.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <link rel="icon" type="image/png" href="~/Images/binoculares-01.png" />
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.js" crossorigin="anonymous"></script>
+    <link href="~/Content/catalogoStyle.css" rel="stylesheet" />
 </head>
 <body>
-
     <nav class="sb-nav-fixed">
-        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-light">
-            <button class="btn btn-link btn-xlg  order-lg-0" id="sidebarToggle" href="#">
-                <i class="fas fa-bars color-green"></i>
+        <nav class="sb-topnav navbar navbar-expand navbar-dark linear-gradient">
+
+            <button class="btn btn-link btn-xlg " id="sidebarToggle" href="#">
+                <i class="fas fa-bars color-white"></i>
             </button>
+
             <a href="~/">
                 <div class="image-brand"> <img class="img-fluid" src="~/Images/binoculares-01.png" /></div>
             </a>
             <ul class="nav navbar-nav  ml-auto menu-top">
                 <li class="margin-right ">
-                    <a class="color-blue" href="@Url.Action("Index", "Home" , new { area = "" })">Inicio</a>
+                    <a class="color-white" href="@Url.Action("Index", "Home" , new { area = "" })">Inicio</a>
                 </li>
                 <li class="margin-right ">
-                    <a class="color-blue" href="@Url.Action("About", "Home" , new { area = "" })">Conócenos</a>
+                    <a class="color-white" href="@Url.Action("About", "Home" , new { area = "" })">Conócenos</a>
                 </li>
                 <li class="margin-right ">
-                    <a class="color-blue" href="@Url.Action("Index", "Productos" , new { area = "Catalogo" })">Catálogo</a>
+                    <a class="color-white" href="@Url.Action("Index", "Productos" , new { area = "Catalogo" })">Catálogo</a>
                 </li>
                 <li class="margin-right ">
-                    <a class="color-blue" href="@Url.Action("Index", "AnuncioTrabajo" , new { area = "Anuncios" })">Empresas</a>
+                    <a class="color-white" href="@Url.Action("Index", "AnuncioTrabajo" , new { area = "Anuncios" })">Empresas</a>
                 </li>
                 <li class="margin-right dropdown">
-                    <a class="color-blue dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="color-white dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Servicios
                     </a>
                     <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="navbarDropdown">
@@ -56,7 +56,7 @@
                     </div>
                 </li>
                 <li class="margin-right ">
-                    <a class="color-blue" href="@Url.Action("Contact", "Home" , new { area = "" })">Contáctanos</a>
+                    <a class="color-white" href="@Url.Action("Contact", "Home" , new { area = "" })">Contáctanos</a>
                 </li>
             </ul>
             @if (Request.IsAuthenticated)
@@ -68,9 +68,8 @@
             <ul class="navbar-nav ml-auto ml-md-0 color-white">
                 @Html.Partial("_LoginPartial")
             </ul>
+           
         </nav>
-
-
 
 
         <!-- Navbar-->
@@ -105,7 +104,7 @@
                                 Moda / Accesorios
                             </a>
                             <div class="center">
-                                <a class="nav-link center" href="#" onclick="showCategorias()" data-toggle="modal" data-target="#categoriasModal">
+                                <a class="nav-link  center" href="#" onclick="showCategorias()" data-toggle="modal" data-target="#categoriasModal">
 
                                     VER MÁS
 
@@ -146,7 +145,6 @@
             </div>
 
         </div>
-
     </nav>
     <!-- Scroll to Top Button-->
     <!-- Logout Modal-->
@@ -185,7 +183,7 @@
 
             </div>
         </div>
-    </div>
+    </div>  
 
 
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
@@ -204,7 +202,9 @@
             } else {
                 $('.scroll-to-top').fadeOut();
             }
-        }); function waiter(event) {
+        });
+
+        function waiter(event) {
             $("#divLoading").show();
         }
 
@@ -232,8 +232,7 @@
 
             });
         }
-
-        function filterCategoriasbyName(nombre) {
+         function filterCategoriasbyName(nombre) {
             console.log(nombre);
              $.ajax(
             {
@@ -252,11 +251,12 @@
 
             });
         }
-
     </script>
 
     <div id="divLoading" class="loader">
         <img src="~/Images/Webp.net-gifmaker.gif" class="image-loader">
     </div>
+
 </body>
 </html>
+ 

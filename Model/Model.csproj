@@ -47,6 +47,7 @@
     <Compile Include="Anuncios\CatalogoImagen.cs" />
     <Compile Include="Anuncios\Notificacion.cs" />
     <Compile Include="Anuncios\PaymentData.cs" />
+    <Compile Include="CatalogoEmpresa\CatalogoEmpresa.cs" />
     <Compile Include="ConfiguracionPlataforma\Localidades.cs" />
     <Compile Include="ConfiguracionPlataforma\Caracteristicas.cs" />
     <Compile Include="ConfiguracionPlataforma\NombreAnuncios.cs" />
@@ -57,6 +58,7 @@
     <Compile Include="Usuarios\Roles.cs" />
     <Compile Include="Usuarios\Usuarios.cs" />
     <Compile Include="ViewModel\AnuncioTrabajoDTO.cs" />
+    <Compile Include="ViewModel\CatalogoEmpresaDTO.cs" />
     <Compile Include="ViewModel\CatalogoImagenDTO.cs" />
     <Compile Include="ViewModel\CategoriasDTO.cs" />
     <Compile Include="ViewModel\AnuncioDTO.cs" />
@@ -74,6 +76,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

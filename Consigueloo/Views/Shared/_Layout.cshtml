@@ -10,9 +10,8 @@
     <title>@ViewBag.Title - Consigueloo.com</title>
     <link href="~/Content/css/styles.css" rel="stylesheet" />
     <link href="~/Content/css/sb-admin-2.css" rel="stylesheet" />
-
-    @*<link href="~/Content/css/pricing.css" rel="stylesheet" />*@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/vue-multiselect@2.1.0/dist/vue-multiselect.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
 
@@ -37,6 +36,9 @@
                 </li>
                 <li class="margin-right ">
                     <a class="color-white" href="@Url.Action("About", "Home" , new { area = "" })">Conócenos</a>
+                </li>
+                <li class="margin-right ">
+                    <a class="color-white" href="@Url.Action("Index", "Productos" , new { area = "Catalogo" })">Catálogo</a>
                 </li>
                 <li class="margin-right ">
                     <a class="color-white" href="@Url.Action("Index", "AnuncioTrabajo" , new { area = "Anuncios" })">Empresas</a>

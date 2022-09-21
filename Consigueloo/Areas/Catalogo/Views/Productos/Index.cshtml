@@ -1,0 +1,72 @@
+﻿@model Model.ViewModel.CatalogoEmpresaDTO
+@{
+    ViewBag.Title = "Catálogo";
+    Layout = "~/Views/Shared/_LayoutCatalogo.cshtml";
+}
+
+<div>
+    <div class="container-fluid" id="bckGrnd">
+        <div class="container">
+            <div class="left-row button">
+                <i class="arrow-left"></i>
+            </div>
+            <div class="right-row button">
+                <i class="arrow-right"></i>
+            </div>
+
+            <div id="modalCatalogo" class="modalCatalogo">
+
+                <div class="modalCatalogo-content">
+                    <span class="closeCatalog" id="closeCatalog">&times;</span>
+                    <div class="main-img" id="main-img" style="height:100%">
+                        <img src="@Model.imagePath" id="current">
+                    </div>
+                    <div class="wa-link">
+                        <a href="@Model.whatsappLink" id="walnk" target="_blank">
+                            <i class="fab fa-whatsapp" style="font-size:30px; padding-top:5%;"></i><span > Comprar</span>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="imgs row" id="dvcontent">
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@if (ViewBag.mostrarmodal == "mostrar")
+{
+    <script>
+        var modal = document.getElementById("modalCatalogo");
+        modal.style.display = "block";
+        
+    </script>
+}
+
+
+<script>
+    $(document).ready(
+        function () {
+            ActivarLoader();
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("GetList", "Productos",  new { area = "Catalogo" })',
+                datatype: "json",
+                contentType: 'application/json',
+                success: function (r) {
+                    $("#dvcontent").html(r);
+                    DesactivarLoader();
+                },
+                error: function (r) {
+                    $("#dvcontent").html(r);
+                    DesactivarLoader();
+                }
+            });
+        });
+
+</script>
+
