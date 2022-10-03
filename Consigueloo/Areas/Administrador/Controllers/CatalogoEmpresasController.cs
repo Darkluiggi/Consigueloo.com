@@ -88,7 +88,8 @@ namespace Consigueloo.Areas.Administrador.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             CatalogoEmpresa catalogoEmpresa = db.CatalogoEmpresas.Find(id);
-            db.CatalogoEmpresas.Remove(catalogoEmpresa);
+            catalogoEmpresa.estado = false;
+            db.Entry(catalogoEmpresa).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("Index");
         }

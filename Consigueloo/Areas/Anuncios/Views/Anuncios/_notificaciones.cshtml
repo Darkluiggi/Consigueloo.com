@@ -8,7 +8,7 @@
             <!-- Counter - Alerts -->
             @if (Model.Where(x => !x.check).Count() != 0)
             {
-                <span class="badge badge-danger badge-counter" id="counter">@Model.Where(x=> !x.check).Count()</span>
+                <span class="badge badge-danger badge-counter" id="counter">@Model.Where(x=> x.check).Count()</span>
             }
             </a>
         <!-- Dropdown - Alerts -->
@@ -31,7 +31,7 @@
             {
                 foreach (var item in Model)
                 {
-                    <a class="dropdown-item d-flex align-items-center" href="~/User">
+                    <a class="dropdown-item d-flex align-items-center" href="~/Manage">
                         <div>
                             <div class="small text-gray-500">@item.fecha.ToString("dd/MM/yyyy")</div>
                             <span class="font-weight-bold" id="notificacion"> @Html.DisplayFor(modelItem => item.notificacion)</span>

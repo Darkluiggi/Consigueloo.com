@@ -127,6 +127,7 @@ namespace Consigueloo.Services
                 periodosModel.ForEach(x =>
                 {
                     UsuariosDTO response = new UsuariosDTO();
+                    response.id = x.id;
                     response.nombre = x.nombre;
                     response.apellido = x.apellido;
                     response.ciudad = x.ciudad;

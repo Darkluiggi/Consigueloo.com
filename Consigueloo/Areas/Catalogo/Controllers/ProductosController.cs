@@ -41,6 +41,7 @@ namespace Consigueloo.Areas.Catalogo.Controllers
         public ActionResult Producto(string nombre)
         {
             ViewBag.mostrarmodal = "mostrar";
+            nombre = nombre.Replace('_', ' ');
             var catalogo = catalogoDAO.getList();
             var product_ = !string.IsNullOrEmpty(nombre) ? catalogo.FirstOrDefault(p => p.nombreProducto == nombre) : catalogo.FirstOrDefault();
             return View("Index",product_);

@@ -129,7 +129,10 @@
                                                         @Html.DisplayFor(modelItem => item.nombreContacto)
                                                     </td>
                                                     <td>
-                                                        <a class="btn btn-primary" href="">
+                                                        <a class="btn btn-success" href="">
+                                                            Renovar
+                                                        </a>
+                                                        <a class="btn btn-danger" href="">
                                                             Borrar
                                                         </a>
                                                     </td>
@@ -153,7 +156,6 @@
 <script>
     function Borrar(id) {
         ActivarLoader();
-
         $.ajax({
             type: "POST",
             url: '/Usuarios/Usuarios/Delete',

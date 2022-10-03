@@ -34,7 +34,7 @@ namespace Model.ViewModel
 
 
         public int id { get; set; }
-        [DisplayName("Nombre")]
+        [DisplayName("Tipo de Anuncio")]
         public string nombre { get; set; }
         public List<CaracteristicasDTO> caracteristicas { get; set; }
         public List<CaracteristicasDTO> noIncluidas { get; set; }

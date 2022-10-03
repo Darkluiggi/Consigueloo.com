@@ -49,5 +49,6 @@ namespace Model.Anuncios
         [ForeignKey("infoImagen")]
         public int? infoImagenId { get; set; }
         public virtual InfoImagen infoImagen { get; set; }
+        public string imagePath { get; set; }
     }
 }

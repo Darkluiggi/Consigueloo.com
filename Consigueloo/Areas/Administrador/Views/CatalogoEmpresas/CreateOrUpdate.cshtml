@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Create";
-    Layout = "~/Views/Shared/_Layout/admin.cshtml";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
 @using (Html.BeginForm("CreateOrUpdate", "CatalogoEmpresas", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
@@ -38,7 +38,7 @@
                     <input type="file" accept="image/*" id="imageFile" name="imageFile" onchange="loadFile(event)" />
                 </div>
             </div>
-            @if (Model.imagePath != null)
+            @if (Model != null && Model.imagePath != null)
                 {
                     <div class="col-md-6">
                         <img class="img-preview" src="../@Model.imagePath" id="preview"/>

@@ -519,7 +519,6 @@
     <Content Include="Areas\Administrador\Views\Administrador\_AnunciosTable.cshtml" />
     <Content Include="Areas\Administrador\Views\Anuncios\Create.cshtml" />
     <Content Include="Areas\Administrador\Views\Anuncios\Delete.cshtml" />
-    <Content Include="Areas\Administrador\Views\Anuncios\Details_.cshtml" />
     <Content Include="Areas\Administrador\Views\Anuncios\Edit.cshtml" />
     <Content Include="Areas\Administrador\Views\Anuncios\Index.cshtml" />
     <Content Include="Areas\Administrador\Views\web.config" />

@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Consigueloo.Services;
 using DAO;
 using Microsoft.AspNet.Identity;
-using Model.Anuncios;
+using Microsoft.AspNetCore.Http;
 using Model.ConfiguracionPlataforma;
 using Model.ViewModel;
 using Persistence;
@@ -22,18 +19,26 @@ namespace Consigueloo.Areas.Administrador.Controllers
 
         PerfilValidator perfilValidator;
         private ApplicationDbContext db = new ApplicationDbContext();
-        AnunciosDAO anunciosDAO;
+        AnunciosDAO anunciosDAO; 
+        TipoAnunciosDAO tipoAnunciosDAO;
+        CategoriasDAO categoriasDAO;
+        NotificacionesDAO notificacionDAO;
+        LocalidadesDAO localidadesDAO;
 
         public AnunciosController()
         {
             perfilValidator = new PerfilValidator(this);
             anunciosDAO = new AnunciosDAO(this);
-
+            tipoAnunciosDAO = new TipoAnunciosDAO(this);
+            categoriasDAO = new CategoriasDAO(this);
+            notificacionDAO = new NotificacionesDAO(this);
+            localidadesDAO = new LocalidadesDAO(this);
         }
 
         // GET: Administrador/Anuncios
         public ActionResult Index()
         {
+            ViewBag.Titulo = "Administrar Anuncios Activos";
             return View(anunciosDAO.ListarAnuncios());
         }
 
@@ -50,7 +55,7 @@ namespace Consigueloo.Areas.Administrador.Controllers
             {
                 return HttpNotFound();
             }
-            return PartialView("Details",response);
+            return PartialView(response);
         }
 
         // GET: Administrador/Anuncios/Create
@@ -60,20 +65,17 @@ namespace Consigueloo.Areas.Administrador.Controllers
         }
 
         // POST: Administrador/Anuncios/Create
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
-        // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,tipo,periodo,precio")] TipoAnuncios tipoAnuncio)
+        public ActionResult CreateOrUpdate(AnuncioVueDTO anuncio)
         {
+            var files = Request.Files;
             if (ModelState.IsValid)
             {
-                db.TiposAnuncio.Add(tipoAnuncio);
-                db.SaveChanges();
+                var result = anunciosDAO.CreateOrUpdate(files, anuncio);
                 return RedirectToAction("Index");
             }
 
-            return View(tipoAnuncio);
+            return RedirectToAction("Index");
         }
 
         // GET: Administrador/Anuncios/Edit/5
@@ -83,48 +85,44 @@ namespace Consigueloo.Areas.Administrador.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TipoAnuncios tipoAnuncio = db.TiposAnuncio.Find(id);
-            if (tipoAnuncio == null)
+            AnuncioDTO response = anunciosDAO.getById((int)id);
+            if (response == null)
             {
                 return HttpNotFound();
             }
-            return View(tipoAnuncio);
+            return PartialView(response);
         }
 
         // POST: Administrador/Anuncios/Edit/5
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
-        // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,tipo,periodo,precio")] TipoAnuncios tipoAnuncio)
+        public ActionResult Edit(AnuncioDTO anuncio)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(tipoAnuncio).State = EntityState.Modified;
-                db.SaveChanges();
+               
                 return RedirectToAction("Index");
             }
-            return View(tipoAnuncio);
+            return View(anuncio);
         }
 
         // GET: Administrador/Anuncios/Delete/5
+        [HttpGet]
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TipoAnuncios tipoAnuncio = db.TiposAnuncio.Find(id);
-            if (tipoAnuncio == null)
+            AnuncioDTO response = anunciosDAO.getById((int)id);
+            if (response == null)
             {
                 return HttpNotFound();
             }
-            return View(tipoAnuncio);
+            return PartialView(response);
         }
 
         // POST: Administrador/Anuncios/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+        [HttpPost]
         public ActionResult DeleteConfirmed(int id)
         {
             TipoAnuncios tipoAnuncio = db.TiposAnuncio.Find(id);
@@ -188,5 +186,27 @@ namespace Consigueloo.Areas.Administrador.Controllers
 
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        public ActionResult GetTipoAnuncios()
+        {
+            List<TipoAnunciosDTO> result = tipoAnunciosDAO.getList();
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult GetCategorias()
+        {
+            List<CategoriasDTO> result = categoriasDAO.getList();
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult GetLocalidades()
+        {
+            List<LocalidadesDTO> result = localidadesDAO.getList();
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }

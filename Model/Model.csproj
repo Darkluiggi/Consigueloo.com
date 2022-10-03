@@ -57,6 +57,7 @@
     <Compile Include="ConfiguracionPlataforma\Categorias.cs" />
     <Compile Include="Usuarios\Roles.cs" />
     <Compile Include="Usuarios\Usuarios.cs" />
+    <Compile Include="ViewModel\AnuncioVueDTO.cs" />
     <Compile Include="ViewModel\AnuncioTrabajoDTO.cs" />
     <Compile Include="ViewModel\CatalogoEmpresaDTO.cs" />
     <Compile Include="ViewModel\CatalogoImagenDTO.cs" />

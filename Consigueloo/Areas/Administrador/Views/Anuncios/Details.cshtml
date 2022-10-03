@@ -1,9 +1,9 @@
 ﻿@model Model.ViewModel.AnuncioDTO
 
-<h4 class="col-md-12">Detalle de información del anuncio</h4>
+<h4 class="col-md-10">Detalle de información del anuncio</h4>
 <hr />
 <div class="row" style="padding:15px; margin-left:10px;">
-    <div class="col-md-4">
+    <div class="col-md-6">
         <dl class="dl-horizontal">
             <dt style="margin-bottom:20px">
                 @Html.DisplayNameFor(model => model.titulo)
@@ -20,18 +20,18 @@
                 @Html.DisplayFor(model => model.nombreContacto)
             </dd>
             <dt style="margin-bottom:20px">
-                @Html.DisplayNameFor(model => model.tipoAnuncio.nombre)
+                @Html.DisplayNameFor(model => model.tipoAnuncio.nombre.nombre)
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.tipoAnuncio.nombre)
+                @Html.DisplayFor(model => model.tipoAnuncio.nombre.nombre)
             </dd>
         </dl>
     </div>
     <dl class="dl-horizontal">
         <dt>
 
-            @using (Ajax.BeginForm("Edit", "Anuncios", new { id = Model.id }, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "dvcontent", OnBegin = "ActivarLoader()", OnComplete = "DesactivarLoader()" }))
+            @using (Ajax.BeginForm("Edit", "Anuncios", new { id = Model.id }, new AjaxOptions { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "dvcontent", OnBegin = "ActivarLoader()", OnComplete = "DesactivarLoader()" }))
             {
                 <input type="submit" value="Editar" class="btn btn-primary" id="btnEditar" width="200" />
             }
@@ -39,7 +39,7 @@
         </dt>
         <dd>
 
-            @using (Ajax.BeginForm("DeleteItem", "Anuncios", new { id = Model.id }, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "dvcontent", OnBegin = "ActivarLoader()", OnComplete = "DesactivarLoader()" }))
+            @using (Ajax.BeginForm("Delete", "Anuncios", new { id = Model.id }, new AjaxOptions { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "dvcontent", OnBegin = "ActivarLoader()", OnComplete = "DesactivarLoader()" }))
             {
                 <input type="submit" value="Borrar" class="btn btn-danger" id="btnInactivar" width="200" />
             }
@@ -53,4 +53,6 @@
     $(document).ready(function () {
         $('[data-toggle="tooltip"]').tooltip();
     });
+
+
 </script>

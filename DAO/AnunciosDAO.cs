@@ -10,6 +10,11 @@ using System.Web.Mvc;
 using Helpers.Methods;
 using Model.Usuarios;
 using System.Security.Cryptography.X509Certificates;
+using System.Web;
+using Model.ConfiguracionPlataforma;
+using System.Drawing.Imaging;
+using System.IO;
+using System.Drawing;
 
 namespace DAO
 {
@@ -74,12 +79,98 @@ namespace DAO
                 db.Entry(anuncioInDB).State = EntityState.Modified;
                 db.SaveChanges();
 
-                }
+            }
             catch (Exception ex)
             {
 
                 throw;
             }
+        }
+
+        public object CreateOrUpdate(HttpFileCollectionBase files, AnuncioVueDTO anuncio)
+        {
+            ImageCodecInfo myImageCodecInfo;
+            Encoder myEncoder;
+            EncoderParameter myEncoderParameter;
+            EncoderParameters myEncoderParameters;
+
+            myImageCodecInfo = GetEncoderInfo("image/jpeg");
+
+            myEncoder = Encoder.Quality;
+            // EncoderParameter object in the array.
+            myEncoderParameters = new EncoderParameters(1);
+
+            // Save the bitmap as a JPEG file with quality level 25.
+            myEncoderParameter = new EncoderParameter(myEncoder, 25L);
+            myEncoderParameters.Param[0] = myEncoderParameter;
+            var result = new List<HttpPostedFileBase>();
+
+            Anuncio anuncioModel = new Anuncio();
+            for (int i = 0; i < files.AllKeys.Count(); i++)
+            {
+                if (files.AllKeys[i].Contains("catalogo"))
+                {
+                    result.Add(files[i]);
+                }
+            }
+            anuncioModel.categoria = db.Categorias.Find(anuncio.categoriaId);
+            anuncioModel.fechaActivacion = DateTime.Today;
+            anuncioModel.localidad = db.Localidades.Find(anuncio.localidadId);
+            TipoAnuncios tipoAnuncio = db.TiposAnuncio.Find(anuncio.tipoAnuncioId);
+            if (tipoAnuncio.duracion.Contains("Mensual"))
+            {
+                anuncioModel.fechaCancelacion = anuncioModel.fechaActivacion.AddDays(30);
+            }
+            if (tipoAnuncio.duracion.Contains("Trimestral"))
+            {
+                anuncioModel.fechaCancelacion = anuncioModel.fechaActivacion.AddDays(90);
+            }
+            if (tipoAnuncio.duracion.Contains("Anual"))
+            {
+                anuncioModel.fechaCancelacion = anuncioModel.fechaActivacion.AddDays(360);
+            }
+            anuncioModel.descripcion = anuncio.descripcion;
+            anuncioModel.actImagen = anuncio.actImagen;
+            anuncioModel.nombreContacto = anuncio.nombreContacto;
+            anuncioModel.telefono = anuncio.telefono;
+            anuncioModel.celularContacto = anuncio.celularContacto;
+            anuncioModel.actCatalogo = anuncio.actCatalogo;
+            anuncioModel.tipoAnuncio = tipoAnuncio;
+
+            anuncioModel.categoria = db.Categorias.Find(anuncio.categoriaId);
+            anuncioModel.localidad = db.Localidades.Find(anuncio.localidadId);
+
+            anuncioModel.titulo = anuncio.titulo;
+            if(anuncio.imagen != null)
+            {
+                Image sourceimage = Image.FromStream(anuncio.imagen.InputStream);
+                string serverPath = HttpContext.Current.Server.MapPath("~/anuncio/" + anuncioModel.titulo + "/");
+                if (!Directory.Exists(serverPath))
+                {
+                    Directory.CreateDirectory(serverPath);
+                }
+                string strUploadPath = Path.Combine(serverPath, anuncio.imagen.FileName);
+
+                sourceimage.Save(strUploadPath, myImageCodecInfo, myEncoderParameters);
+                anuncioModel.imagePath = "../../anuncio/" + anuncioModel.titulo +"/" + anuncio.imagen.FileName;
+            }
+
+            db.Anuncios.Add(anuncioModel);
+            db.SaveChanges();
+            return null;
+        }
+
+        private static ImageCodecInfo GetEncoderInfo(String mimeType)
+        {
+            int j;
+            ImageCodecInfo[] encoders;
+            encoders = ImageCodecInfo.GetImageEncoders();
+            for (j = 0; j < encoders.Length; ++j)
+            {
+                if (encoders[j].MimeType == mimeType)
+                    return encoders[j];
+            }
+            return null;
         }
 
         public List<AnuncioDTO> ShowDestacados()
@@ -103,7 +194,7 @@ namespace DAO
                         anuncioModel.celularContacto = item.celularContacto;
                         anuncioModel.descripcion = item.descripcion;
                         anuncioModel.id = item.id;
-                        anuncioModel.path = imageHelper.GetImageFromByteArray(item.imagen);
+                        anuncioModel.path = item.imagen != null ? imageHelper.GetImageFromByteArray(item.imagen) : item.imagePath;
                         anuncioModel.fechaActivacion = item.fechaActivacion;
                         anuncioModel.fechaCancelacion = item.fechaCancelacion;
                         anuncioModel.categoria = categoriasDAO.Find(item.categoriaId);
@@ -127,8 +218,7 @@ namespace DAO
         public List<AnuncioDTO> ListarAnuncios()
         {
             try
-            {
-                
+            {               
                 //Mapeo de clase
                 var anuncio = db.Anuncios.Include(x=> x.catalogo).Include(x=> x.tipoAnuncio).Where(x=> x.estado==true).ToList();
                 List<AnuncioDTO> anuncios=new List<AnuncioDTO>();
@@ -145,7 +235,7 @@ namespace DAO
                         anuncioModel.celularContacto = item.celularContacto;
                         anuncioModel.descripcion = item.descripcion;
                         anuncioModel.id = item.id;
-                        anuncioModel.path = imageHelper.GetImageFromByteArray(item.imagen);
+                        anuncioModel.path = item.imagen != null ? imageHelper.GetImageFromByteArray(item.imagen): item.imagePath;
                         anuncioModel.fechaActivacion = item.fechaActivacion;
                         anuncioModel.fechaCancelacion = item.fechaCancelacion;
                         if (anuncioModel.catalogo!=null)
@@ -290,10 +380,7 @@ namespace DAO
                 anuncioModel.celularContacto = model.celularContacto;
                 anuncioModel.descripcion = model.descripcion;
                 anuncioModel.id = model.id;
-                if (model.imagen != null)
-                {
-                    anuncioModel.path = imageHelper.GetImageFromByteArray(model.imagen);
-                }
+                anuncioModel.path = model.imagen != null ? imageHelper.GetImageFromByteArray(model.imagen) : model.imagePath;
                 anuncioModel.fechaActivacion = model.fechaActivacion;
                 anuncioModel.fechaCancelacion = model.fechaCancelacion;
                 anuncioModel.categoriaId = model.categoriaId;
@@ -461,7 +548,7 @@ namespace DAO
                     anuncioModel.celularContacto = item.celularContacto;
                     anuncioModel.descripcion = item.descripcion;
                     anuncioModel.id = item.id;
-                    anuncioModel.path = imageHelper.GetImageFromByteArray(item.imagen);
+                    anuncioModel.path = item.imagen != null ? imageHelper.GetImageFromByteArray(item.imagen) : item.imagePath;
                     anuncioModel.fechaActivacion = item.fechaActivacion;
                     anuncioModel.fechaCancelacion = item.fechaCancelacion;
                     anuncioModel.categoria = categoriasDAO.Find(item.categoriaId);

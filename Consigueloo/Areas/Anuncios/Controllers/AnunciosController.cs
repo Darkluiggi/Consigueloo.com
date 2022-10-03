@@ -1,21 +1,13 @@
-﻿using DAO;
-using Model.ViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Web;
-using System.Web.Helpers;
 using System.Web.Mvc;
 using System.IO;
-using Consigueloo.Models;
 using Microsoft.AspNet.Identity;
-using System.Net;
 using RestSharp;
 using Model.Anuncios;
-using System.Text.Json;
 using Newtonsoft.Json;
-using System.IdentityModel;
+using DAO;
+using Model.ViewModel;
 
 namespace Consigueloo.Areas.Anuncios.Controllers
 {

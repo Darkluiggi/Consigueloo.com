@@ -88,9 +88,10 @@ namespace DAO
                 // Save the bitmap as a JPEG file with quality level 25.
                 myEncoderParameter = new EncoderParameter(myEncoder, 25L);
                 myEncoderParameters.Param[0] = myEncoderParameter;
-                Image sourceimage = Image.FromStream(catalogo.imageFile.InputStream);
-                if (sourceimage != null)
+                
+                if (catalogo.imageFile != null)
                 {
+                    Image sourceimage = Image.FromStream(catalogo.imageFile.InputStream);
                     var path = System.Web.HttpContext.Current.Server.MapPath("../"+pagina.imagePath);
                     if (File.Exists(path))
                     {
@@ -124,7 +125,7 @@ namespace DAO
                     pagina.imagePath = catalogo.imagePath;
                 }
 
-                pagina.whatsappLink = "https://wa.me/+573016806338?text=Hola vengo de Consigueloo.co y me interesa el producto " + catalogo.nombreProducto + " Link: "
+                pagina.whatsappLink = "https://wa.me/+573243934309?text=Hola vengo de Consigueloo.co y me interesa el producto " + catalogo.nombreProducto + " Link: "
                     + "https://Consigueloo.co/Catalogo/Productos/Producto?nombre=" + catalogo.nombreProducto;
                 pagina.whatsappLink = pagina.whatsappLink.Replace(" ", "_");
                 if (isNew)
