@@ -10,6 +10,10 @@ namespace Model.ViewModel
 {
     public class CaracteristicasDTO
     {
+        public CaracteristicasDTO()
+        {
+        }
+
         public CaracteristicasDTO(Caracteristicas model)
         {
             id = model.id;

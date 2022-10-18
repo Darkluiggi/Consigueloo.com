@@ -132,9 +132,11 @@ namespace DAO
                     pagina.imagePath = catalogo.imagePath;
                 }
 
-                pagina.whatsappLink = "https://wa.me/+573243934309?text=Hola vengo de Consigueloo.co y me interesa el producto " + catalogo.nombreProducto + " Link: "
-                    + "https://Consigueloo.co/Catalogo/Productos/Producto?nombre=" + catalogo.nombreProducto;
-                pagina.whatsappLink = pagina.whatsappLink.Replace(" ", "_");
+                string mensaje = "https://wa.me/+573243934309?text=Hola vengo de Consigueloo.co y me interesa el producto " + pagina.nombreProducto + " Link: ";
+                string link = "https://Consigueloo.co/Catalogo/Productos/Producto?nombre=" + pagina.nombreProducto;
+                link = link.Replace(" ", "_");
+
+                pagina.whatsappLink = mensaje + link;
                 if (isNew)
                 {
                     pagina.pagina = FindNextPage();

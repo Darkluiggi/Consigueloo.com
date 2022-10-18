@@ -48,7 +48,7 @@ namespace DAO
                 return responseList;
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;

@@ -12250,9 +12250,10 @@ body {
     color: #fff;
     background-color: #eaecf4;
     border-color: #4e73df;
-    border-radius: 10px;
-    width: 100%;
-    height: 30px;
+    border-radius: 5px;
+    width: 70px;
+    height: 45px;
+    padding-top:0px;
     background-size: cover;
     background-image: url('../../Content/assets/img-btn/boton gl-01.png');
 }
@@ -12290,3 +12291,4 @@ body {
     max-height:400px;
     overflow-y: auto;
 }
+
