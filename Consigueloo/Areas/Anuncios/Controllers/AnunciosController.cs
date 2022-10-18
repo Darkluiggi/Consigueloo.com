@@ -36,8 +36,9 @@ namespace Consigueloo.Areas.Anuncios.Controllers
         public ActionResult Index()
         {          
             List<AnuncioDTO> anuncios = anunciosDAO.ListarAnuncios();
-            
-            return View(anuncios);
+
+            //return View(anuncios);
+            return View("~/Views/Shared/_EnConstruccion.cshtml");
         }
 
         // GET: Anuncios/Anuncios/Details/5
@@ -130,7 +131,8 @@ namespace Consigueloo.Areas.Anuncios.Controllers
         public ActionResult Pricing()
         {
             List<TipoAnunciosDTO> anuncios = tipoAnunciosDAO.getList();
-            return View(anuncios);
+            return View("~/Views/Shared/_EnConstruccion.cshtml");
+            //return View(anuncios);
         }
         public ActionResult ShowSelected(int id)
         {

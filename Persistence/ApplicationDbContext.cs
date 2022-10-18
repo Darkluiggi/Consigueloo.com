@@ -44,6 +44,7 @@ namespace Persistence
         public DbSet<Extra> datosTarjeta { get; set; }
         public DbSet<InfoImagen> InfoImagenes { get; set; }
         public DbSet<CatalogoEmpresa> CatalogoEmpresas { get; set; }
+        public DbSet<NombreAnunciosCaracteristicas> NombreAnuncioCaracteristica { get; set; }
 
 
     }

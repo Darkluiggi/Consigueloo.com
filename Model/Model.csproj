@@ -48,6 +48,7 @@
     <Compile Include="Anuncios\Notificacion.cs" />
     <Compile Include="Anuncios\PaymentData.cs" />
     <Compile Include="CatalogoEmpresa\CatalogoEmpresa.cs" />
+    <Compile Include="ConfiguracionPlataforma\NombreAnunciosCaracteristicas.cs" />
     <Compile Include="ConfiguracionPlataforma\Localidades.cs" />
     <Compile Include="ConfiguracionPlataforma\Caracteristicas.cs" />
     <Compile Include="ConfiguracionPlataforma\NombreAnuncios.cs" />

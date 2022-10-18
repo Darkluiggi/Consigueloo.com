@@ -1,81 +1,193 @@
-﻿@model IEnumerable<Model.CatalogoEmpresa.CatalogoEmpresa>
+﻿@model IEnumerable<Model.ViewModel.CatalogoEmpresaDTO>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Configuracion Catálogo";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
 
 <div class="container">
-    <div class="row" style="margin-top:20px">
-        <div class="col-md-12">
-            <h3>Administrar catalogo.</h3>
-            <br/>
-            <p>
-                <button class="btn btn-primary btn-sm" id="btnNuevo" onclick="location.href='@Url.Action("CreateOrUpdate","CatalogoEmpresas")'">
-                    Nueva página
-                </button>
-            </p>
-            <div id="anunciosPendientesdiv">
-                <div class="card-header color-blue3">
-                    <strong> <i class="fas fa-table color-green"></i> Imágenes del catálogo</strong>
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-bordered table table-striped" id="table" width="100%" cellspacing="0">
-                            <tbody>
-                                <tr class="color-blue3">
-                                    <th>
-                                        Título Imagen
-                                    </th>
-                                    <th>
-                                        Imagen
-                                    </th>
-                                    <th>
-                                        Página
-                                    </th>
-                                    <th>Acciones</th>
+    <h3 class="color-blue3 margin-top2">Administrador de Catálogo</h3>
+    <div class="row">
+        <div class=" col-md-4">
+            <div class="container row">
+                <p>
+                    <button class="btn btn-primary btn-sm color-white" id="btnNuevo" onclick="location.href='@Url.Action("CreateOrUpdate","CatalogoEmpresas")'">
+                        Nueva página
+                    </button>
+                </p> 
+                <p>
+                    <button class="btn btn-primary btn-sm color-white" id="fixWALinks" @*onclick="fixWhatsappLinks()"*@ onclick="location.href='@Url.Action("FixWhastappLinks","CatalogoEmpresas")'">
+                        Arreglar Links whatsapp
+                    </button>
+                </p>
+            </div>
+
+        </div>
+        <div class="card mb-4 col-md-12" style="padding:14px;margin:auto;">
+            <div class="card-header"><i class="fas fa-table mr-1"></i>Usuarios activos</div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered table table-striped" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.pagina)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.nombreProducto)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.imagePath)
+                                </th>
+                                <th>
+                                    Acciones
+                                </th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.pagina)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.nombreProducto)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.imagePath)
+                                </th>
+                                <th>
+                                    Acciones
+                                </th>
+                            </tr>
+                        </tfoot>
+                        @if (Model.ToList().Count == 0)
+                        {
+                            <tr>
+                                <td colspan="4">No hay elementos para mostrar</td>
+                            </tr>
+                        }
+                        else
+                        {
+
+                            foreach (var item in Model)
+                            {
+                                <tr draggable="true" ondragstart="start()" ondragover="dragover()" style="height: 0;">
+
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.pagina)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.nombreProducto)
+                                    </td>
+                                    <td>
+                                        <img src="@item.imagePath" alt="@item.nombreProducto" style="height:450px; width:600px" />
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-primary" onclick="location.href='@Url.Action("CreateOrUpdate", "CatalogoEmpresas", new { id = item.id })'">
+                                            Editar
+                                        </a>
+                                        <a class="btn btn-primary" onclick="location.href='@Url.Action("Delete", "CatalogoEmpresas", new { id = item.id })'">
+                                            Borrar
+                                        </a>
+                                    </td>
                                 </tr>
-                                @if (Model.ToList().Count == 0)
-                                {
-                                    <tr>
-                                        <td colspan="4">No hay elementos para mostrar</td>
-                                    </tr>
-                                }
-                                else
-                                {
-                                    foreach (var item in Model)
-                                    {
-                                        <tr draggable="true" ondragstart="start()"  ondragover="dragover()"  style="height: 0;">
-                                            <td hidden>
-                                                @Html.DisplayFor(modelItem => item.id)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.nombreProducto)
-                                            </td>
-                                            <td>
-                                                <img src="@item.imagePath" alt="@item.nombreProducto" style="height:450px; width:600px"/>
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.pagina)
-                                            </td>
-                                            <td>
-                                                <a class="btn btn-primary"  onclick="location.href='@Url.Action("CreateOrUpdate","CatalogoEmpresas", new { id = item.id})'">
-                                                    Editar
-                                                </a>
-                                                <a class="btn btn-primary" onclick="location.href='@Url.Action("Delete","CatalogoEmpresas", new { id = item.id})'">
-                                                    Borrar
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    }
-                                }
-                            </tbody>
+                            }
+                        }
                         </table>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-                                
+
+<!-- Modal -->
+<div class="modal fade" id="mdlCtrl" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog   modal-lg" role="document">
+        <div class="modal-content">
+            <div class="box box-warning" style="padding:14px">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <div id="dvcontent"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(
+        function () {
+            $('#dataTable tbody').on('click', 'tr', function () {
+                var data = $(this).attr('id');
+                ActivarLoader();
+                ajaxControl(data);
+            });
+        }
+    );
+
+
+    function ajaxControl(indx) {
+        console.log(indx);
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("Details", "CatalogoEmpresas")',
+            datatype: "json",
+            contentType: 'application/json',
+            data: JSON.stringify({ "id": indx }),
+            success: function (r) {
+                $("#dvcontent").html(r);
+                DesactivarLoader();
+            },
+            error: function (r) {
+                $("#dvcontent").html(r);
+                DesactivarLoader();
+            }
+        });
+    }
+    function fixWhatsappLinks() {
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("FixWhastappLinks","CatalogoEmpresas")',
+            datatype: "json",
+            contentType: 'application/json',
+            success: function (r) {
+               
+                DesactivarLoader();
+            },
+            error: function (r) {
+             
+                DesactivarLoader();
+            }
+        });
+    }
+
+</script>
+
+<script>
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+
+
+    $(document).ready(
+        function () {
+            $("#searchform").submit(
+                function () {
+                    ActivarLoader();
+                }
+            );
+        }
+    );
+</script>
+
+<script type="text/javascript" charset="UTF-8">
+    $(document).ready(function() {
+        if ("!@string.IsNullOrEmpty(ViewBag.message)") {
+            $.notify.defaults({ className: "@ViewBag.level" });
+            $.notify(
+                "@Html.Raw(ViewBag.message)",
+                {
+                    position: "top Center"
+                }
+            );
+      }
+    });
+</script>

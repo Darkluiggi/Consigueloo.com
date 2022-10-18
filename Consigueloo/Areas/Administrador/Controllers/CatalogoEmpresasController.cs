@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Consigueloo.Services;
 using DAO;
 using Model.CatalogoEmpresa;
 using Model.ViewModel;
@@ -25,8 +26,13 @@ namespace Consigueloo.Areas.Administrador.Controllers
 
         // GET: Administrador/CatalogoEmpresas
         public ActionResult Index()
-        {
-            return View(db.CatalogoEmpresas.ToList());
+        {            
+            if (Request.IsAuthenticated)
+            {
+                var response = catalogoDAO.getList();
+                return View(response);
+            }
+            return View("Error");
         }
 
         // GET: Administrador/CatalogoEmpresas/Details/5
@@ -48,6 +54,11 @@ namespace Consigueloo.Areas.Administrador.Controllers
         public ActionResult CreateOrUpdate(int? id)
         {
             var pagina = catalogoDAO.Find(id);
+            if(pagina == null)
+            {
+                pagina = new CatalogoEmpresaDTO();
+                pagina.pagina = catalogoDAO.FindNextPage();
+            }
             return View(pagina);
         }
 
@@ -60,11 +71,18 @@ namespace Consigueloo.Areas.Administrador.Controllers
         {
             if (ModelState.IsValid)
             {
-                catalogoDAO.Add(catalogoEmpresa);
-                return RedirectToAction("Index");
+                List<CatalogoEmpresaDTO> catalogo = catalogoDAO.Add(catalogoEmpresa);
+                return View("Index", catalogo);
             }
 
             return View(catalogoEmpresa);
+        }
+
+        public ActionResult FixWhastappLinks(CatalogoEmpresaDTO catalogoEmpresa)
+        {
+            var catalogo = catalogoDAO.FixWhastappLinks(catalogoEmpresa);
+
+            return View("Index", catalogo);
         }
 
        // GET: Administrador/CatalogoEmpresas/Delete/5
@@ -87,11 +105,8 @@ namespace Consigueloo.Areas.Administrador.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            CatalogoEmpresa catalogoEmpresa = db.CatalogoEmpresas.Find(id);
-            catalogoEmpresa.estado = false;
-            db.Entry(catalogoEmpresa).State = EntityState.Modified;
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            List<CatalogoEmpresaDTO> catalogo = catalogoDAO.Remove(id);
+            return View("Index", catalogo);
         }
 
         protected override void Dispose(bool disposing)

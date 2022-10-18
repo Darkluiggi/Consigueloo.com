@@ -21,14 +21,14 @@ namespace Model.ViewModel
             id = model.id;
             nombre = model.nombre;
             caracteristicas = new List<CaracteristicasDTO>();
-            model.caracteristicas.ForEach(caracteristic =>
+            model.caracteristicas.ForEach(caracteristica =>
             {
-                caracteristicas.Add(new CaracteristicasDTO(caracteristic));
+                caracteristicas.Add(new CaracteristicasDTO(caracteristica.Caracteristica));
             });
             noIncluidas = new List<CaracteristicasDTO>();
-            model.noIncluidas.ForEach(caracteristic =>
+            model.noIncluidas.ForEach(caracteristica =>
             {
-                noIncluidas.Add(new CaracteristicasDTO(caracteristic));
+                noIncluidas.Add(new CaracteristicasDTO(caracteristica.Caracteristica));
             });
         }
 

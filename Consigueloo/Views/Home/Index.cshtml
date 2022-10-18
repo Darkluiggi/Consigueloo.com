@@ -18,19 +18,19 @@
         </div>
 
         <div class="col-md-12">
-            <div class="input-group">
+            @*<div class="input-group">
                 <input type="text" onkeyup="inputKeyUp(event)" id="searchField"class="form-control" placeholder="Búsqueda..." aria-label="Search" aria-describedby="basic-addon2">
                 <div class="input-group-append">
                     <button class="btn btn-primary find-btn" type="button" id="srchButton" onclick="BuscarEnAnuncios()">
                         <i class="fas fa-search"></i>
                     </button>
                 </div>
-            </div>  
+            </div>*@  
         </div>
         <br />
         <div class="center col-md-12">
-            <a class="btn-anunciate pad" href="@Url.Action("Pricing", "Anuncios", new { Area = "Anuncios" })" onclick="ActivarLoader()">
-                <h3 class="keep-calm clr-green pad-top">Anúnciate ya</h3>
+            <a class="btn-anunciate pad" href="@Url.Action("Index", "Productos", new { Area = "Catalogo" })" onclick="ActivarLoader()">
+                <h2 class="keep-calm clr-green pad-top">Catálogo</h2>
             </a>
         </div>
     </div>
@@ -75,9 +75,9 @@
 <div class="mid-down-container">
 
 </div>
-<div id="destacados" class="destacados-container">
+@*<div id="destacados" class="destacados-container">
 
-</div>
+</div>*@
 <script>
 
     $(document).ready(function () {

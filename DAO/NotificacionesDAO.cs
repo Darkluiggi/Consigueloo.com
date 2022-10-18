@@ -225,7 +225,7 @@ namespace DAO
             catch (Exception ex)
             {
 
-                throw;
+                throw ex;
             }
         }
 
@@ -290,6 +290,7 @@ namespace DAO
                 notificacionModel.check = x.check;
                 response.Add(notificacionModel);
             });
+            response  = response.OrderByDescending(x => x.id).ToList();
             return response;
         }
 

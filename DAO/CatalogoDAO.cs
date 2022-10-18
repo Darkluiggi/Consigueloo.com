@@ -19,7 +19,7 @@ namespace DAO
     {
         ApplicationDbContext db;
         Controller controller;
-        private const string entidad = "Catalogo";
+        private const string entidad = "Página de catálogo";
 
         public CatalogoDAO(Controller controller)
         {
@@ -48,6 +48,7 @@ namespace DAO
                     response.whatsappLink = x.whatsappLink;
                     responseList.Add(response);
                 });
+                responseList = responseList.OrderBy(r => r.pagina).ToList();
                 return responseList;
 
             }
@@ -58,13 +59,19 @@ namespace DAO
             }
         }
 
-        public void Add(CatalogoEmpresaDTO catalogo)
+        public int FindNextPage()
+        {
+            var catalogo = db.CatalogoEmpresas.Where(x => x.estado).OrderByDescending(x => x.pagina).ToList();
+            var proximo = catalogo.FirstOrDefault().pagina + 1;
+            return proximo;
+        }
+
+        public List<CatalogoEmpresaDTO> Add(CatalogoEmpresaDTO catalogo)
         {
             ImageCodecInfo myImageCodecInfo;
             Encoder myEncoder;
             EncoderParameter myEncoderParameter;
             EncoderParameters myEncoderParameters;
-
 
             // Get an ImageCodecInfo object that represents the JPEG codec.
             myImageCodecInfo = GetEncoderInfo("image/jpeg");
@@ -130,6 +137,7 @@ namespace DAO
                 pagina.whatsappLink = pagina.whatsappLink.Replace(" ", "_");
                 if (isNew)
                 {
+                    pagina.pagina = FindNextPage();
                     db.CatalogoEmpresas.Add(pagina);
                 }
                 else
@@ -138,6 +146,7 @@ namespace DAO
                 }
                 db.SaveChanges();
                 ViewInfoMensaje.setMensaje(controller, MensajeBuilder.CrearMsgSuccess(entidad), ConstantsLevels.SUCCESS);
+                return getList();
             }
 
             catch (Exception ex)
@@ -145,6 +154,24 @@ namespace DAO
 
                 throw ex;
             }
+        }
+
+        public List<CatalogoEmpresaDTO> FixWhastappLinks(CatalogoEmpresaDTO catalogoEmpresa)
+        {
+            List<CatalogoEmpresa> catalogo = db.CatalogoEmpresas.Where(c => c.estado).ToList();
+            catalogo.ForEach(pagina =>
+            {
+                string mensaje = "https://wa.me/+573243934309?text=Hola vengo de Consigueloo.co y me interesa el producto " + pagina.nombreProducto + " Link: ";
+                string link = "https://Consigueloo.co/Catalogo/Productos/Producto?nombre=" + pagina.nombreProducto;
+                link = link.Replace(" ", "_");
+
+                pagina.whatsappLink = mensaje + link;
+            });
+            db.SaveChanges();
+            var result = getList();
+            ViewInfoMensaje.setMensaje(controller, MensajeBuilder.EditarMsgSuccess(entidad), Helpers.InfoMensajes.ConstantsLevels.SUCCESS);
+            return result;
+
         }
 
         public CatalogoEmpresaDTO Find(int? id)
@@ -196,19 +223,21 @@ namespace DAO
             }
         }
 
-        public void Remove(int id)
+        public List<CatalogoEmpresaDTO> Remove(int id)
         {
             try
             {
-                Caracteristicas razonsocial = db.Caracteristicas.Find(id);
-                razonsocial.estado = false;
-                db.Entry(razonsocial).State = EntityState.Modified;
+                CatalogoEmpresa catalogoEmpresa = db.CatalogoEmpresas.Find(id);
+                catalogoEmpresa.estado = false;
+                db.Entry(catalogoEmpresa).State = EntityState.Modified;
                 db.SaveChanges();
                 ViewInfoMensaje.setMensaje(controller, MensajeBuilder.BorrarMsgSuccess(entidad), Helpers.InfoMensajes.ConstantsLevels.SUCCESS);
+                return getList();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 ViewInfoMensaje.setMensaje(controller, MensajeBuilder.BorrarMsgError(entidad), Helpers.InfoMensajes.ConstantsLevels.ERROR);
+                throw new Exception(ex.Message);
             }
         }
 

@@ -11,13 +11,13 @@ namespace Model.ConfiguracionPlataforma
     {
         public NombreAnuncios()
         {
-            caracteristicas = new List<Caracteristicas>();
-            noIncluidas = new List<Caracteristicas>();
+            caracteristicas = new List<NombreAnunciosCaracteristicas>();
+            noIncluidas = new List<NombreAnunciosCaracteristicas>();
         }
 
         public int id { get; set; }
         public string nombre { get; set; }
-        public virtual List<Caracteristicas> caracteristicas { get; set; }
-        public virtual List<Caracteristicas> noIncluidas { get; set; }
+        public virtual List<NombreAnunciosCaracteristicas> caracteristicas { get; set; }
+        public virtual List<NombreAnunciosCaracteristicas> noIncluidas { get; set; }
     }
 }

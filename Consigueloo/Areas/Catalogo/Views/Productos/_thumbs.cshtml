@@ -4,7 +4,7 @@
     @foreach (var item in Model)
     {
         <div class="imageRow">
-            <img src="@item.imagePath" alt="@item.whatsappLink">
+            <img loading="lazy" src="@item.imagePath" alt="@item.whatsappLink" id="@item.pagina">
         </div>
     }
 
@@ -14,18 +14,19 @@
         const imgs = document.querySelector('.imgs');
         const img = document.querySelectorAll('.imgs img');
         const lnk = document.getElementById('walnk');
+        const left = document.querySelector('.left-arrow-control');
+        const right = document.querySelector('.right-arrow-control');
         const opacity = 0.6;
         // Get the modal
         var modal = document.getElementById("modalCatalogo");
-
-
+        var content = document.querySelector('.modalCatalogo-content');
+        
         // Get the <span> element that closes the modal
         var span = document.getElementById("closeCatalog");
 
-        // Set first img opacity
-        img[0].style.opacity = opacity;
-
         imgs.addEventListener('click', imgClick);
+        left.addEventListener('click', moveLeft);
+        right.addEventListener('click', moveRight);
 
         function imgClick(e) {
             // Reset the opacity
@@ -54,6 +55,47 @@
             }
         }
 
+        function moveLeft() {
+            img.forEach(img => (img.style.opacity = 1));
+            content.classList.add('fadeLeft');
+            modal.style.display = "block";
+            var i = 0;
+            debugger
+            for(const im of img) {
+                if (im.src === current.src) {
+                    i = i - 1;
+                    i = i < 0 ? img.length-1 : i;
+                    i = i > img.length-1 ? 0 : i;
+                    current.src = img[i].src;
+                    lnk.setAttribute('href', img[i].alt);
+                    setTimeout(() => content.classList.remove('fadeLeft'), 500);
+                    img[i].style.opacity = opacity;
+                    break;
+                }
+                i++;
+            };
+        }
+
+        function moveRight() {
+            img.forEach(img => (img.style.opacity = 1));
+            content.classList.add('fadeRight');
+            modal.style.display = "block";
+            var i = 0;
+            debugger
+            for (const im of img) {
+                if (im.src === current.src) {
+                    i = i + 1;
+                    i = i > img.length - 1 ? 0 : i;
+                    i = i < 0 ? img.length - 1 : i;
+                    current.src = img[i].src;
+                    lnk.setAttribute('href', img[i].alt);
+                    setTimeout(() => content.classList.remove('fadeRight'), 500);
+                    img[i].style.opacity = opacity;
+                    break;
+                }
+                i++;
+            };
+        }
 
         span.onclick = function () {
             modal.style.display = "none";

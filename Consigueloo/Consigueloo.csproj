@@ -476,6 +476,8 @@
     <Content Include="Content\assets\Iconos\whatsapp.png" />
     <Content Include="Content\assets\Iconos\wifi.png" />
     <Content Include="Content\assets\Iconos\Youtube.png" />
+    <Content Include="Content\assets\img-btn\boton gl-01.png" />
+    <Content Include="Content\assets\img\enconstruccion.jpg" />
     <Content Include="Content\assets\img\error-404-monochrome.svg" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -668,7 +670,7 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\View.cshtml" />
+    <Content Include="Views\Home\TerminosYCondiciones.cshtml" />
     <Content Include="Views\Home\_Display.cshtml" />
     <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
     <Content Include="Views\Manage\ChangePassword.cshtml" />
@@ -701,6 +703,8 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Shared\_LayoutCatalogo.cshtml" />
+    <Content Include="Views\Shared\_EnConstruccion.cshtml" />
+    <Content Include="Views\Home\PoliticaDePrivacidad.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

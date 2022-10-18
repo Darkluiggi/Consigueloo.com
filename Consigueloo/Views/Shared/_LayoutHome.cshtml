@@ -83,34 +83,33 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">Servicios</div>
-                            <a class="nav-link" onclick="ActivarLoader()" href="@Url.Action("FilterCategoryByName", "Anuncios", new { nombre="Inmuebles", area = "Anuncios" })">
+                            <a class="nav-link" onclick="ActivarLoader()" href="@Url.Action("Producto", "Productos", new { nombre="Belleza", area = "Catalogo" })">
                                 <div class="sb-nav-link-icon"><img src="~/Content/assets/Iconos/Categorias/Inmuebles.png" /></div>
-                                Inmuebles
-
+                                Belleza
                             </a>
-                            <a class="nav-link" onclick="ActivarLoader()" href="@Url.Action("FilterCategoryByName", "Anuncios", new { nombre="Vehiculos", area = "Anuncios" })">
+                            <a class="nav-link" onclick="ActivarLoader()" href="@Url.Action("Producto", "Productos", new { nombre="Cuidado_del_Hombre", area = "Catalogo" })">
                                 <div class="sb-nav-link-icon"><img src="~/Content/assets/Iconos/Categorias/Vehículos.png" /></i></div>
-                                Vehículos
+                                Cuidado del hombre
                             </a>
-                            <a class="nav-link" onclick="ActivarLoader()" href="@Url.Action("FilterCategoryByName", "Anuncios", new { nombre="Alimentos / Bebidas", area = "Anuncios" })">
+                            <a class="nav-link" onclick="ActivarLoader()" href="@Url.Action("Producto", "Productos", new { nombre="Cuidado_Personal", area = "Catalogo" })">
                                 <div class="sb-nav-link-icon"><img src="~/Content/assets/Iconos/Categorias/Alimentos y bebidas.png" /></div>
-                                Alimentos / Bebidas
+                                Cuidado personal
                             </a>
-                            <a class="nav-link" onclick="ActivarLoader()" href="@Url.Action("FilterCategoryByName", "Anuncios", new { nombre="Salud / Farmacia", area = "Anuncios" })">
+                            <a class="nav-link" onclick="ActivarLoader()" href="@Url.Action("Producto", "Productos", new { nombre="Fitness", area = "Catalogo" })">
                                 <div class="sb-nav-link-icon"><img src="~/Content/assets/Iconos/Categorias/Salud y farmacia.png" /></div>
-                                Salud / Farmacia
+                                Fitness
                             </a>
-                            <a class="nav-link" onclick="ActivarLoader()" href="@Url.Action("FilterCategoryByName", "Anuncios", new { nombre="Moda / Accesorios", area = "Anuncios" })">
+                            <a class="nav-link" onclick="ActivarLoader()" href="@Url.Action("Producto", "Productos", new { nombre="Tecnología", area = "Catalogo" })">
                                 <div class="sb-nav-link-icon"><img src="~/Content/assets/Iconos/Categorias/Moda y accesorios.png" /></div>
-                                Moda / Accesorios
+                                Tecnología
                             </a>
-                            <div class="center">
+                            @*<div class="center">
                                 <a class="nav-link center" href="#" onclick="showCategorias()" data-toggle="modal" data-target="#categoriasModal">
 
                                     VER MÁS
 
                                 </a>
-                            </div>
+                            </div>*@
 
                             <a class="nav-link" href="~/Anuncios/AnuncioTrabajo">
                                 Buscar empleo
@@ -196,6 +195,10 @@
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
     <script src="~/Content/assets/demo/datatables-demo.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/axios@1.0.0/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/luxon@2.3.0/build/global/luxon.min.js"></script>
     <script>
         $(document).on('scroll', function () {
             var scrollDistance = $(this).scrollTop();

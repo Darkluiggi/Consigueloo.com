@@ -376,7 +376,9 @@ namespace Consigueloo.Controllers
         public ActionResult ExternalLogin(string provider, string returnUrl)
         {
             // Solicitar redireccionamiento al proveedor de inicio de sesión externo
+          
             return new ChallengeResult(provider, Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl }));
+            
         }
 
         //
@@ -427,6 +429,7 @@ namespace Consigueloo.Controllers
 
             // Si el usuario ya tiene un inicio de sesión, iniciar sesión del usuario con este proveedor de inicio de sesión externo
             var result = await SignInManager.ExternalSignInAsync(loginInfo, isPersistent: false);
+
             switch (result)
             {
                 case SignInStatus.Success:
@@ -469,8 +472,10 @@ namespace Consigueloo.Controllers
                     UserName = model.Email,
                     Email = model.Email,
                     BirthDate = model.BirthDate,
-                    HomeTown = model.HomeTown
-                    
+                    HomeTown = model.HomeTown,
+                    Name = info.ExternalIdentity.Name.Split(' ')[0],
+                    LastName = info.ExternalIdentity.Name.Split(' ')[1],
+
                 };
 
                 var result = await UserManager.CreateAsync(user);

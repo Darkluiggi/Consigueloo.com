@@ -22,7 +22,9 @@ namespace Consigueloo.Areas.Anuncios.Controllers
             ViewBag.Funcion = "Anuncios de trabajo";
             List<AnuncioTrabajoDTO> anuncios = anuncioTrabajoDAO.getList();
 
-            return View(anuncios);
+            //return View(anuncios);
+            return View("~/Views/Shared/_EnConstruccion.cshtml");
+
         }
 
         // GET: Anuncios/AnuncioTrabajo/Details/5

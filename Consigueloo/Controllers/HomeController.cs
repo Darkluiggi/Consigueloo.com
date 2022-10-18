@@ -43,11 +43,24 @@ namespace Consigueloo.Controllers
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Tus inquietudes las resolvemos en los siguientes canales:.";
+            ViewBag.Message = "Tus inquietudes las resolvemos en los siguientes canales:";
 
             return View();
         }
 
+        public ActionResult TerminosYCondiciones()
+        {
+            ViewBag.Message = "Términos y condiciones de uso Consigueloo.co";
+
+            return View();
+        }
+
+        public ActionResult PoliticaDePrivacidad()
+        {
+            ViewBag.Message = "Política de privacidad Consigueloo.co";
+
+            return View();
+        }
         public ActionResult ShowDestacados()
         {            
             List<AnuncioDTO> anuncios = anunciosDAO.ShowDestacados();

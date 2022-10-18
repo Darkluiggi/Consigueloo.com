@@ -70,7 +70,7 @@ namespace Consigueloo.Services
                 model.nombre = user.Name;
                 model.apellido = user.LastName;
                 model.ciudad = user.HomeTown;
-                model.rol = db.Roles.Where(r => r.nombre.ToLower() == "Cliente").FirstOrDefault();
+                model.rolId = db.Roles.Where(r => r.nombre.ToLower() == "Cliente").FirstOrDefault().id; 
                 db.Usuarios.Add(model);
                 db.SaveChanges();
             }
@@ -363,8 +363,8 @@ namespace Consigueloo.Services
                 model.nombre = user.Name;
                 model.apellido = user.LastName;
                 model.ciudad = user.HomeTown;
-                model.rol = db.Roles.FirstOrDefault(x => x.nombre.Equals("Usuario"));
-                
+                model.rolId = db.Roles.FirstOrDefault(x => x.nombre.Equals("Cliente")).id;
+
                 db.Usuarios.Add(model);
                 db.SaveChanges();
             }

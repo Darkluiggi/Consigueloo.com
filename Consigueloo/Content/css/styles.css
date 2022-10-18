@@ -10565,6 +10565,12 @@ body {
 .img-error {
   max-width: 20rem;
 }
+
+.img-enConstruccion {
+    position:relative;
+    margin-top:30%;
+    max-width: 40rem;
+}
 .sb-nav-link-icon img{
     width:20px;
     height:20px;
@@ -11256,7 +11262,6 @@ body {
             }
 
             .pad {
-                padding-top: 6px;
                 padding-left: 30px;
             }
 
@@ -12240,3 +12245,48 @@ body {
             box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
         }
 
+
+.btn-google {
+    color: #fff;
+    background-color: #eaecf4;
+    border-color: #4e73df;
+    border-radius: 10px;
+    width: 100%;
+    height: 30px;
+    background-size: cover;
+    background-image: url('../../Content/assets/img-btn/boton gl-01.png');
+}
+
+    .btn-google:hover {
+        color: #fff;
+        background-color: #0069d9;
+        border-color: #0062cc;
+    }
+
+    .btn-google:focus, .btn-google.focus {
+        color: #fff;
+        background-color: #0069d9;
+        border-color: #0062cc;
+        box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
+    }
+
+    .btn-google.disabled, .btn-google:disabled {
+        color: #fff;
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+    .btn-google:not(:disabled):not(.disabled):active, .btn-google:not(:disabled):not(.disabled).active, .show > .btn-google.dropdown-toggle {
+        color: #fff;
+        background-color: #0062cc;
+        border-color: #005cbf;
+    }
+
+        .btn-google:not(:disabled):not(.disabled):active:focus, .btn-google:not(:disabled):not(.disabled).active:focus, .show > .btn-google.dropdown-toggle:focus {
+            box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
+        }
+
+.notificationsDiv{
+    max-height:400px;
+    overflow-y: auto;
+}

@@ -14,9 +14,9 @@
                 @*<i class="fas fa-user-circle fa-fw"></i>*@
                 @*</a>*@
                 <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                    <a class="dropdown-item d-flex align-items-center" href="#">@User.Identity.GetUserName()</a>
-                    <a class="dropdown-item d-flex align-items-center" href="~/Manage">Settings</a>
-                   
+                    <label style="font-weight:bold" class="dropdown-item d-flex align-items-center" href="#">@User.Identity.GetUserName()</label>
+                    <a class="dropdown-item d-flex align-items-center" href="~/Manage">Administra tu cuenta</a>
+
                     <a v-if="isAdmin" class="dropdown-item d-flex align-items-center" href="~/Administrador/Administrador">Panel de administrador</a>
 
                     <a class="dropdown-item d-flex align-items-center" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a>
@@ -48,12 +48,11 @@
     }
 </div>
 
-
 <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://unpkg.com/axios@1.0.0/dist/axios.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/luxon@2.3.0/build/global/luxon.min.js"></script>
 <script>
-
 
     var loginPartialVue = new Vue({
 

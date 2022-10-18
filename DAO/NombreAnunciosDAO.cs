@@ -32,7 +32,7 @@ namespace DAO
             try
             {
                 List<NombreAnuncios> periodosModel = db.NombreAnuncios.Where(x => x.estado == true).ToList();
-                List<NombreAnunciosDTO> responseList = new List<NombreAnunciosDTO>(); ;
+                List<NombreAnunciosDTO> responseList = new List<NombreAnunciosDTO>();
                 
                 periodosModel.ForEach(x =>
                 {
@@ -41,12 +41,12 @@ namespace DAO
                     response.nombre = x.nombre;
                     x.caracteristicas.ForEach(y =>
                     {
-                        CaracteristicasDTO item = new CaracteristicasDTO(y);
+                        CaracteristicasDTO item = new CaracteristicasDTO(y.Caracteristica);
                         response.caracteristicas.Add(item);
                     });
                     x.noIncluidas.ForEach(y =>
                     {
-                        CaracteristicasDTO item = new CaracteristicasDTO(y);
+                        CaracteristicasDTO item = new CaracteristicasDTO(y.Caracteristica);
                         response.noIncluidas.Add(item);
                     });
                     responseList.Add(response);
@@ -90,7 +90,7 @@ namespace DAO
                     Caracteristicas item = new Caracteristicas();
                     item.nombre = x.nombre;
                     item.id = x.id;
-                    response.caracteristicas.Add(item);
+                    response.caracteristicas.Add(new NombreAnunciosCaracteristicas() { CaracteristicaId = item.id, NombreAnuncioId = response.id });
                 });
                 model.noIncluidas.ForEach(x =>
                 {
@@ -98,7 +98,7 @@ namespace DAO
                     item.nombre = x.nombre;
                     item.id = x.id;
 
-                    response.noIncluidas.Add(item);
+                    response.noIncluidas.Add(new NombreAnunciosCaracteristicas() { CaracteristicaId = item.id, NombreAnuncioId = response.id });
                 });
                 db.NombreAnuncios.Add(response);
                 db.SaveChanges();
@@ -124,12 +124,12 @@ namespace DAO
                 response.nombre = model.nombre;
                 model.caracteristicas.ForEach(x =>
                 {
-                    CaracteristicasDTO item = new CaracteristicasDTO(x);
+                    CaracteristicasDTO item = new CaracteristicasDTO(x.Caracteristica);
                     response.caracteristicas.Add(item);
                 });
                 model.noIncluidas.ForEach(x =>
                 {
-                    CaracteristicasDTO item = new CaracteristicasDTO(x);
+                    CaracteristicasDTO item = new CaracteristicasDTO(x.Caracteristica);
                     response.noIncluidas.Add(item);
                 });
 
@@ -171,7 +171,7 @@ namespace DAO
                         Caracteristicas item = new Caracteristicas();
                         item.nombre = y.nombre;
                         item.id = y.id;
-                        response.caracteristicas.Add(item);
+                        response.caracteristicas.Add(new NombreAnunciosCaracteristicas() { CaracteristicaId = item.id, NombreAnuncioId = response.id });
 
                     });
                 }
@@ -183,7 +183,7 @@ namespace DAO
                         Caracteristicas item = new Caracteristicas();
                         item.nombre = y.nombre;
                         item.id = y.id;
-                        response.caracteristicas.Add(item);
+                        response.caracteristicas.Add(new NombreAnunciosCaracteristicas() { CaracteristicaId = item.id, NombreAnuncioId = response.id });
                     });
                 }
                 if (response.noIncluidas.Count==0)
@@ -193,7 +193,7 @@ namespace DAO
                         Caracteristicas item = new Caracteristicas();
                         item.nombre = y.nombre;
                         item.id = y.id;
-                        response.noIncluidas.Add(item);
+                        response.noIncluidas.Add(new NombreAnunciosCaracteristicas() { CaracteristicaId = item.id, NombreAnuncioId = response.id });
 
                     });
                 }
@@ -205,7 +205,7 @@ namespace DAO
                         Caracteristicas item = new Caracteristicas();
                         item.nombre = x.nombre;
                         item.id = x.id;
-                        response.noIncluidas.Add(item);
+                        response.noIncluidas.Add(new NombreAnunciosCaracteristicas() { CaracteristicaId = item.id, NombreAnuncioId = response.id });
                         
                     });
                 }

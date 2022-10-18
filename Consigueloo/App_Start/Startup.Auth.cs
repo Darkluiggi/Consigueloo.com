@@ -53,12 +53,12 @@ namespace Consigueloo
             //app.UseTwitterAuthentication(
             //   consumerKey: "",
             //   consumerSecret: "");
-           
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "366421968528-stmgg12lgdg5kmf7c4mi8dvaimjl5pdc.apps.googleusercontent.com",
+                ClientSecret = "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"
+            });
         }
     }
 }
