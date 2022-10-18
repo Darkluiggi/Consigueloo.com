@@ -187,35 +187,35 @@ namespace Persistence.Migrations
                     {
                         new NombreAnunciosCaracteristicas()
                         {
-                        CaracteristicaId = 1,
-                        NombreAnuncioId = 4
+                            CaracteristicaId = 1,
+                            NombreAnuncioId = 4
+                        },
+                        new NombreAnunciosCaracteristicas()
+                        {
+                            CaracteristicaId = 2,
+                            NombreAnuncioId = 4
+                        },
+                        new NombreAnunciosCaracteristicas()
+                        {
+                            CaracteristicaId = 3,
+                            NombreAnuncioId = 4
+                        },
+                        new NombreAnunciosCaracteristicas()
+                        {
+                            CaracteristicaId = 4,
+                            NombreAnuncioId = 4
+                        },
+                        new NombreAnunciosCaracteristicas()
+                        {
+                            CaracteristicaId = 5,
+                            NombreAnuncioId = 4
+                        },
+                        new NombreAnunciosCaracteristicas()
+                        {
+                            CaracteristicaId = 6,
+                            NombreAnuncioId = 4
+                        }
                     },
-                    new NombreAnunciosCaracteristicas()
-                    {
-                        CaracteristicaId = 2,
-                        NombreAnuncioId = 4
-                    },
-                    new NombreAnunciosCaracteristicas()
-                    {
-                        CaracteristicaId = 3,
-                        NombreAnuncioId = 4
-                    },
-                    new NombreAnunciosCaracteristicas()
-                    {
-                        CaracteristicaId = 4,
-                        NombreAnuncioId = 4
-                    },
-                    new NombreAnunciosCaracteristicas()
-                    {
-                        CaracteristicaId = 5,
-                        NombreAnuncioId = 4
-                    },
-                    new NombreAnunciosCaracteristicas()
-                    {
-                        CaracteristicaId = 6,
-                        NombreAnuncioId = 4
-                    }
-                },
                     noIncluidas = new List<NombreAnunciosCaracteristicas>()
                     {
                         new NombreAnunciosCaracteristicas()
