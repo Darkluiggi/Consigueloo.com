@@ -231,6 +231,13 @@ namespace DAO
             {
                 CatalogoEmpresa catalogoEmpresa = db.CatalogoEmpresas.Find(id);
                 catalogoEmpresa.estado = false;
+                List<CatalogoEmpresa> catalogo = db.CatalogoEmpresas.Where(ce => ce.pagina > catalogoEmpresa.pagina).ToList();
+                catalogo.ForEach(ce => 
+                {
+                    ce.pagina = ce.pagina - 1;
+                    db.Entry(ce).State = EntityState.Modified;
+                }
+                );
                 db.Entry(catalogoEmpresa).State = EntityState.Modified;
                 db.SaveChanges();
                 ViewInfoMensaje.setMensaje(controller, MensajeBuilder.BorrarMsgSuccess(entidad), Helpers.InfoMensajes.ConstantsLevels.SUCCESS);

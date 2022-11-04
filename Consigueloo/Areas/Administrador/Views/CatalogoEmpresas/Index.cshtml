@@ -16,11 +16,11 @@
                         Nueva página
                     </button>
                 </p> 
-                <p>
-                    <button class="btn btn-primary btn-sm color-white" id="fixWALinks" @*onclick="fixWhatsappLinks()"*@ onclick="location.href='@Url.Action("FixWhastappLinks","CatalogoEmpresas")'">
+                @*<p>
+                    <button class="btn btn-primary btn-sm color-white" id="fixWALinks" onclick="location.href='@Url.Action("FixWhastappLinks","CatalogoEmpresas")'">
                         Arreglar Links whatsapp
                     </button>
-                </p>
+                </p>*@
             </div>
 
         </div>
@@ -72,7 +72,7 @@
 
                             foreach (var item in Model)
                             {
-                                <tr draggable="true" ondragstart="start()" ondragover="dragover()" style="height: 0;">
+                                <tr style="height: 0;">
 
                                     <td>
                                         @Html.DisplayFor(modelItem => item.pagina)
@@ -81,7 +81,7 @@
                                         @Html.DisplayFor(modelItem => item.nombreProducto)
                                     </td>
                                     <td>
-                                        <img src="@item.imagePath" alt="@item.nombreProducto" style="height:450px; width:600px" />
+                                        <img src="@item.imagePath" alt="@item.nombreProducto" style="height:300px; width:400px" />
                                     </td>
                                     <td>
                                         <a class="btn btn-primary" onclick="location.href='@Url.Action("CreateOrUpdate", "CatalogoEmpresas", new { id = item.id })'">
@@ -113,35 +113,8 @@
     </div>
 </div>
 <script type="text/javascript">
-    $(document).ready(
-        function () {
-            $('#dataTable tbody').on('click', 'tr', function () {
-                var data = $(this).attr('id');
-                ActivarLoader();
-                ajaxControl(data);
-            });
-        }
-    );
 
-
-    function ajaxControl(indx) {
-        console.log(indx);
-        $.ajax({
-            type: "POST",
-            url: '@Url.Action("Details", "CatalogoEmpresas")',
-            datatype: "json",
-            contentType: 'application/json',
-            data: JSON.stringify({ "id": indx }),
-            success: function (r) {
-                $("#dvcontent").html(r);
-                DesactivarLoader();
-            },
-            error: function (r) {
-                $("#dvcontent").html(r);
-                DesactivarLoader();
-            }
-        });
-    }
+   
     function fixWhatsappLinks() {
         $.ajax({
             type: "POST",
@@ -190,4 +163,9 @@
             );
       }
     });
+    $(document).ready(function () {
+        $('#dataTable').DataTable();
+    });
+
+
 </script>

@@ -24,13 +24,11 @@ namespace Consigueloo.Areas.Administrador.Controllers
         // GET: Administrador/Administrador
         public ActionResult Index()
         {
-            if (Request.IsAuthenticated)
+            if (Request.IsAuthenticated && perfilValidator.isAdministrator(User.Identity.GetUserName()))
             {
-                if (perfilValidator.isAdministrator(User.Identity.GetUserName()))
-                {
-                    List<AnuncioDTO> anuncios = anunciosDAO.ListarAnuncios();
-                    return View(anuncios);
-                }
+                List<AnuncioDTO> anuncios = anunciosDAO.ListarAnuncios();
+                return View(anuncios);
+                
             }
             return View("Error");
         }

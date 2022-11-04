@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Consigueloo.Services;
 using DAO;
+using Microsoft.AspNet.Identity;
 using Model.CatalogoEmpresa;
 using Model.ViewModel;
 using Persistence;
@@ -18,16 +19,18 @@ namespace Consigueloo.Areas.Administrador.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
         CatalogoDAO catalogoDAO;
+        PerfilValidator perfilValidator;
 
         public CatalogoEmpresasController()
         {
             catalogoDAO = new CatalogoDAO(this);
+            perfilValidator = new PerfilValidator(this);
         }
 
         // GET: Administrador/CatalogoEmpresas
         public ActionResult Index()
-        {            
-            if (Request.IsAuthenticated)
+        {
+            if (Request.IsAuthenticated && perfilValidator.isAdministrator(User.Identity.GetUserName()))
             {
                 var response = catalogoDAO.getList();
                 return View(response);
@@ -35,31 +38,20 @@ namespace Consigueloo.Areas.Administrador.Controllers
             return View("Error");
         }
 
-        // GET: Administrador/CatalogoEmpresas/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            CatalogoEmpresa catalogoEmpresa = db.CatalogoEmpresas.Find(id);
-            if (catalogoEmpresa == null)
-            {
-                return HttpNotFound();
-            }
-            return View(catalogoEmpresa);
-        }
-
         // GET: Administrador/CatalogoEmpresas/Create
         public ActionResult CreateOrUpdate(int? id)
         {
-            var pagina = catalogoDAO.Find(id);
-            if(pagina == null)
+            if (Request.IsAuthenticated && perfilValidator.isAdministrator(User.Identity.GetUserName()))
             {
-                pagina = new CatalogoEmpresaDTO();
-                pagina.pagina = catalogoDAO.FindNextPage();
+                var pagina = catalogoDAO.Find(id);
+                if (pagina == null)
+                {
+                    pagina = new CatalogoEmpresaDTO();
+                    pagina.pagina = catalogoDAO.FindNextPage();
+                }
+                return View(pagina);
             }
-            return View(pagina);
+            return View("Error");
         }
 
         // POST: Administrador/CatalogoEmpresas/Create
@@ -71,8 +63,8 @@ namespace Consigueloo.Areas.Administrador.Controllers
         {
             if (ModelState.IsValid)
             {
-                List<CatalogoEmpresaDTO> catalogo = catalogoDAO.Add(catalogoEmpresa);
-                return View("Index", catalogo);
+                catalogoDAO.Add(catalogoEmpresa);
+                return RedirectToAction("Index");
             }
 
             return View(catalogoEmpresa);

@@ -3,7 +3,7 @@
 <div id="loginPartialVue">
     @if (Request.IsAuthenticated)
     {
-        using (Html.BeginForm("LogOff", "Usuarios", FormMethod.Post, new { area = "", id = "logoutForm", @class = "navbar-right" }))
+        using (Html.BeginForm("LogOff", "Account", new { Area = "" }, FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
         {
             @Html.AntiForgeryToken()
             <li class="nav-item dropdown">
@@ -19,7 +19,7 @@
 
                     <a v-if="isAdmin" class="dropdown-item d-flex align-items-center" href="~/Administrador/Administrador">Panel de administrador</a>
 
-                    <a class="dropdown-item d-flex align-items-center" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a>
+                    <a class="dropdown-item d-flex align-items-center" href="#" data-toggle="modal" data-target="#logoutModal">Cerrar sesión</a>
                 </div>
             </li>
 

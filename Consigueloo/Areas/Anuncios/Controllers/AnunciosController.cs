@@ -8,6 +8,7 @@ using Model.Anuncios;
 using Newtonsoft.Json;
 using DAO;
 using Model.ViewModel;
+using System.IdentityModel;
 
 namespace Consigueloo.Areas.Anuncios.Controllers
 {
@@ -210,11 +211,19 @@ namespace Consigueloo.Areas.Anuncios.Controllers
         [HttpPost]
         public ActionResult verificarNotificaciones()
         {
-            string user = User.Identity.GetUserName();
-            notificacionDAO.crearNotificaciones(user);
-            List<NotificacionDTO> result = notificacionDAO.verificarNotificaciones(user);
+            try
+            {
+                string user = User.Identity.GetUserName();
+                notificacionDAO.crearNotificaciones(user);
+                List<NotificacionDTO> result = notificacionDAO.verificarNotificaciones(user);
 
-            return PartialView("_notificaciones", result);
+                return PartialView("_notificaciones", result);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw new BadRequestException(ex.Message);
+            }
         }
         public ActionResult checkNotificaciones()
         {

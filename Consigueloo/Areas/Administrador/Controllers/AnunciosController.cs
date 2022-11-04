@@ -38,24 +38,33 @@ namespace Consigueloo.Areas.Administrador.Controllers
         // GET: Administrador/Anuncios
         public ActionResult Index()
         {
-            ViewBag.Titulo = "Administrar Anuncios Activos";
-            return View(anunciosDAO.ListarAnuncios());
+            if (Request.IsAuthenticated && perfilValidator.isAdministrator(User.Identity.GetUserName()))
+            {
+                ViewBag.Titulo = "Administrar Anuncios Activos";
+                return View(anunciosDAO.ListarAnuncios());
+            }
+            return View("Error");
         }
 
         // GET: Administrador/Anuncios/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            if (Request.IsAuthenticated && perfilValidator.isAdministrator(User.Identity.GetUserName()))
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                int Id = (int)id;
+                AnuncioDTO response = anunciosDAO.getById(Id);
+                if (response == null)
+                {
+                    return HttpNotFound();
+                }
+                return PartialView(response);
             }
-            int Id = (int)id;
-            AnuncioDTO response = anunciosDAO.getById(Id);
-            if (response == null)
-            {
-                return HttpNotFound();
-            }
-            return PartialView(response);
+            return View("Error");
         }
 
         // GET: Administrador/Anuncios/Create

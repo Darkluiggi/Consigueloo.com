@@ -21,7 +21,15 @@
                     <br>
                     <hr>
                     <button class="btn bg-white color-blue shadow-button">
-                        <a href="/Manage/ChangePassword">Cambiar la contraseña</a>
+                        @if (!Model.HasPassword)
+                        {
+                            <a href="/Manage/SetPassword">Crear contraseña</a>
+                        }
+                        else
+                        {
+                            <a href="/Manage/ChangePassword">Cambiar la contraseña</a>
+                        }
+
                     </button>
                 </div>
             </div>

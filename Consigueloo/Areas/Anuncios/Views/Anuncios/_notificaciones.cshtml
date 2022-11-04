@@ -46,7 +46,9 @@
     function quitarNotificacion() {
 
         var notificacion = document.getElementById('counter');
-        notificacion.hidden = true;
+        if (notificacion != null) {
+            notificacion.hidden = true;
+        }
           $.ajax(
             {
                 type: "POST",
