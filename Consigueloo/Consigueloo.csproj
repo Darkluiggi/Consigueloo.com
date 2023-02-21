@@ -367,6 +367,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Administrador\Controllers\VisitasController.cs" />
     <Compile Include="Areas\Catalogo\CatalogoAreaRegistration.cs" />
     <Compile Include="Areas\Catalogo\Controllers\ProductosController.cs" />
     <Compile Include="Areas\Administrador\AdministradorAreaRegistration.cs" />

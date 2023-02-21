@@ -13,6 +13,9 @@ using Model.ViewModel;
 using DAO;
 using Consigueloo.Services;
 using System.Web.Helpers;
+using System.Net.Mail;
+using System.Net.Mime;
+using System.Threading.Tasks;
 
 namespace Consigueloo.Controllers
 {
@@ -20,6 +23,8 @@ namespace Consigueloo.Controllers
     public class HomeController : Controller
     {
         private AnunciosDAO anunciosDAO;
+
+        private VisitasDAO visitasDAO = new VisitasDAO();
 
         private PerfilValidator perfilValidator;
         public HomeController()
@@ -80,6 +85,36 @@ namespace Consigueloo.Controllers
                 }
             }
             return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> SaveVisitor()
+        {
+            string ip = Request.UserHostAddress;
+            VisitasDTO visita = new VisitasDTO()
+            {
+                IP = ip,
+                isActive = true,
+                visitTime = DateTime.Now
+            };
+            visitasDAO.Add(visita);
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> LeaveVisitor()
+        {
+            string ip = Request.UserHostAddress;
+
+            VisitasDTO visita = new VisitasDTO()
+            {
+                IP = ip,
+                isActive = false
+            };
+            visitasDAO.EndVisit(visita);
+
+
+            return Json($"Session ended for IP: {ip}",JsonRequestBehavior.AllowGet);
         }
     }
 }

@@ -29,6 +29,7 @@ namespace Consigueloo.Areas.Catalogo.Controllers
             var catalogo = catalogoDAO.getList();
             var product_ = !string.IsNullOrEmpty(product) ? catalogo.FirstOrDefault(p => p.nombreProducto == product) : catalogo.FirstOrDefault();
             return View(product_);
+
         }
 
         public ActionResult GetList()

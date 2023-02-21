@@ -66,6 +66,7 @@
     <Compile Include="ViewModel\CategoriasDTO.cs" />
     <Compile Include="ViewModel\AnuncioDTO.cs" />
     <Compile Include="ViewModel\NotificacionDTO.cs" />
+    <Compile Include="ViewModel\VisitasDTO.cs" />
     <Compile Include="ViewModel\RolesDTO.cs" />
     <Compile Include="ViewModel\CaracteristicasDTO.cs" />
     <Compile Include="ViewModel\CatalogoDTO.cs" />

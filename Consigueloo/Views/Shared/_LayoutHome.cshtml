@@ -204,6 +204,11 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/axios@1.0.0/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/luxon@2.3.0/build/global/luxon.min.js"></script>
+
+    <script>
+   
+      
+    </script>
     <script>
         $(document).on('scroll', function () {
             var scrollDistance = $(this).scrollTop();
@@ -212,7 +217,9 @@
             } else {
                 $('.scroll-to-top').fadeOut();
             }
-        }); function waiter(event) {
+        });
+
+        function waiter(event) {
             $("#divLoading").show();
         }
 
@@ -244,23 +251,35 @@
         function filterCategoriasbyName(nombre) {
             console.log(nombre);
              $.ajax(
-            {
-                type: "POST",
-                url: '@Url.Action("FilterCategoryByName", "Anuncios", new { area = "Anuncios" })',
-                datatype: "json",
-                     contentType: 'application/json',
-                     data: JSON.stringify({ "nombre": nombre}),
-                success: function (res) {
+                {
+                    type: "POST",
+                    url: '@Url.Action("FilterCategoryByName", "Anuncios", new { area = "Anuncios" })',
+                    datatype: "json",
+                         contentType: 'application/json',
+                         data: JSON.stringify({ "nombre": nombre}),
+                    success: function (res) {
 
-                    var newDoc = document.open("text/html", "replace");
-                    newDoc.write(res);
-                    newDoc.close();
-
+                        var newDoc = document.open("text/html", "replace");
+                        newDoc.write(res);
+                        newDoc.close();
                 }
 
             });
         }
 
+        addEventListener('beforeunload', (event) => {
+            debugger
+            $.ajax(
+                {
+                    type: "GET",
+                    url: 'https://www.Consigueloo.co/Home/LeaveVisitor',
+                    datatype: "json",
+                         contentType: 'application/json',
+                    success: function (res) {
+                        console.log(res);
+                     }
+                 });
+        });
     </script>
 
     <div id="divLoading" class="loader">

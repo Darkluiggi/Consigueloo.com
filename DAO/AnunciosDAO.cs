@@ -456,17 +456,17 @@ namespace DAO
                 var today = DateTime.Today;
                 ChartDataDTO result = new ChartDataDTO();
 
+                int max = 0;
                 for (int i = 5; i >= 0; i--)
                 {
-
                     DateTime fechaResultado = today.AddMonths (-i);
                     var model = anuncios.Where(x => x.fechaActivacion.Month == fechaResultado.Month).ToList();
                     result.datos.Add(model.Count.ToString());
                     string Mes = dateHelper.stringToMonth(fechaResultado.Month.ToString()); 
                     result.periodos.Add(Mes);
+                    max = model.Count > max ? model.Count: max;
+                    result.max = max + 20;
                 }
-
-
                 return result;
             }
             catch (Exception)
@@ -593,5 +593,6 @@ namespace DAO
         }
         public List<string> periodos { get; set; }
         public List<string> datos { get; set; }
+        public int max { get; set; }
     }
 }
